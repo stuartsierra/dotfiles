@@ -25,4 +25,11 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home
 alias java6=$JAVA_HOME/bin/java
 alias javac6=$JAVA_HOME/bin/javac
 
-alias truecrypt=/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt
+alias truecrypt="/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt -t"
+
+# Relevance "etc" scripts
+source ~/src/relevance/etc/bash/git.sh
+source ~/src/relevance/etc/bash/git_autocompletion.sh
+source ~/src/relevance/etc/bash/git_installer.sh
+source ~/src/relevance/etc/bash/git_prompt.sh
+source ~/src/relevance/etc/bash/ssh_autocompletion.sh
