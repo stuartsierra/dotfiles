@@ -4,11 +4,26 @@
 ;; evaluating this file and print errors in the *Messags* buffer.
 ;; Use this file in place of ~/.emacs (which is loaded as well.)
 
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Locally-installed packages (non-ELPA)
 
 (push "~/.emacs.d/local/" load-path)
-(load-library "color-theme-twilight")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; "Twilight" color theme
+
+(load
+ (expand-file-name "~/src/crafterm/twilight-emacs/color-theme-twilight.el"))
 (color-theme-twilight)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -24,7 +39,15 @@
      (define-key clojure-mode-map "}" 'paredit-close-brace)
 
      ;; Custom indentation rules; see clojure-indent-function
-     (define-clojure-indent (describe 'defun) (it 'defun))))
+     (eval-after-load 'clojure-mode
+       '(define-clojure-indent
+	  (describe 'defun)
+	  (testing 'defun)
+	  (given 'defun)
+	  (it 'defun)))))
+
+(eval-after-load 'slime
+  '(setq slime-protocol-version 'ignore))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -65,5 +88,3 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;; This is your old M-x.
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
