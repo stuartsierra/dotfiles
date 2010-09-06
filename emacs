@@ -20,13 +20,6 @@
 (push "~/.emacs.d/local/" load-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; "Twilight" color theme
-
-(load
- (expand-file-name "~/src/crafterm/twilight-emacs/color-theme-twilight.el"))
-(color-theme-twilight)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE/SWANK/SLIME
 
 (eval-after-load 'clojure-mode
@@ -88,3 +81,46 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org-mode Day Page
+;; http://almostobsolete.net/daypage.html
+
+(setq daypage-path "~/Documents/daypage/")
+
+(defun find-daypage (&optional date)
+  "Go to the day page for the specified date, 
+   or toady's if none is specified."
+  (interactive (list 
+                (org-read-date "" 'totime nil nil
+                               (current-time) "")))
+  (setq date (or date (current-time)))
+  (find-file 
+       (expand-file-name 
+        (concat daypage-path 
+        (format-time-string "daypage-%Y-%m-%d" date) ".txt")))
+  (when (eq 0 (buffer-size))
+        ;; Insert an initial for the page
+        (insert (concat "* <" 
+                        (format-time-string "%Y-%m-%d %a" date) 
+                        "> Notes\n\n")
+        (beginning-of-buffer)
+        (next-line 2))))
+
+(defun todays-daypage ()
+  "Go straight to today's day page without prompting for a date."
+  (interactive) 
+  (find-daypage))
+
+(global-set-key "\C-con" 'todays-daypage)
+(global-set-key "\C-coN" 'find-daypage)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; "Twilight" color theme
+
+(load
+ (expand-file-name "~/src/crafterm/twilight-emacs/color-theme-twilight.el"))
+(color-theme-twilight)
