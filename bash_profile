@@ -33,3 +33,6 @@ source ~/src/relevance/etc/bash/git_autocompletion.sh
 source ~/src/relevance/etc/bash/git_installer.sh
 source ~/src/relevance/etc/bash/git_prompt.sh
 source ~/src/relevance/etc/bash/ssh_autocompletion.sh
+
+# RVM
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
