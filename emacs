@@ -123,4 +123,4 @@
 
 (load
  (expand-file-name "~/src/crafterm/twilight-emacs/color-theme-twilight.el"))
-(color-theme-twilight)
+(add-hook 'after-init-hook 'color-theme-twilight)
