@@ -17,6 +17,8 @@
  '(linum-format "%3d ")
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
+ '(org-todo-keywords (quote ((sequence "TODO" "INPROGRESS" "DONE"))))
+ '(safe-local-variable-values (quote ((eval define-clojure-indent (to-data (quote defun))))))
  '(slime-kill-without-query-p t)
  '(slime-net-coding-system (quote utf-8-unix))
  '(slime-truncate-lines nil)
@@ -30,7 +32,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:height 140 :foundry "Anonymous_Pro"))))
- '(linum ((t (:inherit (shadow default) :foreground "#444" :height 110)))))
+ '(linum ((t (:inherit (shadow default) :background "black" :foreground "#444")))))
 
 (put 'narrow-to-region 'disabled nil)
 
