@@ -20,7 +20,15 @@
 (push "~/.emacs.d/local/" load-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Magit
+;; http://github.com/philjackson/magit/downloads
+
+(autoload 'magit-status "magit" nil t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE/SWANK/SLIME
+
+(autoload 'clojure-mode "clojure-mode" nil t)
 
 (eval-after-load 'clojure-mode
   '(progn
@@ -32,15 +40,20 @@
      (define-key clojure-mode-map "}" 'paredit-close-brace)
 
      ;; Custom indentation rules; see clojure-indent-function
-     (eval-after-load 'clojure-mode
-       '(define-clojure-indent
-	  (describe 'defun)
-	  (testing 'defun)
-	  (given 'defun)
-	  (it 'defun)))))
+     (define-clojure-indent
+       (describe 'defun)
+       (testing 'defun)
+       (given 'defun)
+       (using 'defun)
+       (with 'defun)
+       (it 'defun)
+       (do-it 'defun))))
 
 (eval-after-load 'slime
   '(setq slime-protocol-version 'ignore))
+
+(load
+ (expand-file-name "~/src/open/elein/elein.el"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49,6 +62,7 @@
 (add-to-list 'auto-mode-alist '("\\.\\(rdfs?\\|owl\\)$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.st$" . fundamental-mode))
 (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode)) 
+(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LINUX-STYLE C CODE
@@ -100,7 +114,7 @@
   (find-file 
        (expand-file-name 
         (concat daypage-path 
-        (format-time-string "daypage-%Y-%m-%d" date) ".txt")))
+        (format-time-string "daypage-%Y-%m-%d-%a" date) ".txt")))
   (when (eq 0 (buffer-size))
         ;; Insert an initial for the page
         (insert (concat "* <" 
