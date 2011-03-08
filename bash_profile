@@ -30,17 +30,28 @@ alias javac6=$JAVA_HOME/bin/javac
 
 alias truecrypt="/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt -t"
 
+alias copy_music_to_droid="rsync --ignore-existing -avz ~/Music/iTunes/iTunes\ Media/Music/ /Volumes/ANDROID/Music"
+
+alias swank="java -Dclojure.compile.path=target/classes -cp src/test/resources:src/test/clojure:src/main/resources:src/main/clojure:target/test-classes:target/classes:target/dependency/* clojure.main -e \"(require 'swank.swank) (swank.swank/start-repl)\""
+
 # Local system stuff
 if [ -e ~/.bash_local ]; then
     source ~/.bash_local
 fi
 
 # Relevance "etc" scripts
-source ~/src/relevance/etc/bash/git.sh
-source ~/src/relevance/etc/bash/git_autocompletion.sh
-source ~/src/relevance/etc/bash/git_installer.sh
-source ~/src/relevance/etc/bash/git_prompt.sh
-source ~/src/relevance/etc/bash/ssh_autocompletion.sh
+if [ -d ~/src/open/relevance/etc/bash ]; then
+    source ~/src/open/relevance/etc/bash/git.sh
+    source ~/src/open/relevance/etc/bash/git_autocompletion.sh
+    source ~/src/open/relevance/etc/bash/git_installer.sh
+    source ~/src/open/relevance/etc/bash/git_prompt.sh
+    source ~/src/open/relevance/etc/bash/ssh_autocompletion.sh
+fi
+
+# cdargs
+if [ -f /opt/local/etc/profile.d/cdargs-bash.sh ]; then
+    source /opt/local/etc/profile.d/cdargs-bash.sh
+fi
 
 # RVM
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
