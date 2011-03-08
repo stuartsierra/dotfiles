@@ -11,9 +11,11 @@
  '(aquamacs-additional-fontsets nil t)
  '(aquamacs-customization-version-id 208 t)
  '(aquamacs-tool-bar-user-customization (quote ((16777249 new-file open-file recent-files save-buffer aquamacs-print nil undo redo cut copy paste isearch-forward nil customize help))) t)
+ '(backward-delete-char-untabify-method (quote all))
  '(default-frame-alist (quote ((menu-bar-lines . 1) (foreground-color . "Black") (background-color . "White") (cursor-type . box) (cursor-color . "Red") (vertical-scroll-bars . right) (internal-border-width . 0) (left-fringe . 1) (right-fringe) (fringe))))
  '(global-auto-revert-mode t)
  '(global-linum-mode t)
+ '(indent-tabs-mode nil)
  '(linum-format "%3d ")
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
@@ -32,7 +34,9 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:height 140 :foundry "Anonymous_Pro"))))
- '(linum ((t (:inherit (shadow default) :background "black" :foreground "#444")))))
+ '(linum ((t (:inherit (shadow default) :background "black" :foreground "#444"))))
+ '(org-hide ((((background dark)) (:foreground "#141414"))))
+ '(outline-4 ((t (:foreground "#8F8A80")))))
 
 (put 'narrow-to-region 'disabled nil)
 
