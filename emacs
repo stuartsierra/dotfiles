@@ -55,13 +55,15 @@
 (load
  (expand-file-name "~/src/open/elein/elein.el"))
 
+(defun clojure-repl ()
+  (interactive)
+  (inferior-lisp "java -jar /Users/stuart/src/clojure/clojure/target/clojure-1.3.0-master-SNAPSHOT.jar"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; FILE ASSOCIATIONS
 
 (add-to-list 'auto-mode-alist '("\\.\\(rdfs?\\|owl\\)$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.st$" . fundamental-mode))
-(add-to-list 'auto-mode-alist '("\\.txt$" . org-mode)) 
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -99,7 +101,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Org-mode Day Page
+;; Org-mode and Day Pages
 ;; http://almostobsolete.net/daypage.html
 
 (setq daypage-path "~/Documents/daypage/")
@@ -114,7 +116,7 @@
   (find-file 
        (expand-file-name 
         (concat daypage-path 
-        (format-time-string "daypage-%Y-%m-%d-%a" date) ".txt")))
+        (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
   (when (eq 0 (buffer-size))
         ;; Insert an initial for the page
         (insert (concat "* <" 
