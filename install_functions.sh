@@ -16,7 +16,7 @@ function link_with_backup {
 }
 
 function install_elpa {
-    rm -rf $DOTFILES/.emacs/elpa
+    rm -rf $DOTFILES/.emacs.d/elpa
     emacs -q -l $DOTFILES/install_elpa.el
 }
 
