@@ -1,0 +1,13 @@
+[user]
+	name = Stuart Sierra
+	email = mail@stuartsierra.com
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+	br = branch
+	di = diff
+[color]
+	ui = true
+[push]
+	default = tracking

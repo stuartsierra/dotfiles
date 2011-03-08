@@ -46,12 +46,13 @@ if [ -e ~/.bash_local ]; then
 fi
 
 # Relevance "etc" scripts
-if [ -d ~/src/open/relevance/etc/bash ]; then
-    source ~/src/open/relevance/etc/bash/git.sh
-    source ~/src/open/relevance/etc/bash/git_autocompletion.sh
-    source ~/src/open/relevance/etc/bash/git_installer.sh
-    source ~/src/open/relevance/etc/bash/git_prompt.sh
-    source ~/src/open/relevance/etc/bash/ssh_autocompletion.sh
+if [ -d ~/.relevance-etc ]; then
+    export PATH=$PATH:~/.relevance-etc/scripts
+    source ~/.relevance-etc/bash/git.sh
+    source ~/.relevance-etc/bash/git_autocompletion.sh
+    source ~/.relevance-etc/bash/git_installer.sh
+    source ~/.relevance-etc/bash/git_prompt.sh
+    source ~/.relevance-etc/bash/ssh_autocompletion.sh
 fi
 
 # cdargs
