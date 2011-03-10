@@ -46,8 +46,7 @@
 (eval-after-load 'slime
   '(setq slime-protocol-version 'ignore))
 
-(load
- (expand-file-name "~/src/open/elein/elein.el"))
+(require 'elein)
 
 (defun clojure-repl ()
   (interactive)
