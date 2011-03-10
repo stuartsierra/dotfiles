@@ -130,6 +130,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "Twilight" color theme
 
-(load
- (expand-file-name "~/src/crafterm/twilight-emacs/color-theme-twilight.el"))
-(add-hook 'after-init-hook 'color-theme-twilight)
+(when (window-system)
+  (load
+   (expand-file-name "~/src/crafterm/twilight-emacs/color-theme-twilight.el"))
+  (add-hook 'after-init-hook 'color-theme-twilight))
