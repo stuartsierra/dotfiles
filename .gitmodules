@@ -4,3 +4,6 @@
 [submodule "submodules/remvee/elein"]
 	path = submodules/remvee/elein
 	url = https://github.com/remvee/elein.git
+[submodule "submodules/crafterm/twilight-emacs"]
+	path = submodules/crafterm/twilight-emacs
+	url = https://github.com/crafterm/twilight-emacs.git
