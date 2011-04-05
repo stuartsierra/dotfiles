@@ -110,13 +110,9 @@
        (expand-file-name 
         (concat daypage-path 
         (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
-  (when (eq 0 (buffer-size))
+  (when (= 0 (buffer-size))
         ;; Insert an initial for the page
-        (insert (concat "* <" 
-                        (format-time-string "%Y-%m-%d %a" date) 
-                        "> Notes\n\n")
-        (beginning-of-buffer)
-        (next-line 2))))
+        (insert (format-time-string "* %Y-%m-%d %A : " date))))
 
 (defun todays-daypage ()
   "Go straight to today's day page without prompting for a date."
