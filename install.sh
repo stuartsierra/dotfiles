@@ -12,6 +12,7 @@ update_submodules
 link_with_backup .bashrc
 link_with_backup .bash_profile
 link_with_backup .gitconfig
+link_with_backup .rvmrc
 
 link_with_backup .emacs.d
 install_elpa
