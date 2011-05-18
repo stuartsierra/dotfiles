@@ -1,4 +1,5 @@
 # Basic environment
+export TERM=xterm-256color
 export PS1='\[\e]1;\]$(basename $(dirname $PWD))/\W\[\a\]\u@\h \W\$ '
 export EDITOR=/usr/bin/nano
 
