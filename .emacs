@@ -126,6 +126,28 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; zap-up-to-char
+
+(defun zap-up-to-char (arg char)
+  "Kill up to but not including ARGth occurrence of CHAR.
+Case is ignored if `case-fold-search' is non-nil in the current buffer.
+Goes backward if ARG is negative; error if CHAR not found."
+  (interactive "p\ncZap up to char: ")
+  ;; Avoid "obsolete" warnings for translation-table-for-input.
+  (with-no-warnings
+    (if (char-table-p translation-table-for-input)
+	(setq char (or (aref translation-table-for-input char) char))))
+  (kill-region (point) (progn
+			 (search-forward (char-to-string char) nil nil arg)
+;			 (goto-char (if (> arg 0) (1- (point)) (1+ (point))))
+			 (1- (point))))
+  (goto-char (1- (point))))
+
+(global-unset-key "\M-z")
+(global-set-key "\M-z" 'zap-up-to-char)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "Twilight" color theme
 
 (when (window-system)
