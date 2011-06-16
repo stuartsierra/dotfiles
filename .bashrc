@@ -43,6 +43,8 @@ alias copy_photos_from_droid="rsync --ignore-existing -avz /Volumes/ANDROID/DCIM
 
 alias swank="java -Dclojure.compile.path=target/classes -cp src/test/resources:src/test/clojure:src/main/resources:src/main/clojure:target/test-classes:target/classes:target/dependency/* clojure.main -e \"(require 'swank.swank) (swank.swank/start-repl)\""
 
+alias aquamacs="open -b org.gnu.Aquamacs"
+
 # Local system stuff
 if [ -e ~/.bash_local ]; then
     source ~/.bash_local
