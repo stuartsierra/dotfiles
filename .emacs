@@ -36,6 +36,7 @@
  '(global-linum-mode t)
  '(indent-tabs-mode nil)
  '(linum-format "%3d ")
+ '(menu-bar-mode nil)
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
  '(org-special-ctrl-a/e t)
