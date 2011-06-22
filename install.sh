@@ -18,6 +18,7 @@ link_with_backup .tmux.conf
 link_with_backup .emacs.d
 install_elpa
 link_with_backup .emacs
+link_with_backup .emacs-custom.el
 
 install_relevance_etc
 
