@@ -60,7 +60,6 @@ fi
 if [ -d ~/.relevance-etc ]; then
     export PATH=$PATH:~/.relevance-etc/scripts
     source ~/.relevance-etc/bash/git.sh
-    source ~/.relevance-etc/bash/git_autocompletion.sh
     source ~/.relevance-etc/bash/git_installer.sh
     source ~/.relevance-etc/bash/git_prompt.sh
     source ~/.relevance-etc/bash/ssh_autocompletion.sh
@@ -69,6 +68,11 @@ fi
 # cdargs
 if [ -f /opt/local/etc/profile.d/cdargs-bash.sh ]; then
     source /opt/local/etc/profile.d/cdargs-bash.sh
+fi
+
+# Git autocompletion
+if [ -f /opt/local/etc/bash_completion ]; then
+      source /opt/local/etc/bash_completion
 fi
 
 # RVM
