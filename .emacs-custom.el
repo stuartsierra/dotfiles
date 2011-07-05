@@ -13,6 +13,7 @@
  '(aquamacs-tool-bar-user-customization (quote ((16777249 new-file open-file recent-files save-buffer aquamacs-print nil undo redo cut copy paste isearch-forward nil customize help))) t)
  '(backward-delete-char-untabify-method (quote all))
  '(global-auto-revert-mode t)
+ '(global-hl-line-mode t)
  '(global-linum-mode t)
  '(indent-tabs-mode nil)
  '(linum-format "%3d ")
