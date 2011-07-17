@@ -36,9 +36,4 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "#141414" :foreground "#CACACA" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :family "Anonymous Pro"))))
- '(linum ((t (:inherit (shadow default) :background "black" :foreground "#444"))))
- '(magit-diff-add ((((class color) (background dark)) (:foreground "green"))))
- '(mode-line-inactive ((t (:inherit aquamacs-variable-width :background "grey10" :foreground "grey40" :box (:line-width -1 :color "grey20") :strike-through nil :underline nil :slant normal :weight normal :width normal))))
- '(org-hide ((((background dark)) (:foreground "#141414"))))
- '(outline-4 ((t (:foreground "#8F8A80")))))
+ '(default ((t (:height 200 :family "Anonymous_Pro")))))
