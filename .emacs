@@ -166,6 +166,4 @@ Goes backward if ARG is negative; error if CHAR not found."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "Twilight" color theme
 
-(when (window-system)
-  (load-library "color-theme-twilight")
-  (add-hook 'after-init-hook 'color-theme-twilight))
+(load-library "color-theme-twilight")
