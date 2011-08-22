@@ -4,12 +4,23 @@ export PS1='\[\e]1;\]$(basename $(dirname $PWD))/\W\[\a\]\u@\h \W\$ '
 export EDITOR=/usr/bin/nano
 
 # My aliases
-alias l="ls -FG"
-alias ll="ls -lhFG"
-alias la="ls -ahFG"
-alias lal="ls -lahFG"
+if [ `uname` = "Darwin" ]; then
+    alias l="ls -FG"
+    alias ls="ls -FG"
+    alias ll="ls -lhFG"
+    alias la="ls -ahFG"
+    alias lal="ls -lahFG"
+    alias d="pwd && echo & ls -FG"
+else
+    alias l="ls --color -F"
+    alias ls="ls --color -F"
+    alias ll="ls --color -lhF"
+    alias la="ls --color -ahF"
+    alias lal="ls --color -lahF"
+    alias d="pwd && echo & ls --color -F"
+fi
+
 alias rm='rm -i'
-alias d="pwd && echo & ls -FG"
 
 # My path
 export PATH=~/bin:~/.cljr/bin:$PATH
