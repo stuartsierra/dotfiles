@@ -91,5 +91,11 @@ if [ -f /opt/local/etc/bash_completion ]; then
       source /opt/local/etc/bash_completion
 fi
 
+# MySQL
+if [ -e /usr/local/mysql ]; then
+    export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
+    export PATH="$PATH:/usr/local/mysql/bin"
+fi
+
 # RVM
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
