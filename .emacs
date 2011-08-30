@@ -17,10 +17,16 @@
 (push "~/.emacs.d/local/" load-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Customizations
+;; Aquamacs stuff
 
 (when (fboundp 'tabbar-mode) (tabbar-mode -1))
 
+(when (boundp 'osx-key-mode-map)
+  (define-key osx-key-mode-map (kbd "C-;") nil))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Customizations
 
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
