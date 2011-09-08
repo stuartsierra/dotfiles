@@ -10,14 +10,14 @@ if [ `uname` = "Darwin" ]; then
     alias ll="ls -lhFG"
     alias la="ls -ahFG"
     alias lal="ls -lahFG"
-    alias d="pwd && echo & ls -FG"
+    alias d="pwd && echo && ls -FG"
 else
     alias l="ls --color -F"
     alias ls="ls --color -F"
     alias ll="ls --color -lhF"
     alias la="ls --color -ahF"
     alias lal="ls --color -lahF"
-    alias d="pwd && echo & ls --color -F"
+    alias d="pwd && echo && ls --color -F"
 fi
 
 alias rm='rm -i'
