@@ -87,6 +87,22 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; RUBY
+
+;; Missing from ruby-mode.el, see https://groups.google.com/group/emacs-on-rails/msg/565fba8263233c28
+(defun ruby-insert-end () 
+  "Insert \"end\" at point and reindent current line." 
+  (interactive) 
+  (insert "end") 
+  (ruby-indent-line t) 
+  (end-of-line)) 
+
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (require 'ruby-electric)
+            (ruby-electric-mode t)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LINUX-STYLE C CODE
 
 (defun linux-c-mode ()
