@@ -81,6 +81,9 @@
 (add-to-list 'auto-mode-alist '("\\.\\(rdfs?\\|owl\\)$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.st$" . fundamental-mode))
 (add-to-list 'auto-mode-alist '("\\.cljs?$" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("^Rakefile$" . ruby-mode))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LINUX-STYLE C CODE
