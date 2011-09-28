@@ -11,3 +11,7 @@
 	ui = true
 [push]
 	default = tracking
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
