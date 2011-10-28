@@ -122,6 +122,25 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; JAVA
+
+(defun my-electric-brace ()
+  (interactive)
+  (insert " {")
+  (backward-char)
+  (fixup-whitespace)
+  (move-end-of-line 1)
+  (indent-for-tab-command)
+  (insert "\n\n")
+  (insert "}")
+  (indent-for-tab-command)
+  (previous-line)
+  (indent-for-tab-command))
+
+(eval-after-load 'cc-mode
+  '(define-key java-mode-map (kbd "{") 'my-electric-brace))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IDO
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 
