@@ -91,6 +91,13 @@ if [ -f /opt/local/etc/bash_completion ]; then
       source /opt/local/etc/bash_completion
 fi
 
+# JDK 7
+function java7 {
+    JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-1.7-x86_64/Contents/Home"
+    PATH="$JAVA_HOME/bin:$PATH"
+    echo "Using Java 7 at $JAVA_HOME"
+}
+
 # MySQL
 if [ -e /usr/local/mysql ]; then
     export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
