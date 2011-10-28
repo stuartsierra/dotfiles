@@ -191,6 +191,35 @@
 (global-set-key "\C-con" 'todays-daypage)
 (global-set-key "\C-coN" 'find-daypage)
 
+(defun org-to-confluence ()
+  "Convert region from org-mode to Confluence wiki syntax"
+  (interactive)
+  (save-excursion
+   (let ((start (region-beginning))
+         (end (region-end)))
+     (replace-regexp "^\\*\\*\\* \\(.+\\)$" "\nh2. \\1\n" nil start end)
+     (replace-regexp "^\\*\\*\\*" "" nil start end))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-babel + Clojure
+
+(require 'ob)
+(require 'ob-tangle)
+(add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
+
+(defvar org-babel-default-header-args:clojure 
+ '((:results . "silent") (:tangle . "yes")))
+
+(defun org-babel-execute:clojure (body params)
+ "Evaluate a block of Clojure code with Babel."
+ (lisp-eval-string body)
+ "Done!")
+
+(provide 'ob-clojure)
+
+(setq org-src-fontify-natively nil)
+(setq org-confirm-babel-evaluate nil)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; zap-up-to-char
