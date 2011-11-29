@@ -244,6 +244,11 @@ Goes backward if ARG is negative; error if CHAR not found."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Line-numbering
+
+(require 'hlinum)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "Twilight" color theme
 
 (load-library "color-theme-twilight")
