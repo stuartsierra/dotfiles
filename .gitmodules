@@ -7,3 +7,6 @@
 [submodule "submodules/crafterm/twilight-emacs"]
 	path = submodules/crafterm/twilight-emacs
 	url = git@github.com:stuartsierra/twilight-emacs.git
+[submodule "submodules/clojure-mode"]
+	path = submodules/clojure-mode
+	url = https://github.com/technomancy/clojure-mode.git
