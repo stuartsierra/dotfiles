@@ -21,9 +21,11 @@ link_with_backup .emacs
 link_with_backup .emacs-custom.el
 
 (
-    cd $DOTFILES/.emacs.d/local &&
-    git clone --depth 1 git@github.com:stuartsierra/org-mode.git &&
-    cd org-mode
+    cd $DOTFILES/.emacs.d/local
+    if [ ! -d org-mode ]; then
+        git clone --depth 1 git@github.com:stuartsierra/org-mode.git
+    fi
+    cd org-mode 
     make
 )
 
