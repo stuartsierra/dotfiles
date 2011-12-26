@@ -17,12 +17,14 @@
 (push "~/.emacs.d/local/" load-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Aquamacs stuff
+;; Aquamacs / Cocoa Emacs stuff
 
 (when (fboundp 'tabbar-mode) (tabbar-mode -1))
 
 (when (boundp 'osx-key-mode-map)
   (define-key osx-key-mode-map (kbd "C-;") nil))
+
+(when (fboundp 'fringe-mode) (fringe-mode 0))
 
 ;; from https://gist.github.com/1297644
 (defun finder (location)
