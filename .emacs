@@ -251,6 +251,16 @@ Goes backward if ARG is negative; error if CHAR not found."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Create temporary buffer
+
+(defun temp-buffer ()
+  (interactive)
+  (switch-to-buffer "*temp*"))
+
+(global-set-key (kbd "C-c o t") 'temp-buffer)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Line-numbering
 
 (require 'hlinum)
