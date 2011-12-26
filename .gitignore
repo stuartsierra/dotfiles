@@ -2,3 +2,4 @@
 *.elc
 *~
 .emacs.d/swank
+.emacs.d/local/org-mode
