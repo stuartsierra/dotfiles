@@ -77,10 +77,7 @@
 
 (require 'elein)
 
-(defun clojure-repl ()
-  (interactive)
-  (inferior-lisp "java -jar /Users/stuart/src/clojure/clojure/target/clojure-1.3.0-master-SNAPSHOT.jar"))
-
+(setq inferior-lisp-program "~/bin/clj")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; FILE ASSOCIATIONS
