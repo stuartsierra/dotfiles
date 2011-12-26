@@ -15,6 +15,7 @@
 ;; Locally-installed packages (non-ELPA)
 
 (push "~/.emacs.d/local/" load-path)
+(push "~/.emacs.d/local/org-mode/lisp" load-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Aquamacs / Cocoa Emacs stuff
