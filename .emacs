@@ -205,23 +205,28 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-babel + Clojure
 
-(require 'ob)
-(require 'ob-tangle)
-(add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
+(when (locate-file "ob" load-path load-suffixes)
+  (require 'ob)
+  (require 'ob-tangle)
+  (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
 
-(defvar org-babel-default-header-args:clojure 
- '((:results . "silent") (:tangle . "yes")))
+  (defvar org-babel-default-header-args:clojure 
+    '((:results . "silent") (:tangle . "yes")))
 
-(defun org-babel-execute:clojure (body params)
- "Evaluate a block of Clojure code with Babel."
- (lisp-eval-string body)
- "Done!")
+  (defun org-babel-execute:clojure (body params)
+    "Evaluate a block of Clojure code with Babel."
+    (lisp-eval-string body)
+    "Done!")
 
-(provide 'ob-clojure)
+  (provide 'ob-clojure)
 
-(setq org-src-fontify-natively nil)
-(setq org-confirm-babel-evaluate nil)
+  (setq org-src-fontify-natively nil)
+  (setq org-confirm-babel-evaluate nil)
 
+  (defun org-babel-insert-src-block ()
+    (interactive)
+    (insert "#+begin_src clojure\n\n#+end_src\n\n")
+    (previous-line 3)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; zap-up-to-char
