@@ -20,6 +20,13 @@ install_elpa
 link_with_backup .emacs
 link_with_backup .emacs-custom.el
 
+(
+    cd $DOTFILES/.emacs.d/local &&
+    git clone --depth 1 git@github.com:stuartsierra/org-mode.git &&
+    cd org-mode
+    make
+)
+
 install_relevance_etc
 
 
