@@ -118,5 +118,9 @@ function ssh-reagent {
     echo Cannot find ssh agent - maybe you should reconnect and forward it?
 }
 
+if [ -d ~/src/clojure/clojurescript ]; then
+    export CLOJURESCRIPT_HOME=~/src/clojure/clojurescript
+fi
+
 # RVM
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
