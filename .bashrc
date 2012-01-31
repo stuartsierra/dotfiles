@@ -71,7 +71,6 @@ fi
 if [ -d ~/.relevance-etc ]; then
     export PATH=$PATH:~/.relevance-etc/scripts
     source ~/.relevance-etc/bash/git.sh
-    source ~/.relevance-etc/bash/git_installer.sh
     source ~/.relevance-etc/bash/git_prompt.sh
     source ~/.relevance-etc/bash/ssh_autocompletion.sh
 fi
