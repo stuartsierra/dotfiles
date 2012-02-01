@@ -166,7 +166,10 @@
 ;; Org-mode and Day Pages
 ;; http://almostobsolete.net/daypage.html
 
-(add-hook 'org-mode-hook 'set-word-wrap)
+(require 'org)
+
+(when (fboundp 'set-word-wrap)
+  (add-hook 'org-mode-hook 'set-word-wrap))
 
 (setq daypage-path "~/Documents/daypage/")
 
