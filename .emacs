@@ -51,6 +51,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE/SWANK/SLIME
 
+(show-paren-mode 1)
+
 (autoload 'clojure-mode "clojure-mode" nil t)
 
 (eval-after-load 'clojure-mode
