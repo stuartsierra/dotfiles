@@ -186,7 +186,7 @@
         (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
   (when (= 0 (buffer-size))
         ;; Insert an initial for the page
-        (insert (format-time-string "* %Y-%m-%d %A : " date))))
+        (insert (format-time-string "%Y-%m-%d %A : " date))))
 
 (defun todays-daypage ()
   "Go straight to today's day page without prompting for a date."
@@ -213,23 +213,26 @@
   (require 'ob-tangle)
   (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
 
-  (defvar org-babel-default-header-args:clojure 
-    '((:results . "silent") (:tangle . "yes")))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (clojure . t)))
 
   (defun org-babel-execute:clojure (body params)
     "Evaluate a block of Clojure code with Babel."
-    (lisp-eval-string body)
-    "Done!")
+    (concat ";;=> "
+            (if (fboundp 'slime-eval)
+                (slime-eval (list 'swank:interactive-eval-region body))
+              (lisp-eval-string body))))
 
   (provide 'ob-clojure)
 
-  (setq org-src-fontify-natively nil)
-  (setq org-confirm-babel-evaluate nil)
+  (setq org-src-fontify-natively t)
+  (setq org-confirm-babel-evaluate nil))
 
-  (defun org-babel-insert-src-block ()
-    (interactive)
-    (insert "#+begin_src clojure\n\n#+end_src\n\n")
-    (previous-line 3)))
+;; Avoid slow "Fontifying..." on OS X
+(setq font-lock-verbose nil)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; zap-up-to-char
