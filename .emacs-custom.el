@@ -17,6 +17,7 @@
  '(global-hl-line-mode t)
  '(global-linum-mode t)
  '(indent-tabs-mode nil)
+ '(initial-buffer-choice t)
  '(linum-format "%3d ")
  '(menu-bar-mode nil)
  '(ns-tool-bar-display-mode (quote both) t)
