@@ -29,7 +29,7 @@
  '(org-special-ctrl-a/e t)
  '(org-startup-folded (quote showeverything))
  '(org-todo-keywords (quote ((sequence "TODO" "INPROGRESS" "DONE"))))
- '(safe-local-variable-values (quote ((buffer-file-coding-system . utf-8-unix) (org-export-html-style-include-scripts) (eval define-clojure-indent (to-data (quote defun))))))
+ '(safe-local-variable-values (quote ((eval setq org-export-htmlize-output-type (quote css)) (buffer-file-coding-system . utf-8-unix) (org-export-html-style-include-scripts) (eval define-clojure-indent (to-data (quote defun))))))
  '(slime-kill-without-query-p t)
  '(slime-net-coding-system (quote utf-8-unix))
  '(slime-truncate-lines nil)
