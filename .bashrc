@@ -50,7 +50,7 @@ fi
 
 alias copy_music_to_droid="rsync --ignore-existing -avz ~/Music/iTunes/iTunes\ Media/Music/ /Volumes/ANDROID/Music"
 
-alias copy_photos_from_droid="rsync --ignore-existing -avz /Volumes/ANDROID/DCIM/Camera/ /Users/stuart/Pictures/my-photos/"
+alias copy_photos_from_droid="rsync --ignore-existing -avz /Volumes/NO\ NAME/DCIM/100MEDIA/ /Users/stuart/Pictures/my-photos/"
 
 alias swank="java -Dclojure.compile.path=target/classes -cp src/test/resources:src/test/clojure:src/main/resources:src/main/clojure:target/test-classes:target/classes:target/dependency/* clojure.main -e \"(require 'swank.swank) (swank.swank/start-repl)\""
 
