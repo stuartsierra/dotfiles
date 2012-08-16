@@ -82,6 +82,14 @@
 
 (setq inferior-lisp-program "~/bin/clj")
 
+(defun my-slime-repl ()
+  (interactive)
+  (if (slime-connected-p)
+      (slime-repl)
+    (slime-connect "localhost" 4005)))
+
+(global-set-key (kbd "C-c o r") 'my-slime-repl)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; FILE ASSOCIATIONS
 
@@ -205,6 +213,12 @@
      (replace-regexp "^\\*\\*\\* \\(.+\\)$" "\nh2. \\1\n" nil start end)
      (replace-regexp "^\\*\\*\\*" "" nil start end))))
 
+(defun my-agenda ()
+  (interactive)
+  (org-agenda nil "n"))
+
+(global-set-key (kbd "C-c o a") 'my-agenda)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-babel + Clojure
 
@@ -269,7 +283,35 @@ Goes backward if ARG is negative; error if CHAR not found."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Line-numbering
 
+(require 'linum-off)
 (require 'hlinum)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Rotate windows
+
+;; from http://emacswiki.org/emacs/TransposeWindows
+(defun rotate-windows ()
+  "Rotate your windows"
+  (interactive)
+  (cond
+   ((not (> (count-windows) 1))
+    (message "You can't rotate a single window!"))
+   (t
+    (let ((i 1)
+          (num-windows (count-windows)))
+      (while  (< i num-windows)
+        (let* ((w1 (elt (window-list) i))
+               (w2 (elt (window-list) (+ (% i num-windows) 1)))
+               (b1 (window-buffer w1))
+               (b2 (window-buffer w2))
+               (s1 (window-start w1))
+               (s2 (window-start w2)))
+          (set-window-buffer w1 b2)
+          (set-window-buffer w2 b1)
+          (set-window-start w1 s2)
+          (set-window-start w2 s1)
+          (setq i (1+ i))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "Twilight" color theme
