@@ -20,6 +20,7 @@
  '(indent-tabs-mode nil)
  '(initial-buffer-choice t)
  '(linum-format "%3d ")
+ '(magit-commit-all-when-nothing-staged (quote ask-stage))
  '(menu-bar-mode nil)
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
