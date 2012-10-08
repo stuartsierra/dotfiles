@@ -103,6 +103,14 @@ if [ -e /usr/local/mysql ]; then
     export PATH="$PATH:/usr/local/mysql/bin"
 fi
 
+# Google Chrome Testing instances
+function newchrome {
+    local now=`date +%Y%m%d%H%M%S`
+    local dir=/tmp/chrome$now
+    cp -R ~/fresh-chrome "$dir"
+    open -na 'Google Chrome' --args --user-data-dir="$dir"
+}
+
 # Re-acquire forwarded SSH key
 # from http://tychoish.com/rhizome/9-awesome-ssh-tricks/
 function ssh-reagent {
