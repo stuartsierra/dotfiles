@@ -222,6 +222,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-babel + Clojure
 
+(require 'nrepl)
+
 (when (locate-file "ob" load-path load-suffixes)
   (require 'ob)
   (require 'ob-tangle)
@@ -234,10 +236,22 @@
 
   (defun org-babel-execute:clojure (body params)
     "Evaluate a block of Clojure code with Babel."
-    (concat ";;=> "
-            (if (fboundp 'slime-eval)
-                (slime-eval (list 'swank:interactive-eval-region body))
-              (lisp-eval-string body))))
+    (let* ((result (nrepl-send-string-sync body (nrepl-current-ns)))
+           (value (plist-get result :value))
+           (out (plist-get result :stdout))
+           (out (when out
+                  (if (string= "\n" (substring out -1))
+                      (substring out 0 -1)
+                    out)))
+           (stdout (when out
+                     (mapconcat (lambda (line)
+                                  (concat ";; " line))
+                                (split-string out "\n")
+                                "\n"))))
+      (concat stdout
+              (when (and stdout (not (string= "\n" (substring stdout -1))))
+                "\n")
+              ";;=> " value)))
 
   (provide 'ob-clojure)
 
