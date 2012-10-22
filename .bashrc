@@ -23,11 +23,10 @@ fi
 alias rm='rm -i'
 
 # My path
-export PATH=~/bin:~/.cljr/bin:$PATH
+export PATH=~/bin:$PATH
 
 # for MacPorts
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export MANPATH=/opt/local/share/man:$MANPATH
+export MANPATH=$MANPATH:/opt/local/share/man
 
 # for PostgreSQL 8.4 installed via MacPorts
 export PATH=$PATH:/opt/local/lib/postgresql84/bin
@@ -125,7 +124,7 @@ function ssh-reagent {
     echo Cannot find ssh agent - maybe you should reconnect and forward it?
 }
 
-if [ -d ~/src/clojure/clojurescript ]; then
+if [ -d ~/src/clj/clojurescript ]; then
     export CLOJURESCRIPT_HOME=~/src/clojure/clojurescript
 fi
 
