@@ -22,6 +22,7 @@
  '(linum-format "%3d ")
  '(magit-commit-all-when-nothing-staged (quote ask-stage))
  '(menu-bar-mode nil)
+ '(nrepl-popup-stacktraces nil)
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
  '(org-agenda-files (quote ("~/Documents/agenda/relevance.org" "~/Documents/agenda/personal.org" "~/Documents/agenda/other/")))
