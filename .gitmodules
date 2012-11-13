@@ -10,3 +10,6 @@
 [submodule "submodules/clojure-mode"]
 	path = submodules/clojure-mode
 	url = https://github.com/technomancy/clojure-mode.git
+[submodule "submodules/find-file-in-project"]
+	path = submodules/find-file-in-project
+	url = https://github.com/technomancy/find-file-in-project.git
