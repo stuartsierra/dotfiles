@@ -23,7 +23,7 @@ fi
 alias rm='rm -i'
 
 # My path
-export PATH=~/bin:$PATH
+export PATH=~/bin:/opt/local/bin:$PATH
 
 # for MacPorts
 export MANPATH=$MANPATH:/opt/local/share/man
