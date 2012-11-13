@@ -3,3 +3,4 @@
 *~
 .emacs.d/swank
 .emacs.d/local/org-mode
+.org-id-locations
