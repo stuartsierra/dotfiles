@@ -64,6 +64,7 @@
      (define-key clojure-mode-map "{" 'paredit-open-brace)
      (define-key clojure-mode-map "}" 'paredit-close-brace)
      (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
+     (define-key paredit-mode-map (kbd "M-[") nil)
 
      ;; Custom indentation rules; see clojure-indent-function
      (define-clojure-indent
