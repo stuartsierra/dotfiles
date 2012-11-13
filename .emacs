@@ -18,6 +18,12 @@
 (push "~/.emacs.d/local/org-mode/lisp" load-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; find-file-in-project
+
+(require 'find-file-in-project)
+(global-set-key (kbd "C-x f") 'find-file-in-project)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Aquamacs / Cocoa Emacs stuff
 
 (when (fboundp 'tabbar-mode) (tabbar-mode -1))
