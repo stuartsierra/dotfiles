@@ -13,3 +13,6 @@
 [submodule "submodules/find-file-in-project"]
 	path = submodules/find-file-in-project
 	url = https://github.com/technomancy/find-file-in-project.git
+[submodule "submodules/nrepl.el"]
+	path = submodules/nrepl.el
+	url = https://github.com/kingtim/nrepl.el.git
