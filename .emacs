@@ -262,6 +262,19 @@
 ;; Avoid slow "Fontifying..." on OS X
 (setq font-lock-verbose nil)
 
+(defun nrepl-refresh ()
+  (interactive)
+  (set-buffer "*nrepl*")
+  (goto-char (point-max))
+  (insert "(clojure.tools.namespace.repl/refresh)")
+  (nrepl-return))
+
+(defun nrepl-reset ()
+  (interactive)
+  (set-buffer "*nrepl*")
+  (goto-char (point-max))
+  (insert "(user/reset)")
+  (nrepl-return))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; zap-up-to-char
