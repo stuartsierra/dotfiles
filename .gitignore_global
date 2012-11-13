@@ -1,39 +1,49 @@
-# see http://help.github.com/ignore-files/
-
-# Compiled source #
-
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
-
-# Packages #
-
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-# Logs and databases #
-
-*.log
-*.sql
-*.sqlite
-
-# OS generated files #
-
-.DS_Store*
-ehthumbs.db
-Icon?
-Thumbs.db
-
-# Editor-generated files #
-
-*#
+# Emacs
 *~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+# Thumbnails
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# etags and ctags
+TAGS
+!TAGS/
+tags
+!tags/
+
+# Linux
+!.gitignore
+*~
+
+# Windows
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+# Folder config file
+Desktop.ini
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Vim
+.*.sw[a-z]
+*.un~
+Session.vim
+.netrwhist
