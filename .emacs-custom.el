@@ -26,6 +26,7 @@
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
  '(org-agenda-files (quote ("~/Documents/agenda/relevance.org" "~/Documents/agenda/personal.org" "~/Documents/agenda/other/")))
+ '(org-clock-idle-time 10)
  '(org-export-author-info nil)
  '(org-export-babel-evaluate nil)
  '(org-export-creator-info nil)
