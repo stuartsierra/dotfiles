@@ -16,6 +16,7 @@
 
 (push "~/.emacs.d/local/" load-path)
 (push "~/.emacs.d/local/org-mode/lisp" load-path)
+(push "~/.emacs.d/local/magit" load-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; find-file-in-project

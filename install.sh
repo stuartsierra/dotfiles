@@ -12,6 +12,7 @@ update_submodules
 link_with_backup .bashrc
 link_with_backup .bash_profile
 link_with_backup .gitconfig
+link_with_backup .gitignore_global
 link_with_backup .rvmrc
 link_with_backup .tmux.conf
 
@@ -20,15 +21,8 @@ install_elpa
 link_with_backup .emacs
 link_with_backup .emacs-custom.el
 
-(
-    cd $DOTFILES/.emacs.d/local
-    if [ ! -d org-mode ]; then
-        git clone --depth 1 git@github.com:stuartsierra/org-mode.git
-    fi
-    cd org-mode 
-    make
-)
-
+install_org_mode
+install_magit
 install_relevance_etc
 
 
