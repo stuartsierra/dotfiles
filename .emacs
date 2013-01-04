@@ -11,6 +11,7 @@
      (expand-file-name "~/.emacs.d/elpa/package.el"))
   (package-initialize))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Locally-installed packages (non-ELPA)
 
@@ -18,11 +19,12 @@
 (push "~/.emacs.d/local/org-mode/lisp" load-path)
 (push "~/.emacs.d/local/magit" load-path)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; find-file-in-project
 
 (require 'find-file-in-project)
-(global-set-key (kbd "C-x f") 'find-file-in-project)
+(global-set-key (kbd "C-x M-f") 'find-file-in-project)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Aquamacs / Cocoa Emacs stuff
@@ -55,48 +57,6 @@
 (autoload 'magit-status "magit" nil t)
 (global-set-key (kbd "C-x m") 'magit-status)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CLOJURE/SWANK/SLIME
-
-(show-paren-mode 1)
-
-(autoload 'clojure-mode "clojure-mode" nil t)
-
-(eval-after-load 'clojure-mode
-  '(progn
-     (require 'paredit)
-     (defun clojure-paredit-hook () (paredit-mode +1))
-     (add-hook 'clojure-mode-hook 'clojure-paredit-hook)
-     
-     (define-key clojure-mode-map "{" 'paredit-open-brace)
-     (define-key clojure-mode-map "}" 'paredit-close-brace)
-     (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
-     (define-key paredit-mode-map (kbd "M-[") nil)
-
-     ;; Custom indentation rules; see clojure-indent-function
-     (define-clojure-indent
-       (describe 'defun)
-       (testing 'defun)
-       (given 'defun)
-       (using 'defun)
-       (with 'defun)
-       (it 'defun)
-       (do-it 'defun))))
-
-(eval-after-load 'slime
-  '(setq slime-protocol-version 'ignore))
-
-(require 'elein)
-
-(setq inferior-lisp-program "~/bin/clj")
-
-(defun my-slime-repl ()
-  (interactive)
-  (if (slime-connected-p)
-      (slime-repl)
-    (slime-connect "localhost" 4005)))
-
-(global-set-key (kbd "C-c o r") 'my-slime-repl)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; FILE ASSOCIATIONS
@@ -158,6 +118,7 @@
 (eval-after-load 'cc-mode
   '(define-key java-mode-map (kbd "{") 'my-electric-brace))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IDO
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
@@ -175,7 +136,6 @@
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -227,10 +187,66 @@
 
 (global-set-key (kbd "C-c o a") 'my-agenda)
 
+(defun org-fixup-buffer-whitespace ()
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward-regexp "^\\*+" (point-max) t)
+    (beginning-of-line)
+    (newline)
+    (forward-line 1)
+    (newline)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; org-babel + Clojure
+;; CLOJURE/LISP/NREPL
+
+(show-paren-mode 1)
+
+(autoload 'clojure-mode "clojure-mode" nil t)
+
+(eval-after-load 'clojure-mode
+  '(progn
+     (require 'paredit)
+     (defun clojure-paredit-hook () (paredit-mode +1))
+     (add-hook 'clojure-mode-hook 'clojure-paredit-hook)
+     
+     (define-key clojure-mode-map "{" 'paredit-open-brace)
+     (define-key clojure-mode-map "}" 'paredit-close-brace)
+     (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
+     (define-key paredit-mode-map (kbd "M-[") nil)
+
+     ;; Custom indentation rules; see clojure-indent-function
+     (define-clojure-indent
+       (describe 'defun)
+       (testing 'defun)
+       (given 'defun)
+       (using 'defun)
+       (with 'defun)
+       (it 'defun)
+       (do-it 'defun))))
 
 (require 'nrepl)
+
+(global-set-key (kbd "C-c o r") 'nrepl-switch-to-repl-buffer)
+
+(setq inferior-lisp-program "~/bin/clj")
+
+(defun nrepl-refresh ()
+  (interactive)
+  (set-buffer "*nrepl*")
+  (goto-char (point-max))
+  (insert "(clojure.tools.namespace.repl/refresh)")
+  (nrepl-return))
+
+(defun nrepl-reset ()
+  (interactive)
+  (set-buffer "*nrepl*")
+  (goto-char (point-max))
+  (insert "(user/reset)")
+  (nrepl-return))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-babel + Clojure
 
 (when (locate-file "ob" load-path load-suffixes)
   (require 'ob)
@@ -269,19 +285,6 @@
 ;; Avoid slow "Fontifying..." on OS X
 (setq font-lock-verbose nil)
 
-(defun nrepl-refresh ()
-  (interactive)
-  (set-buffer "*nrepl*")
-  (goto-char (point-max))
-  (insert "(clojure.tools.namespace.repl/refresh)")
-  (nrepl-return))
-
-(defun nrepl-reset ()
-  (interactive)
-  (set-buffer "*nrepl*")
-  (goto-char (point-max))
-  (insert "(user/reset)")
-  (nrepl-return))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; zap-up-to-char
@@ -347,6 +350,7 @@ Goes backward if ARG is negative; error if CHAR not found."
           (set-window-start w1 s2)
           (set-window-start w2 s1)
           (setq i (1+ i))))))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "Twilight" color theme
