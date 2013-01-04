@@ -56,7 +56,4 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:height 200 :family "Anonymous_Pro"))))
- '(font-lock-warning-face ((t (:background "#EE799F" :foreground "black"))))
- '(fringe ((((type ns)) (:background "#141314" :foreground "grey55"))))
- '(linum-highlight-face ((t (:inherit linum-face :foreground "yellow")))))
+ '(default ((t (:height 200 :foundry "apple" :family "Anonymous_Pro")))))
