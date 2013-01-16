@@ -143,6 +143,10 @@
 ;; http://almostobsolete.net/daypage.html
 
 (require 'org)
+(require 'org-clock)
+(require 'org-faces)
+
+(set-face-attribute 'org-mode-line-clock nil :background "pink")
 
 (when (fboundp 'set-word-wrap)
   (add-hook 'org-mode-hook 'set-word-wrap))
