@@ -35,6 +35,8 @@ fi
 
 alias rm='rm -i'
 
+alias beep="echo -e '\a'"
+
 # My path
 export PATH=~/bin:/usr/local/bin:/opt/local/bin:$PATH
 
