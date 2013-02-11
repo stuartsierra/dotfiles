@@ -40,6 +40,7 @@
  '(org-export-html-validation-link "")
  '(org-export-htmlize-output-type (quote css))
  '(org-export-time-stamp-file nil)
+ '(org-return-follows-link t)
  '(org-special-ctrl-a/e t)
  '(org-startup-folded (quote showeverything))
  '(org-todo-keywords (quote ((sequence "TODO" "INPROGRESS" "DONE"))))
