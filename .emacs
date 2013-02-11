@@ -331,6 +331,57 @@ Goes backward if ARG is negative; error if CHAR not found."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Whitespace
+
+;; from https://github.com/candera/emacs/blob/3cc572daf3148a1aebe2fc69c1c93e462dba2fee/init.el#L298
+
+(defun detabify-buffer ()
+  "Calls untabify on the current buffer"
+  (interactive)
+  (untabify (point-min) (point-max)))
+
+(defvar detabify-modes '(javascript-mode emacs-lisp-mode ruby-mode clojure-mode java-mode)
+  "A list of the modes that will have tabs converted to spaces before saving.")
+
+(defun mode-aware-detabify ()
+  "Calls untabify on the current buffer if the major mode is one of 'detabify-modes'"
+  (interactive)
+  (when (member major-mode detabify-modes)
+    (detabify-buffer)))
+
+(defvar delete-trailing-whitespace-modes detabify-modes
+  "A list of the modes that will have trailing whitespace before saving.")
+
+(defun mode-aware-trailing-whitespace-cleanup ()
+  "Calls delete-trailing-whitespace-modes on the current buffer
+if the major mode is one of 'delete-trailing-whitespace-modes'"
+  (interactive)
+  (when (member major-mode delete-trailing-whitespace-modes)
+    (delete-trailing-whitespace)))
+
+(defun clean-up-whitespace ()
+  "Calls untabify and delete-trailing-whitespace on the current buffer."
+  (interactive)
+  (detabify-buffer)
+  (delete-trailing-whitespace))
+
+(global-set-key (kbd "C-x t") 'clean-up-whitespace)
+
+(defun setup-highlight-whitespace ()
+  (setq show-trailing-whitespace t))
+
+(defun stop-highlighting-whitespace ()
+  (interactive)
+  (setq show-trailing-whitespace nil))
+
+(add-hook 'emacs-lisp-mode-hook 'setup-highlight-whitespace)
+(add-hook 'text-mode-hook 'setup-highlight-whitespace)
+(add-hook 'lisp-mode-hook 'setup-highlight-whitespace)
+(add-hook 'clojure-mode-hook 'setup-highlight-whitespace)
+(add-hook 'ruby-mode 'setup-highlight-whitespace)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rotate windows
 
 ;; from http://emacswiki.org/emacs/TransposeWindows
