@@ -127,12 +127,12 @@
 ;; RUBY
 
 ;; Missing from ruby-mode.el, see https://groups.google.com/group/emacs-on-rails/msg/565fba8263233c28
-(defun ruby-insert-end () 
-  "Insert \"end\" at point and reindent current line." 
-  (interactive) 
-  (insert "end") 
-  (ruby-indent-line t) 
-  (end-of-line)) 
+(defun ruby-insert-end ()
+  "Insert \"end\" at point and reindent current line."
+  (interactive)
+  (insert "end")
+  (ruby-indent-line t)
+  (end-of-line))
 
 (add-hook 'ruby-mode-hook
           (lambda ()
@@ -208,23 +208,26 @@
 (setq daypage-path "~/Documents/daypage/")
 
 (defun find-daypage (&optional date)
-  "Go to the day page for the specified date, 
+  "Go to the day page for the specified date,
    or toady's if none is specified."
-  (interactive (list 
+  (interactive (list
                 (org-read-date "" 'totime nil nil
                                (current-time) "")))
   (setq date (or date (current-time)))
-  (find-file 
-       (expand-file-name 
-        (concat daypage-path 
-        (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
-  (when (= 0 (buffer-size))
-        ;; Insert an initial for the page
-        (insert (format-time-string "%Y-%m-%d %A : " date))))
+  (let* ((file (expand-file-name
+                (concat daypage-path
+                        (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
+         (buffer (find-buffer-visiting file)))
+    (if buffer
+        (pop-to-buffer buffer)
+      (find-file file))
+    (when (= 0 (buffer-size))
+      ;; Insert an initial for the page
+      (insert (format-time-string "%Y-%m-%d %A : " date)))))
 
 (defun todays-daypage ()
   "Go straight to today's day page without prompting for a date."
-  (interactive) 
+  (interactive)
   (find-daypage))
 
 (global-set-key "\C-con" 'todays-daypage)
@@ -266,7 +269,7 @@
      (require 'paredit)
      (defun clojure-paredit-hook () (paredit-mode +1))
      (add-hook 'clojure-mode-hook 'clojure-paredit-hook)
-     
+
      (define-key clojure-mode-map "{" 'paredit-open-brace)
      (define-key clojure-mode-map "}" 'paredit-close-brace)
      (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
@@ -356,11 +359,11 @@ Goes backward if ARG is negative; error if CHAR not found."
   ;; Avoid "obsolete" warnings for translation-table-for-input.
   (with-no-warnings
     (if (char-table-p translation-table-for-input)
-	(setq char (or (aref translation-table-for-input char) char))))
+        (setq char (or (aref translation-table-for-input char) char))))
   (kill-region (point) (progn
-			 (search-forward (char-to-string char) nil nil arg)
-;			 (goto-char (if (> arg 0) (1- (point)) (1+ (point))))
-			 (1- (point))))
+                         (search-forward (char-to-string char) nil nil arg)
+;                        (goto-char (if (> arg 0) (1- (point)) (1+ (point))))
+                         (1- (point))))
   (goto-char (1- (point))))
 
 (global-unset-key "\M-z")
