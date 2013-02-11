@@ -22,6 +22,7 @@
  '(initial-buffer-choice t)
  '(linum-format "%3d")
  '(magit-commit-all-when-nothing-staged (quote ask-stage))
+ '(magit-process-popup-time 2)
  '(magit-set-upstream-on-push t)
  '(menu-bar-mode nil)
  '(nrepl-popup-stacktraces nil)
