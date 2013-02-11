@@ -229,6 +229,7 @@
        (do-it 'defun))))
 
 (require 'nrepl)
+(setq nrepl-words-of-inspiration ())
 
 (global-set-key (kbd "C-c o r") 'nrepl-switch-to-repl-buffer)
 
