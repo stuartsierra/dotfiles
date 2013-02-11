@@ -1,6 +1,19 @@
+# Terminal colors
+        RED="\[\033[0;31m\]"
+     ORANGE="\[\033[0;33m\]"
+     YELLOW="\[\033[0;33m\]"
+      GREEN="\[\033[0;32m\]"
+       BLUE="\[\033[0;34m\]"
+  LIGHT_RED="\[\033[1;31m\]"
+LIGHT_GREEN="\[\033[1;32m\]"
+      WHITE="\[\033[1;37m\]"
+ LIGHT_GRAY="\[\033[0;37m\]"
+ COLOR_NONE="\[\e[0m\]"
+
+
 # Basic environment
 export TERM=xterm-256color
-export PS1='\[\e]1;\]$(basename $(dirname $PWD))/\W\[\a\]\u@\h \W\$ '
+export PS1="${BLUE}\W \$${COLOR_NONE} "
 export EDITOR=/usr/bin/nano
 
 # My aliases
@@ -70,7 +83,7 @@ fi
 if [ -d ~/.relevance-etc ]; then
     export PATH=$PATH:~/.relevance-etc/scripts
     source ~/.relevance-etc/bash/git.sh
-    source ~/.relevance-etc/bash/git_prompt.sh
+    # source ~/.relevance-etc/bash/git_prompt.sh
     source ~/.relevance-etc/bash/ssh_autocompletion.sh
 fi
 
