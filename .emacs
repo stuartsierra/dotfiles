@@ -466,6 +466,12 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Server
+
+(server-start)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "Twilight" color theme
 
 (load-library "color-theme-twilight")
