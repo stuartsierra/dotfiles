@@ -13,3 +13,6 @@
 [submodule "submodules/nrepl.el"]
 	path = submodules/nrepl.el
 	url = https://github.com/kingtim/nrepl.el.git
+[submodule "submodules/align-cljlet"]
+	path = submodules/align-cljlet
+	url = https://github.com/gstamp/align-cljlet.git
