@@ -142,6 +142,3 @@ function ssh-reagent {
 if [ -d ~/src/clj/clojurescript ]; then
     export CLOJURESCRIPT_HOME=~/src/clojure/clojurescript
 fi
-
-# RVM
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
