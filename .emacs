@@ -19,12 +19,14 @@
 (push "~/.emacs.d/local/org-mode/lisp" load-path)
 (push "~/.emacs.d/local/magit" load-path)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; find-file-in-project
 
 (require 'find-file-in-project)
 (global-set-key (kbd "C-x M-f") 'find-file-in-project)
+
+(push "*.edn" ffip-patterns)
+(push "*.dtm" ffip-patterns)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Aquamacs / Cocoa Emacs stuff
