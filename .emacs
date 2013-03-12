@@ -265,6 +265,7 @@
 (show-paren-mode 1)
 
 (autoload 'clojure-mode "clojure-mode" nil t)
+(autoload 'align-cljlet "align-cljlet" nil t)
 
 (eval-after-load 'clojure-mode
   '(progn
