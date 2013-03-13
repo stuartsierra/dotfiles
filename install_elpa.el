@@ -1,3 +1,5 @@
+(setq user-init-file "/tmp/.emacs")
+
 (let ((buffer (url-retrieve-synchronously
 	       "http://tromey.com/elpa/package-install.el")))
   (save-excursion
