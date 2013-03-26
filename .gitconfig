@@ -34,7 +34,3 @@
 [core]
 	editor = emacsclient --alternate-editor=nano
 	excludesfile = ~/.gitignore_global
-
-# Avoid "merge master into master" commits after a git pull
-[branch]
-	autosetuprebase = remote
