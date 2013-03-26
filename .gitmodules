@@ -1,9 +1,9 @@
 [submodule "submodules/relevance/etc"]
 	path = submodules/relevance/etc
-	url = git@github.com:relevance/etc.git
+	url = https://github.com/relevance/etc.git
 [submodule "submodules/crafterm/twilight-emacs"]
 	path = submodules/crafterm/twilight-emacs
-	url = git@github.com:stuartsierra/twilight-emacs.git
+	url = https://github.com/stuartsierra/twilight-emacs.git
 [submodule "submodules/clojure-mode"]
 	path = submodules/clojure-mode
 	url = https://github.com/technomancy/clojure-mode.git
