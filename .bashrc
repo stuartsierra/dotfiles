@@ -140,5 +140,5 @@ function ssh-reagent {
 }
 
 if [ -d ~/src/clj/clojurescript ]; then
-    export CLOJURESCRIPT_HOME=~/src/clojure/clojurescript
+    export CLOJURESCRIPT_HOME=~/src/clj/clojurescript
 fi
