@@ -350,6 +350,25 @@
 ;; Avoid slow "Fontifying..." on OS X
 (setq font-lock-verbose nil)
 
+(defun org-babel-execute-in-repl ()
+  (interactive)
+  (let ((body (cadr (org-babel-get-src-block-info))))
+    (set-buffer "*nrepl*")
+    (goto-char (point-max))
+    (insert body)
+    (nrepl-return)))
+
+(defun nrepl-eval-expression-at-point-in-repl ()
+  (interactive)
+  (let ((form (nrepl-expression-at-point)))
+    ;; Strip excess whitespace
+    (while (string-match "\\`\s+\\|\n+\\'" form)
+      (setq form (replace-match "" t t form)))
+    (set-buffer "*nrepl*")
+    (goto-char (point-max))
+    (insert form)
+    (nrepl-return)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; zap-up-to-char
