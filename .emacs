@@ -27,6 +27,8 @@
 
 (push "*.edn" ffip-patterns)
 (push "*.dtm" ffip-patterns)
+(push "*.xml" ffip-patterns)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Aquamacs / Cocoa Emacs stuff
