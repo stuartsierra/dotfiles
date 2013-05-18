@@ -371,6 +371,11 @@
     (insert form)
     (nrepl-return)))
 
+(defun nrepl-clear-repl-buffer ()
+  (interactive)
+  (set-buffer "*nrepl*")
+  (nrepl-clear-buffer))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; zap-up-to-char
