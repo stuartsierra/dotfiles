@@ -17,13 +17,12 @@
 (when (boundp 'osx-key-mode-map)
   (define-key osx-key-mode-map (kbd "C-;") nil))
 
-(when (fboundp 'fringe-mode) (fringe-mode 0))
-
 ;; from https://gist.github.com/1297644
 (defun finder (location)
   "Fire up finder in a location relative to pwd."
   (interactive "sOpen finder at this location (relative to pwd): ")
   (start-process "finder" "finder" "open" "-a" "Finder.app" location))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Customizations
@@ -121,6 +120,7 @@
           (lambda ()
             (require 'ruby-electric)
             (ruby-electric-mode t)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LINUX-STYLE C CODE
