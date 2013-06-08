@@ -32,24 +32,33 @@ function install_relevance_etc {
 
 function install_org_mode {
     (
-        cd $DOTFILES/.emacs.d/local
+        cd $DOTFILES/.emacs.d
         if [ ! -d org-mode ]; then
-            git clone --depth 1 git@github.com:stuartsierra/org-mode.git
+            wget -O org-mode-master.zip \
+                https://github.com/stuartsierra/org-mode/archive/master.zip
+            unzip org-mode-master.zip
+            mv org-mode-master org-mode
         fi
-        cd org-mode 
+        cd org-mode
         make
     )
 }
 
 function install_magit {
     (
-        cd $DOTFILES/.emacs.d/local
+        cd $DOTFILES/.emacs.d
         if [ ! -d magit ]; then
-            wget http://cloud.github.com/downloads/magit/magit/magit-1.2.0.tar.gz
+            wget -O magit-1.2.0.tar.gz \
+                https://github.com/magit/magit/archive/1.2.0.tar.gz
+            tar xzf magit-1.2.0.tar.gz
+            mv magit-1.2.0 magit
         fi
-        tar xzf magit-1.2.0.tar.gz
-        mv magit-1.2.0 magit
         cd magit
         make
     )
 }
+
+function compile_local_emacs {
+    emacs -batch -f batch-byte-recompile-directory "$DOTFILES/.emacs.d/local"
+}
+

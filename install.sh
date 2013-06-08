@@ -20,11 +20,11 @@ link_with_backup .emacs.d
 install_elpa
 link_with_backup .emacs
 link_with_backup .emacs-custom.el
-
 install_org_mode
 install_magit
-install_relevance_etc
+compile_local_emacs
 
+install_relevance_etc
 
 backup ~/.relevance-etc
 ln -s $DOTFILES/submodules/relevance/etc $HOME/.relevance-etc

@@ -15,9 +15,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Locally-installed packages (non-ELPA)
 
-(push "~/.emacs.d/local/magit" load-path)
-(push "~/.emacs.d/local/org-mode/contrib/lisp" load-path)
-(push "~/.emacs.d/local/org-mode/lisp" load-path)
+(push "~/.emacs.d/magit" load-path)
+(push "~/.emacs.d/org-mode/contrib/lisp" load-path)
+(push "~/.emacs.d/org-mode/lisp" load-path)
 (push "~/.emacs.d/local/" load-path)
 
 
