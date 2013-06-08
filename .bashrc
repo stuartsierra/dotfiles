@@ -111,12 +111,6 @@ function java7 {
     echo "Using Java 7 at $JAVA_HOME"
 }
 
-# MySQL
-if [ -e /usr/local/mysql ]; then
-    export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
-    export PATH="$PATH:/usr/local/mysql/bin"
-fi
-
 # Google Chrome Testing instances
 function newchrome {
     local now=`date +%Y%m%d%H%M%S`
