@@ -69,7 +69,7 @@ alias copy_photos_from_droid="rsync --ignore-existing -avz /Volumes/NO\ NAME/DCI
 alias swank="java -Dclojure.compile.path=target/classes -cp src/test/resources:src/test/clojure:src/main/resources:src/main/clojure:target/test-classes:target/classes:target/dependency/* clojure.main -e \"(require 'swank.swank) (swank.swank/start-repl)\""
 
 if which open > /dev/null; then
-    alias e="open -b org.gnu.Aquamacs"
+    alias e="open -a Emacs.app"
 elif which emacs > /dev/null; then
     alias e="emacs"
 else
