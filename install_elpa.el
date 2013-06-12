@@ -8,6 +8,4 @@
 (package-install 'paredit)
 (package-install 'ruby-mode)
 (package-install 'ruby-electric)
-(package-install 'slime)
-(package-install 'slime-repl)
 (package-install 'smex)
