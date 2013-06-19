@@ -3,15 +3,16 @@
  (unless (fboundp 'auto-detect-longlines) (defun auto-detect-longlines () t))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(aquamacs-additional-fontsets nil t)
  '(aquamacs-autoface-mode nil)
  '(aquamacs-customization-version-id 208 t)
  '(aquamacs-tool-bar-user-customization (quote ((16777249 new-file open-file recent-files save-buffer aquamacs-print nil undo redo cut copy paste isearch-forward nil customize help))) t)
  '(auto-word-wrap-default-function nil)
+ '(backup-directory-alist (quote (("." . "/tmp/emacs-backups"))))
  '(backward-delete-char-untabify-method (quote all))
  '(dired-listing-switches "-alg")
  '(fringe-mode nil nil (fringe))
@@ -41,6 +42,9 @@
  '(org-export-html-validation-link "")
  '(org-export-htmlize-output-type (quote css))
  '(org-export-time-stamp-file nil)
+ '(org-export-with-section-numbers nil)
+ '(org-export-with-tags nil)
+ '(org-export-with-toc nil)
  '(org-return-follows-link t)
  '(org-special-ctrl-a/e t)
  '(org-startup-folded (quote showeverything))
@@ -51,12 +55,14 @@
  '(slime-net-coding-system (quote utf-8-unix))
  '(slime-truncate-lines nil)
  '(tool-bar-mode nil)
+ '(typopunct-buffer-language (quote english))
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(version-control t)
  '(visual-line-mode nil t))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:height 180 :foundry "apple" :family "Anonymous_Pro")))))
