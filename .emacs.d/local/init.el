@@ -291,6 +291,8 @@
   (insert "(user/reset)")
   (nrepl-return))
 
+(global-set-key (kbd "s-6") 'nrepl-reset)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-babel + Clojure
