@@ -62,3 +62,10 @@ function compile_local_emacs {
     emacs -batch -f batch-byte-recompile-directory "$DOTFILES/.emacs.d/local"
 }
 
+# SSH autocomplete depends on ~/.ssh/config existing
+function create_ssh_config {
+    mkdir -p "$HOME/.ssh"
+    if [ ! -e "$HOME/.ssh/config" ]; then
+        touch "$HOME/.ssh/config"
+    fi
+}
