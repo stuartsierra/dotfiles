@@ -477,6 +477,33 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Typopunct mode
+
+;; http://www.emacswiki.org/emacs/TypographicalPunctuationMarks
+
+(require 'typopunct)
+
+(defconst typopunct-ellipsis (decode-char 'ucs #x2026))
+(defconst typopunct-middot   (decode-char 'ucs #xB7)) ; or 2219
+(defun typopunct-insert-ellipsis-or-middot (arg)
+  "Change three consecutive dots to a typographical ellipsis mark."
+  (interactive "p")
+  (cond
+   ((and (= 1 arg)
+         (eq (char-before) ?^))
+    (delete-char -1)
+    (insert typopunct-middot))
+   ((and (= 1 arg)
+         (eq this-command last-command)
+         (looking-back "\\.\\."))
+    (replace-match "")
+    (insert typopunct-ellipsis))
+   (t
+    (self-insert-command arg))))
+(define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Server
 
 (server-start)
