@@ -19,6 +19,9 @@
 ;; file is in a Git repository whose "remote.origin.url" property
 ;; points to github.com. Works for both public (https://github.com)
 ;; and private (git@github.com) repository URLs.
+;;
+;; Inspired by https://github.com/gleitz/browse-on-github.el but
+;; rewritten without an external script.
 
 
 (defun call-git
