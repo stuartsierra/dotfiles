@@ -4,9 +4,6 @@
 [submodule "submodules/crafterm/twilight-emacs"]
 	path = submodules/crafterm/twilight-emacs
 	url = https://github.com/stuartsierra/twilight-emacs.git
-[submodule "submodules/clojure-mode"]
-	path = submodules/clojure-mode
-	url = https://github.com/technomancy/clojure-mode.git
 [submodule "submodules/find-file-in-project"]
 	path = submodules/find-file-in-project
 	url = https://github.com/technomancy/find-file-in-project.git
@@ -16,3 +13,6 @@
 [submodule "submodules/align-cljlet"]
 	path = submodules/align-cljlet
 	url = https://github.com/gstamp/align-cljlet.git
+[submodule "submodules/clojure-mode"]
+	path = submodules/clojure-mode
+	url = https://github.com/stuartsierra/clojure-mode.git
