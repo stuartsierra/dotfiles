@@ -58,7 +58,7 @@ function install_magit {
     )
 }
 
-function compile_local_emacs {
+function compile_local_emacs_lisp {
     emacs -batch -f batch-byte-recompile-directory "$DOTFILES/.emacs.d/local"
 }
 
