@@ -13,7 +13,7 @@ LIGHT_GREEN="\[\033[1;32m\]"
 
 # Basic environment
 export TERM=xterm-256color
-export PS1="${BLUE}\W \$${COLOR_NONE} "
+export PS1="${BLUE}\h:\W \$${COLOR_NONE} "
 export EDITOR=/usr/bin/nano
 
 # My aliases
