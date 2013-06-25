@@ -360,7 +360,16 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; zap-up-to-char
+;; General Text Manipulation
+
+;; from http://www.emacswiki.org/emacs/UnfillRegion
+(defun unfill-region (beg end)
+  "Unfill the region, joining text paragraphs into a single
+  logical line. This is useful, e.g., for use with
+  `visual-line-mode'."
+  (interactive "*r")
+  (let ((fill-column (point-max)))
+    (fill-region beg end)))
 
 (defun zap-up-to-char (arg char)
   "Kill up to but not including ARGth occurrence of CHAR.
