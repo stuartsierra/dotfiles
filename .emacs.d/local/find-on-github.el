@@ -24,10 +24,9 @@
 ;; rewritten without an external script.
 
 
-(defun call-git
+(defun call-git (&rest args)
   "Invoke git with the given arguments and return whatever it
   prints to STDOUT, whitespace-trimmed."
-  (&rest args)
   (cl-labels ((strip-whitespace (string)
                 (let ((s string))
                   (while (string-match "\\`\s+\\|\n+\\'" s)
@@ -38,9 +37,8 @@
           (strip-whitespace (buffer-string))
         (error "Git failed")))))
 
-(defun git-remote-to-web-url
+(defun git-remote-to-web-url (remote-url)
   "Convert a Git remote origin URL into a GitHub web page URL."
-  (remote-url)
   (let ((url remote-url))
     (when (string-match "^git@github\\.com:" url)
       (setq url (replace-match "https://github.com/" t t url)))
@@ -48,11 +46,10 @@
       (setq url (replace-match "" t t url)))
     url))
 
-(defun github-hash-fragment
+(defun github-hash-fragment ()
   "Returns a URL hash fragment like #L4-10 based on point and/or
   region in the current buffer. Returns nil if point is at the
   beginning of the buffer."
-  ()
   (cond ((region-active-p)
          (concat "#L" (int-to-string (line-number-at-pos (region-beginning)))
                  "-L" (int-to-string
