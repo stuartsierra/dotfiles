@@ -51,13 +51,6 @@ if [ -e /opt/local/lib/perl5 ]; then
     export PERL5LIB="/opt/local/lib/perl5/5.8.8:/opt/local/lib/perl5/site_perl/5.8.8:/opt/local/lib/perl5/vendor_perl/5.8.8"
 fi
     
-# for Java JDK 1.6
-if [ -e /System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home ]; then
-    export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home
-    alias java6=$JAVA_HOME/bin/java
-    alias javac6=$JAVA_HOME/bin/javac
-fi
-
 if [ -e /Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt ]; then
     alias truecrypt="/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt -t"
 fi
