@@ -35,6 +35,7 @@
 (custom-theme-set-faces
  'twilight-stuart
  '(default ((t (:background "#141414" :foreground "#CACACA"))))
+ '(cursor ((t (:background "yellow"))))
  '(blue ((t (:foreground "blue"))))
  '(border-glyph ((t (nil))))
  '(buffers-tab ((t (:background "#141414" :foreground "#CACACA"))))
