@@ -23,6 +23,9 @@
   (interactive "sOpen finder at this location (relative to pwd): ")
   (start-process "finder" "finder" "open" "-a" "Finder.app" location))
 
+(when (eq 'ns window-system)
+  (menu-bar-mode 1))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Customizations
@@ -513,6 +516,22 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Text scaling (zoom)
+
+(defun text-scale-reset ()
+  "Disables text scaling (zoom)"
+  (interactive)
+  (text-scale-set 0))
+
+(global-set-key (kbd "s-=") 'text-scale-increase)
+(global-set-key (kbd "s--") 'text-scale-decrease)
+(global-set-key (kbd "s-0") 'text-scale-reset)
+(global-set-key (kbd "s-+") 'text-scale-increase)
+(global-set-key (kbd "s-_") 'text-scale-decrease)
+(global-set-key (kbd "s-)") 'text-scale-reset)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Server
 
 (server-start)
@@ -521,4 +540,5 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; "Twilight" color theme
 
-(load-library "color-theme-twilight")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/local")
+(load-theme 'twilight-stuart t)
