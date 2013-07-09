@@ -10,24 +10,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Aquamacs / Cocoa Emacs stuff
-
-(when (fboundp 'tabbar-mode) (tabbar-mode -1))
-
-(when (boundp 'osx-key-mode-map)
-  (define-key osx-key-mode-map (kbd "C-;") nil))
-
-;; from https://gist.github.com/1297644
-(defun finder (location)
-  "Fire up finder in a location relative to pwd."
-  (interactive "sOpen finder at this location (relative to pwd): ")
-  (start-process "finder" "finder" "open" "-a" "Finder.app" location))
-
-(when (eq 'ns window-system)
-  (menu-bar-mode 1))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Customizations
 
 (put 'narrow-to-region 'disabled nil)
@@ -542,3 +524,22 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/local")
 (load-theme 'twilight-stuart t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Aquamacs / Cocoa Emacs stuff
+
+(when (fboundp 'tabbar-mode) (tabbar-mode -1))
+
+(when (boundp 'osx-key-mode-map)
+  (define-key osx-key-mode-map (kbd "C-;") nil))
+
+;; from https://gist.github.com/1297644
+(defun finder (location)
+  "Fire up finder in a location relative to pwd."
+  (interactive "sOpen finder at this location (relative to pwd): ")
+  (start-process "finder" "finder" "open" "-a" "Finder.app" location))
+
+;; Has to come late in the initialization process
+(when (display-graphic-p)
+  (menu-bar-mode 1))
