@@ -543,3 +543,10 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 ;; Has to come late in the initialization process
 (when (display-graphic-p)
   (menu-bar-mode 1))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Executable programs
+
+(add-to-list 'exec-path "~/bin")
+(add-to-list 'exec-path "/usr/local/bin")
