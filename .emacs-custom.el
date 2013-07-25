@@ -46,6 +46,7 @@
  '(org-export-with-section-numbers nil)
  '(org-export-with-tags nil)
  '(org-export-with-toc nil)
+ '(org-html-htmlize-output-type (quote css))
  '(org-return-follows-link t)
  '(org-special-ctrl-a/e t)
  '(org-startup-folded (quote showeverything))
