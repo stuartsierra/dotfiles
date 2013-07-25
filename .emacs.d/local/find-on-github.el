@@ -42,6 +42,8 @@
   (let ((url remote-url))
     (when (string-match "^git@github\\.com:" url)
       (setq url (replace-match "https://github.com/" t t url)))
+    (when (string-match "^git://github\\.com/" url)
+      (setq url (replace-match "https://github.com/" t t url)))
     (when (string-match "\\.git$" url)
       (setq url (replace-match "" t t url)))
     url))
