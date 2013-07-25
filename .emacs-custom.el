@@ -14,6 +14,7 @@
  '(auto-word-wrap-default-function nil)
  '(backup-directory-alist (quote (("." . "/tmp/emacs-backups"))))
  '(backward-delete-char-untabify-method (quote all))
+ '(column-number-mode t)
  '(dired-listing-switches "-alg")
  '(fringe-mode nil nil (fringe))
  '(global-auto-revert-mode t)
