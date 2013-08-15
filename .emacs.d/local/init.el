@@ -429,18 +429,10 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 (global-set-key (kbd "C-x t") 'clean-up-whitespace)
 
-(defun setup-highlight-whitespace ()
-  (setq show-trailing-whitespace t))
-
-(defun stop-highlighting-whitespace ()
+(defun toggle-show-whitespace ()
   (interactive)
-  (setq show-trailing-whitespace nil))
-
-(add-hook 'emacs-lisp-mode-hook 'setup-highlight-whitespace)
-(add-hook 'text-mode-hook 'setup-highlight-whitespace)
-(add-hook 'lisp-mode-hook 'setup-highlight-whitespace)
-(add-hook 'clojure-mode-hook 'setup-highlight-whitespace)
-(add-hook 'ruby-mode 'setup-highlight-whitespace)
+  (setq show-trailing-whitespace
+        (not show-trailing-whitespace)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
