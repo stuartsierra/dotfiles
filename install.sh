@@ -18,6 +18,12 @@ link_with_backup .gitignore_global
 link_with_backup .rvmrc
 link_with_backup .tmux.conf
 
+link_with_backup bin/clj
+link_with_backup bin/edit
+link_with_backup bin/fresh-chrome
+link_with_backup bin/git-submodule-pull
+link_with_backup bin/tab
+
 link_with_backup .emacs.d
 install_elpa
 link_with_backup .emacs
