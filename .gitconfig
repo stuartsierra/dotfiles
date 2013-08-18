@@ -32,5 +32,5 @@
 	changed = green
 	untracked = cyan
 [core]
-	editor = emacsclient --alternate-editor=nano
+	editor = ~/bin/edit
 	excludesfile = ~/.gitignore_global
