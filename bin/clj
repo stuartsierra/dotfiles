@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+set -e
+
+VERSION="1.5.1"
+
+RLWRAP=`which rlwrap`
+
+function print_usage {
+    echo "Usage: $0 [-v clojure_version] [-c extra_classpath]"
+    echo "Launches specified Clojure version ($VERSION by default)."
+    echo "Option -c may be repeated to augment the Java classpath."
+    echo "Remaining options are passed to Clojure."
+}
+
+while getopts "hv:c:-" OPT; do
+    case "$OPT" in
+        v) VERSION="$OPTARG" ;;
+        c) CLASSPATH="$CLASSPATH:$OPTARG" ;;
+        -) break ;;
+        h) print_usage; exit ;;
+    esac
+done
+
+shift $(($OPTIND - 1))
+
+CLOJURE_JAR="$HOME/.m2/repository/org/clojure/clojure/$VERSION/clojure-$VERSION.jar"
+
+if [ ! -e "$CLOJURE_JAR" ]; then
+    mvn dependency:get \
+        -DrepoId=sonatype \
+        -DrepoUrl=https://oss.sonatype.org/content/repositories/public/ \
+        -DgroupId=org.clojure \
+        -DartifactId=clojure \
+        "-Dversion=$VERSION"
+fi    
+
+CLASSPATH="$CLOJURE_JAR:$CLASSPATH"
+
+exec "$RLWRAP" java -cp "$CLASSPATH" clojure.main "$@"

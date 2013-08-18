@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# On OS X, work around the fact that the default installed emacsclient
+# does not recognize an Emacs installed with Homebrew
+if [[ -e /usr/local/bin/emacsclient ]]; then
+    EMACSCLIENT=/usr/local/bin/emacsclient
+else
+    EMACSCLIENT=$(which emacsclient)
+fi
+
+for command in zile nano emacs vim; do
+    ALTERNATE=$(which ${command})
+    if [[ ! -z "$ALTERNATE" ]]; then break; fi
+done
+
+exec "$EMACSCLIENT" --alternate-editor="$ALTERNATE" "$@"

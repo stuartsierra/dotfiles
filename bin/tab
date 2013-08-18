@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    TITLE=$(basename $(pwd))
+else
+    TITLE="$@"
+fi	
+
+echo -ne "\033]0;$TITLE\007"

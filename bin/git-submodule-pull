@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -e
+
+submodule_dir="$1"
+
+function print_usage {
+    cat <<EOF
+Usage: $0 <submodule-dir>
+
+cd's to submodule directory, pulls latest master, then commits change
+in top-level project.
+EOF
+}
+
+############################################################
+### Main script begins here
+
+if [ -z "$submodule_dir" ]; then
+    print_usage
+    exit 1
+fi
+
+(
+    cd $submodule_dir
+
+    if [ -n "$(git status --porcelain)" ]; then
+        echo "ERROR: Directory $submodule_dir has uncommitted changes"
+        exit 1
+    fi
+
+    git checkout master
+    git pull
+)
+
+git add $submodule_dir
+git commit -m "Pull Git master of submodule at $submodule_dir"
