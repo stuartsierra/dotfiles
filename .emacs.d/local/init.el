@@ -168,6 +168,8 @@
 (require 'org-clock)
 (require 'org-faces)
 
+(add-hook 'org-mode-hook 'auto-fill-mode)
+
 (set-face-attribute 'org-mode-line-clock nil :background "pink")
 
 (when (fboundp 'set-word-wrap)
