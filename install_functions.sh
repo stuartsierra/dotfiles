@@ -1,23 +1,23 @@
 function backup {
-    local FILE=$1
-    if [ -L $FILE ]; then
-        rm $FILE
-    elif [ -e $FILE ]; then
-        mv $FILE $FILE.bak
+    local file="$1"
+    if [[ -L "$file" ]]; then
+        rm "$file"
+    elif [[ -e "$file" ]]; then
+        mv "$file" "$file.bak"
     fi
 }
 
 function link_with_backup {
-    local FILENAME=$1
-    local SOURCE=$DOTFILES/$FILENAME
-    local TARGET=$HOME/$FILENAME
-    backup $TARGET
-    ln -s $SOURCE $TARGET
+    local filename="$1"
+    local source="$DOTFILES/$filename"
+    local target="$HOME/$filename"
+    backup "$target"
+    ln -s "$source" "$target"
 }
 
 function install_elpa {
-    rm -rf $DOTFILES/.emacs.d/elpa
-    emacs --script $DOTFILES/install_elpa.el
+    rm -rf "$DOTFILES/.emacs.d/elpa"
+    emacs --script "$DOTFILES/install_elpa.el"
 }
 
 function update_submodules {
@@ -26,13 +26,13 @@ function update_submodules {
 }
 
 function install_relevance_etc {
-    backup ~/.relevance-etc
-    ln -s $DOTFILES/submodules/relevance/etc $HOME/.relevance-etc
+    backup "$HOME/.relevance-etc"
+    ln -s "$DOTFILES/submodules/relevance/etc" "$HOME/.relevance-etc"
 }
 
 function install_org_mode {
     (
-        cd $DOTFILES/.emacs.d
+        cd "$DOTFILES/.emacs.d"
         if [ ! -d org-mode ]; then
             wget -O org-mode-master.zip \
                 https://github.com/stuartsierra/org-mode/archive/master.zip
@@ -46,7 +46,7 @@ function install_org_mode {
 
 function install_magit {
     (
-        cd $DOTFILES/.emacs.d
+        cd "$DOTFILES/.emacs.d"
         if [ ! -d magit ]; then
             wget -O magit-1.2.0.tar.gz \
                 https://github.com/magit/magit/archive/1.2.0.tar.gz
