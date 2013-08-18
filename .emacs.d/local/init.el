@@ -279,6 +279,7 @@
   (nrepl-return))
 
 (global-set-key (kbd "s-6") 'nrepl-reset)
+(global-set-key (kbd "s-7") 'nrepl-refresh)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
