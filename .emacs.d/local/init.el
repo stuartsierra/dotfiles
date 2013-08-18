@@ -540,5 +540,15 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Executable programs
 
-(add-to-list 'exec-path "~/bin")
-(add-to-list 'exec-path "/usr/local/bin")
+(defun slurp (path)
+  "Return file's contents as a string."
+  (with-temp-buffer
+    (insert-file-contents path)
+    (buffer-string)))
+
+(let ((path (slurp "~/.path")))
+  (setenv "PATH" path)
+  (setq exec-path
+        (delq nil  ;; like Clojure's 'remove'
+          (mapcar (lambda (s) (if (zerop (length s)) nil s))
+                  (split-string path "\n")))))

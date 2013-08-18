@@ -38,13 +38,15 @@ alias rm='rm -i'
 alias beep="echo -e '\a'"
 
 # My path
-export PATH=~/bin:/usr/local/bin:/opt/local/bin:$PATH
+if [[ -e ~/.path ]]; then
+    path=""
+    while read -r; do
+        if [[ ! -z "$path" ]]; then path="$path:"; fi
+        path="$path$REPLY"
+    done < ~/.path
+    export PATH="$path"
+fi
 
-# for MacPorts
-export MANPATH=$MANPATH:/opt/local/share/man
-
-# for PostgreSQL 8.4 installed via MacPorts
-export PATH=$PATH:/opt/local/lib/postgresql84/bin
 
 # for Perl5 / CPAN
 if [ -e /opt/local/lib/perl5 ]; then
