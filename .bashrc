@@ -16,8 +16,19 @@ export TERM=xterm-256color
 export PS1="${BLUE}\h:\W \$${COLOR_NONE} "
 export EDITOR=/usr/bin/nano
 
+# My path
+if [[ -e "$HOME/.path" ]]; then
+    path=""
+    while read -r; do
+        if [[ ! -z "$path" ]]; then path="$path:"; fi
+        path="$path$REPLY"
+    done < "$HOME/.path"
+    export PATH="$path"
+fi
+
+
 # My aliases
-if [ `uname` = "Darwin" ]; then
+if [[ "$(uname)" == "Darwin" ]]; then
     alias l="ls -FG"
     alias ls="ls -FG"
     alias ll="ls -lhFG"
@@ -36,17 +47,6 @@ fi
 alias rm='rm -i'
 
 alias beep="echo -e '\a'"
-
-# My path
-if [[ -e ~/.path ]]; then
-    path=""
-    while read -r; do
-        if [[ ! -z "$path" ]]; then path="$path:"; fi
-        path="$path$REPLY"
-    done < ~/.path
-    export PATH="$path"
-fi
-
 
 # for Perl5 / CPAN
 if [ -e /opt/local/lib/perl5 ]; then

@@ -275,7 +275,7 @@
   (interactive)
   (set-buffer "*nrepl*")
   (goto-char (point-max))
-  (insert "(user/reset)")
+  (insert "(dev/reset)")
   (nrepl-return))
 
 (global-set-key (kbd "s-6") 'nrepl-reset)
@@ -550,8 +550,9 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
     (buffer-string)))
 
 (let ((path (slurp "~/.path")))
-  (setenv "PATH" path)
-  (setq exec-path
-        (delq nil  ;; like Clojure's 'remove'
-          (mapcar (lambda (s) (if (zerop (length s)) nil s))
-                  (split-string path "\n")))))
+  (mapcar (lambda (s)
+            (if (zerop (length s))
+                nil
+              (progn (push s exec-path)
+                     (setenv "PATH" (concat (getenv "PATH") ":" s)))))
+          (split-string path "\n")))

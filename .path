@@ -5,7 +5,6 @@
 /bin
 /usr/sbin
 /sbin
-/usr/local/bin
 /opt/X11/bin
 /usr/texbin
 ~/.relevance-etc/scripts

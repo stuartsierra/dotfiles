@@ -16,3 +16,4 @@
 (package-install 'ruby-mode)
 (package-install 'smex)
 (package-install 'typopunct)
+(package-install 'dash)
