@@ -71,3 +71,9 @@ function create_ssh_config {
         fi
     done
 }
+
+function unset_git_user {
+    git config --global --unset user.name
+    git config --global --unset user.email
+    git config --global --unset user.initials
+}
