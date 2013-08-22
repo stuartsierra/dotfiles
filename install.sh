@@ -36,3 +36,10 @@ install_relevance_etc
 
 backup ~/.relevance-etc
 ln -s $DOTFILES/submodules/relevance/etc $HOME/.relevance-etc
+
+if [[ "$USER" != "stuart" ]]; then
+    git config --global --unset user.name
+    git config --global --unset user.email
+fi
+
+
