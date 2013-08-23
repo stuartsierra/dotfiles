@@ -73,7 +73,9 @@ function create_ssh_config {
 }
 
 function unset_git_user {
-    git config --global --unset user.name
-    git config --global --unset user.email
-    git config --global --unset user.initials
+    for var in user.name user.email user.initials; do
+        if ( git config --list --global | grep "$var" &> /dev/null ); then
+            git config --global --unset "$var"
+        fi
+    done
 }
