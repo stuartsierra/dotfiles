@@ -304,15 +304,31 @@
                   (if (string= "\n" (substring out -1))
                       (substring out 0 -1)
                     out)))
+           (err (plist-get result :stderr))
+           (err (when err
+                  (if (string= "\n" (substring err -1))
+                      (substring err 0 -1)
+                    err)))
            (stdout (when out
                      (mapconcat (lambda (line)
                                   (concat ";; " line))
                                 (split-string out "\n")
-                                "\n"))))
-      (concat stdout
-              (when (and stdout (not (string= "\n" (substring stdout -1))))
+                                "\n")))
+           (stderr (when err
+                     (mapconcat (lambda (line)
+                                  (concat ";; " line))
+                                (split-string err "\n")
+                                "\n")))
+           (output (concat stdout
+                           (when (and stdout (not (string= "\n" (substring stdout -1))))
+                             "\n")
+                           stderr)))
+      (concat output
+              (when (and output
+                         (not (string= "" output))
+                         (not (string= "\n" (substring output -1))))
                 "\n")
-              ";;=> " value)))
+              (when value (concat ";;=> " value)))))
 
   (provide 'ob-clojure)
 
