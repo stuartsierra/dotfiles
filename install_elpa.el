@@ -12,6 +12,7 @@
 (package-install 'color-theme)
 (package-install 'gh)
 (package-install 'gist)
+(package-install 'pkg-info)
 (package-install 'paredit)
 (package-install 'ruby-mode)
 (package-install 'smex)
