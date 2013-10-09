@@ -18,6 +18,7 @@ link_with_backup .gitignore_global
 link_with_backup .rvmrc
 link_with_backup .tmux.conf
 
+mkdir -p "$HOME/bin"
 link_with_backup bin/clj
 link_with_backup bin/edit
 link_with_backup bin/fresh-chrome
