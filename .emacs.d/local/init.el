@@ -275,7 +275,7 @@
   (interactive)
   (set-buffer "*nrepl*")
   (goto-char (point-max))
-  (insert "(dev/reset)")
+  (insert "(user/reset)")
   (nrepl-return))
 
 (global-set-key (kbd "s-6") 'nrepl-reset)
