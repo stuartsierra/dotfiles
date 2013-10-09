@@ -264,6 +264,14 @@
 
 (setq inferior-lisp-program "~/bin/clj")
 
+(defun nrepl-copy-current-ns ()
+  "Copies the name of the current Clojure namespace to the kill
+ring."
+  (interactive)
+  (let ((ns (nrepl-current-ns)))
+    (kill-new ns)
+    (message ns)))
+
 (defun nrepl-refresh ()
   (interactive)
   (set-buffer "*nrepl*")
