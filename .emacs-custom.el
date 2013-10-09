@@ -16,6 +16,7 @@
  '(backward-delete-char-untabify-method (quote all))
  '(column-number-mode t)
  '(custom-safe-themes (quote ("1875632bec1cc9954c7bfe7babb5177a9f2ecda73d255041a24c7e6428059ed5" "26a2398fa2c7bdaf5e456484ff45fade498e9e500ebad2ddf84d3509a952e98d" default)))
+ '(delete-old-versions t)
  '(dired-listing-switches "-alg")
  '(fringe-mode nil nil (fringe))
  '(global-auto-revert-mode t)
