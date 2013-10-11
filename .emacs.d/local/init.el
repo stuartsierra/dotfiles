@@ -272,19 +272,40 @@ ring."
     (kill-new ns)
     (message ns)))
 
+(defun nrepl-execute-in-current-repl (expr)
+  (if (not (get-buffer (nrepl-current-connection-buffer)))
+      (message "No active nREPL connection.")
+    (progn
+      (set-buffer (nrepl-find-or-create-repl-buffer))
+      (goto-char (point-max))
+      (insert expr)
+      (nrepl-return))))
+
 (defun nrepl-refresh ()
   (interactive)
-  (set-buffer "*nrepl*")
-  (goto-char (point-max))
-  (insert "(clojure.tools.namespace.repl/refresh)")
-  (nrepl-return))
+  (nrepl-execute-in-current-repl
+   "(clojure.tools.namespace.repl/refresh)"))
 
 (defun nrepl-reset ()
   (interactive)
+  (nrepl-execute-in-current-repl
+   "(user/reset)"))
+
+(defun nrepl-eval-expression-at-point-in-repl ()
+  (interactive)
+  (let ((form (nrepl-expression-at-point)))
+    ;; Strip excess whitespace
+    (while (string-match "\\`\s+\\|\n+\\'" form)
+      (setq form (replace-match "" t t form)))
+    (set-buffer "*nrepl*")
+    (goto-char (point-max))
+    (insert form)
+    (nrepl-return)))
+
+(defun nrepl-clear-repl-buffer ()
+  (interactive)
   (set-buffer "*nrepl*")
-  (goto-char (point-max))
-  (insert "(user/reset)")
-  (nrepl-return))
+  (nrepl-clear-buffer))
 
 (global-set-key (kbd "s-6") 'nrepl-reset)
 (global-set-key (kbd "s-7") 'nrepl-refresh)
@@ -354,21 +375,6 @@ ring."
     (insert body)
     (nrepl-return)))
 
-(defun nrepl-eval-expression-at-point-in-repl ()
-  (interactive)
-  (let ((form (nrepl-expression-at-point)))
-    ;; Strip excess whitespace
-    (while (string-match "\\`\s+\\|\n+\\'" form)
-      (setq form (replace-match "" t t form)))
-    (set-buffer "*nrepl*")
-    (goto-char (point-max))
-    (insert form)
-    (nrepl-return)))
-
-(defun nrepl-clear-repl-buffer ()
-  (interactive)
-  (set-buffer "*nrepl*")
-  (nrepl-clear-buffer))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
