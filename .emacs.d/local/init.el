@@ -255,7 +255,8 @@
        (using 'defun)
        (with 'defun)
        (it 'defun)
-       (do-it 'defun))))
+       (do-it 'defun)
+       (go-loop 'defun))))
 
 (require 'nrepl)
 (setq nrepl-words-of-inspiration '(""))
