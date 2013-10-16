@@ -297,15 +297,15 @@ ring."
     ;; Strip excess whitespace
     (while (string-match "\\`\s+\\|\n+\\'" form)
       (setq form (replace-match "" t t form)))
-    (set-buffer "*nrepl*")
-    (goto-char (point-max))
-    (insert form)
-    (nrepl-return)))
+    (nrepl-execute-in-current-repl form)))
 
 (defun nrepl-clear-repl-buffer ()
   (interactive)
-  (set-buffer "*nrepl*")
-  (nrepl-clear-buffer))
+  (if (not (get-buffer (nrepl-current-connection-buffer)))
+      (message "No active nREPL connection.")
+    (progn
+      (set-buffer (nrepl-find-or-create-repl-buffer))
+      (nrepl-clear-buffer))))
 
 (global-set-key (kbd "s-6") 'nrepl-reset)
 (global-set-key (kbd "s-7") 'nrepl-refresh)
