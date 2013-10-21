@@ -59,6 +59,7 @@
  '(slime-kill-without-query-p t)
  '(slime-net-coding-system (quote utf-8-unix))
  '(slime-truncate-lines nil)
+ '(text-scale-mode-step 1.1)
  '(tool-bar-mode nil)
  '(typopunct-buffer-language (quote english))
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
