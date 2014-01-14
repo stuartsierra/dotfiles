@@ -570,6 +570,12 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 (when (display-graphic-p)
   (menu-bar-mode 1))
 
+;; Fix Unicode character spacing; see http://stackoverflow.com/q/8779351
+(when (string-equal system-type "darwin")
+  (set-fontset-font "fontset-default"
+                    'unicode
+                    '("Menlo" . "iso10646-1")))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Executable programs
