@@ -17,6 +17,7 @@ link_with_backup .gitconfig
 link_with_backup .gitignore_global
 link_with_backup .rvmrc
 link_with_backup .tmux.conf
+link_with_backup .ackrc
 
 mkdir -p "$HOME/bin"
 link_with_backup bin/clj
