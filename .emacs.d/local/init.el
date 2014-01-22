@@ -229,7 +229,9 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CLOJURE/LISP/NREPL
+;; CLOJURE/LISP/NREPL/CIDER
+
+(require 'cider)
 
 (show-paren-mode 1)
 
@@ -258,58 +260,54 @@
        (do-it 'defun)
        (go-loop 'defun))))
 
-(require 'nrepl)
-(setq nrepl-words-of-inspiration '(""))
+(setq cider-words-of-inspiration '(""))
 
-(global-set-key (kbd "C-c o r") 'nrepl-switch-to-repl-buffer)
+(global-set-key (kbd "C-c o r") 'cider-switch-to-repl-buffer)
 
 (setq inferior-lisp-program "~/bin/clj")
 
-(defun nrepl-copy-current-ns ()
+(defun cider-copy-current-ns ()
   "Copies the name of the current Clojure namespace to the kill
 ring."
   (interactive)
-  (let ((ns (nrepl-current-ns)))
+  (let ((ns (cider-current-ns)))
     (kill-new ns)
     (message ns)))
 
-(defun nrepl-execute-in-current-repl (expr)
-  (if (not (get-buffer (nrepl-current-connection-buffer)))
-      (message "No active nREPL connection.")
-    (progn
-      (set-buffer (nrepl-find-or-create-repl-buffer))
-      (goto-char (point-max))
-      (insert expr)
-      (nrepl-return))))
+(defun cider-execute-in-current-repl (expr)
+  (with-current-buffer (cider-current-repl-buffer)
+    (goto-char (point-max))
+    (insert expr)
+    (cider-repl-return)))
 
-(defun nrepl-refresh ()
+(defun cider-refresh ()
   (interactive)
-  (nrepl-execute-in-current-repl
+  (cider-execute-in-current-repl
    "(clojure.tools.namespace.repl/refresh)"))
 
-(defun nrepl-reset ()
+(defun cider-reset ()
   (interactive)
-  (nrepl-execute-in-current-repl
+  (cider-execute-in-current-repl
    "(user/reset)"))
 
-(defun nrepl-eval-expression-at-point-in-repl ()
+(defun cider-eval-expression-at-point-in-repl ()
   (interactive)
-  (let ((form (nrepl-expression-at-point)))
+  (let ((form (cider-defun-at-point)))
     ;; Strip excess whitespace
     (while (string-match "\\`\s+\\|\n+\\'" form)
       (setq form (replace-match "" t t form)))
-    (nrepl-execute-in-current-repl form)))
+    (cider-execute-in-current-repl form)))
 
-(defun nrepl-clear-repl-buffer ()
+(defun cider-clear-repl-buffer ()
   (interactive)
-  (if (not (get-buffer (nrepl-current-connection-buffer)))
-      (message "No active nREPL connection.")
+  (if (not (get-buffer (cider-current-connection-buffer)))
+      (message "No active cider connection.")
     (progn
-      (set-buffer (nrepl-find-or-create-repl-buffer))
-      (nrepl-clear-buffer))))
+      (set-buffer (cider-find-or-create-repl-buffer))
+      (cider-clear-buffer))))
 
-(global-set-key (kbd "s-6") 'nrepl-reset)
-(global-set-key (kbd "s-7") 'nrepl-refresh)
+(global-set-key (kbd "s-6") 'cider-reset)
+(global-set-key (kbd "s-7") 'cider-refresh)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -327,7 +325,7 @@ ring."
 
   (defun org-babel-execute:clojure (body params)
     "Evaluate a block of Clojure code with Babel."
-    (let* ((result (nrepl-send-string-sync body (nrepl-current-ns)))
+    (let* ((result (nrepl-send-string-sync body (cider-current-ns)))
            (value (plist-get result :value))
            (out (plist-get result :stdout))
            (out (when out
@@ -371,12 +369,7 @@ ring."
 (defun org-babel-execute-in-repl ()
   (interactive)
   (let ((body (cadr (org-babel-get-src-block-info))))
-    (set-buffer "*nrepl*")
-    (goto-char (point-max))
-    (insert body)
-    (nrepl-return)))
-
-
+    (cider-execute-in-current-repl body)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General Text Manipulation
