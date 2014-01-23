@@ -22,6 +22,7 @@
  '(global-auto-revert-mode t)
  '(global-hl-line-mode t)
  '(global-linum-mode t)
+ '(image-dired-external-viewer "/usr/bin/open")
  '(indent-tabs-mode nil)
  '(initial-buffer-choice t)
  '(linum-format "%3d")
