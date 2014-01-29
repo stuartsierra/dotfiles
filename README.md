@@ -2,6 +2,10 @@
 
 My personal shell/editor/environment customization files.
 
+I publish this repository for **example purposes only**. I do not
+recommend using it as-is. Instead, treat it as a source of ideas for
+creating your own development setup.
+
 To install:
 
     ./install.sh
