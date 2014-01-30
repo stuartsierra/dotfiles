@@ -241,8 +241,13 @@
 (eval-after-load 'clojure-mode
   '(progn
      (require 'paredit)
+     (require 'clj-refactor)
      (defun clojure-paredit-hook () (paredit-mode +1))
+     (defun clj-refactor-hook ()
+       (clj-refactor-mode 1)
+       (cljr-add-keybindings-with-prefix "C-c C-m"))
      (add-hook 'clojure-mode-hook 'clojure-paredit-hook)
+     (add-hook 'clojure-mode-hook 'clj-refactor-hook)
 
      (define-key clojure-mode-map "{" 'paredit-open-brace)
      (define-key clojure-mode-map "}" 'paredit-close-brace)

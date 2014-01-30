@@ -10,7 +10,22 @@
 (package-refresh-contents)
 
 (defvar my-packages
-  '(color-theme gh gist pkg-info paredit ruby-mode smex typopunct dash))
+  '(
+    clj-refactor
+    color-theme
+    dash
+    dash
+    gh
+    gist
+    multiple-cursors
+    paredit
+    pkg-info
+    ruby-mode
+    s
+    smex
+    typopunct
+    yasnippet
+    ))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
