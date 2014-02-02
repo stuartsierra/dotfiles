@@ -115,3 +115,4 @@
     (message url)
     (browse-url url)))
 
+(provide 'find-on-github)
