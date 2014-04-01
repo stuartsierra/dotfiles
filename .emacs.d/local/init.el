@@ -247,6 +247,18 @@
     (forward-line 1)
     (newline)))
 
+(setq org-default-src-language "clojure")
+
+(defun org-insert-src-block ()
+  (interactive)
+  (insert "#+BEGIN_SRC "
+          org-default-src-language
+          "\n\n#+END_SRC\n")
+  (previous-line 2)
+  (org-edit-special))
+
+(define-key org-mode-map (kbd "C-c o s") 'org-insert-src-block)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE/LISP/NREPL/CIDER
