@@ -19,6 +19,10 @@
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
  '(font-lock-warning-face ((t (:inherit error))))
+ '(org-code ((t (:inherit bold))))
+ '(org-block-begin-line ((t (:foreground "Gray"))))
+ '(org-block-end-line ((t (:foreground "Gray"))))
+ '(org-block-background ((t :background "#eee")))
  '(default ((t (:background "white" :foreground "black")))))
 
 (provide-theme 'projector)
