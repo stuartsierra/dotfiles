@@ -48,7 +48,7 @@ alias rm='rm -i'
 
 alias beep="echo -e '\a'"
 
-alias pgrep='ps -aux | grep'
+alias pgrep='ps aux | grep'
 
 # for Perl5 / CPAN
 if [ -e /opt/local/lib/perl5 ]; then
