@@ -334,6 +334,10 @@ ring."
   (cider-execute-in-current-repl
    "(user/reset)"))
 
+(defun cider-eval-register-in-repl (register)
+  (interactive "cEval register in CIDER REPL: ")
+  (cider-execute-in-current-repl (get-register register)))
+
 (defun cider-eval-expression-at-point-in-repl ()
   (interactive)
   (let ((form (cider-defun-at-point)))
