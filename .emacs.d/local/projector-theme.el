@@ -22,6 +22,7 @@
  '(org-code ((t (:inherit bold))))
  '(org-block-begin-line ((t (:foreground "Gray"))))
  '(org-block-end-line ((t (:foreground "Gray"))))
+ '(org-meta-line ((t (:foreground "Gray"))))
  '(org-block-background ((t :background "#eee")))
  '(default ((t (:background "white" :foreground "black")))))
 
