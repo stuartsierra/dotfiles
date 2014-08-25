@@ -517,7 +517,7 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Rotate windows
+;; Window (pane) management
 
 ;; from http://emacswiki.org/emacs/TransposeWindows
 (defun rotate-windows ()
@@ -541,6 +541,9 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
           (set-window-start w1 s2)
           (set-window-start w2 s1)
           (setq i (1+ i))))))))
+
+(global-set-key (kbd "s-}") 'other-window)
+(global-set-key (kbd "s-{") (lambda () (interactive) (other-window -1)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
