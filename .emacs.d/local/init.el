@@ -289,6 +289,7 @@
 
      ;; Custom indentation rules; see clojure-indent-function
      (define-clojure-indent
+       (for-all 'defun)
        (describe 'defun)
        (testing 'defun)
        (given 'defun)
