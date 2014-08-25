@@ -628,7 +628,7 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Executable programs
+;; Executable $PATH from ~/.path
 
 (defun slurp (path)
   "Return file's contents as a string."
@@ -643,3 +643,7 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
               (progn (push s exec-path)
                      (setenv "PATH" (concat (getenv "PATH") ":" s)))))
           (split-string path "\n")))
+
+;; Work around path bug on OS X
+(when (string-equal "/" default-directory)
+  (cd "~/"))
