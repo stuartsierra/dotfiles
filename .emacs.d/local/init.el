@@ -281,6 +281,7 @@
      (add-hook 'clojure-mode-hook 'clojure-paredit-hook)
      (add-hook 'clojure-mode-hook 'clj-refactor-hook)
 
+     (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
      (define-key clojure-mode-map "{" 'paredit-open-brace)
      (define-key clojure-mode-map "}" 'paredit-close-brace)
      (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
