@@ -25,6 +25,7 @@ link_with_backup bin/edit
 link_with_backup bin/fresh-chrome
 link_with_backup bin/git-submodule-pull
 link_with_backup bin/tab
+link_with_backup bin/trunctail
 
 link_with_backup .emacs.d
 install_elpa

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# trunctail
+#
+# Truncate a file and then 'tail -f' it.
+
+set -e
+
+file="$1"
+
+if [[ -z "$file" ]]; then
+    echo "Usage: truncail <file>"
+    echo "Truncate file and then 'tail -f' it."
+    exit 1
+fi
+
+:> "$file"
+exec tail -f "$file"
