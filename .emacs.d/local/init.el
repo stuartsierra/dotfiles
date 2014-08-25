@@ -359,8 +359,9 @@ ring."
       (set-buffer (cider-find-or-create-repl-buffer))
       (cider-clear-buffer))))
 
-(global-set-key (kbd "s-6") 'cider-reset)
-(global-set-key (kbd "s-7") 'cider-refresh)
+(global-set-key (kbd "s-t") 'cider-run-tests)
+(global-set-key (kbd "s-r") 'cider-refresh)
+(global-set-key (kbd "s-R") 'cider-reset)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
