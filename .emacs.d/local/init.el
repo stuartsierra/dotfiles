@@ -319,13 +319,18 @@ ring."
     (insert expr)
     (cider-repl-return)))
 
+(defun clj-file-p ()
+  (string-match "\.clj$" (buffer-file-name)))
+
 (defun cider-refresh ()
   (interactive)
+  (save-some-buffers t 'clj-file-p)
   (cider-execute-in-current-repl
    "(clojure.tools.namespace.repl/refresh)"))
 
 (defun cider-reset ()
   (interactive)
+  (save-some-buffers t 'clj-file-p)
   (cider-execute-in-current-repl
    "(user/reset)"))
 
