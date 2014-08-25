@@ -346,6 +346,11 @@ ring."
       (setq form (replace-match "" t t form)))
     (cider-execute-in-current-repl form)))
 
+(defun cider-run-tests ()
+  (interactive)
+  (cider-execute-in-current-repl
+   "(clojure.test/run-tests)"))
+
 (defun cider-clear-repl-buffer ()
   (interactive)
   (if (not (get-buffer (cider-current-connection-buffer)))
