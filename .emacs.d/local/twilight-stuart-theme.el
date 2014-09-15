@@ -85,7 +85,7 @@
  '(font-lock-string-face ((t (:foreground "#8F9D6A"))))
  '(font-lock-type-face ((t (:foreground "#9B703F"))))
  '(font-lock-variable-name-face ((t (:foreground "#7587A6"))))
- '(font-lock-warning-face ((t (:background "#EE799F" :foreground "red"))))
+ '(font-lock-warning-face ((t (:foreground "red"))))
  '(gui-element ((t (:background "#D4D0C8" :foreground "black"))))
  '(region ((t (:background "#000080"))))
  '(highlight ((t (:background "#000080"))))
