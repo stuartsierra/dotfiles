@@ -259,6 +259,33 @@
 
 (define-key org-mode-map (kbd "C-c o s") 'org-insert-src-block)
 
+(require 'org-element)
+;; Modified from org-element.el to add support for ` as a markup
+;; character, after customizing org-emphasis-alist.
+(defun org-element-text-markup-successor (limit)
+  "Search for the next text-markup object.
+
+LIMIT bounds the search.
+
+Return value is a cons cell whose CAR is a symbol among `bold',
+`italic', `underline', `strike-through', `code' and `verbatim'
+and CDR is beginning position."
+  (save-excursion
+    (unless (bolp) (backward-char))
+    (when (re-search-forward org-emph-re limit t)
+      (let ((marker (match-string 3)))
+	(cons (cond
+	       ((equal marker "*") 'bold)
+	       ((equal marker "/") 'italic)
+	       ((equal marker "_") 'underline)
+	       ((equal marker "+") 'strike-through)
+	       ((equal marker "~") 'code)
+	       ((equal marker "=") 'verbatim)
+	       ((equal marker "`") 'code)
+	       (t (error "Unknown marker at %d" (match-beginning 3))))
+	      (match-beginning 2))))))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CLOJURE/LISP/NREPL/CIDER
