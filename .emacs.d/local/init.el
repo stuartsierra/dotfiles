@@ -394,55 +394,17 @@ ring."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-babel + Clojure
 
-(when (locate-file "ob" load-path load-suffixes)
-  (require 'ob)
-  (require 'ob-tangle)
-  (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
+(load "org-babel-cider")
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (clojure . t)))
+(add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
 
-  (defun org-babel-execute:clojure (body params)
-    "Evaluate a block of Clojure code with Babel."
-    (let* ((result (nrepl-send-string-sync body (cider-current-ns)))
-           (value (plist-get result :value))
-           (out (plist-get result :stdout))
-           (out (when out
-                  (if (string= "\n" (substring out -1))
-                      (substring out 0 -1)
-                    out)))
-           (err (plist-get result :stderr))
-           (err (when err
-                  (if (string= "\n" (substring err -1))
-                      (substring err 0 -1)
-                    err)))
-           (stdout (when out
-                     (mapconcat (lambda (line)
-                                  (concat ";; " line))
-                                (split-string out "\n")
-                                "\n")))
-           (stderr (when err
-                     (mapconcat (lambda (line)
-                                  (concat ";; " line))
-                                (split-string err "\n")
-                                "\n")))
-           (output (concat stdout
-                           (when (and stdout (not (string= "\n" (substring stdout -1))))
-                             "\n")
-                           stderr)))
-      (concat output
-              (when (and output
-                         (not (string= "" output))
-                         (not (string= "\n" (substring output -1))))
-                "\n")
-              (when value (concat ";;=> " value)))))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (clojure . t)))
 
-  (provide 'ob-clojure)
-
-  (setq org-src-fontify-natively t)
-  (setq org-confirm-babel-evaluate nil))
+(setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil)
 
 ;; Avoid slow "Fontifying..." on OS X
 (setq font-lock-verbose nil)
