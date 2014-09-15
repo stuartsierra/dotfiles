@@ -37,6 +37,7 @@
  '(org-agenda-files (quote ("~/Documents/agenda/relevance.org" "~/Documents/agenda/personal.org" "~/Documents/agenda/other/")))
  '(org-clock-idle-time 10)
  '(org-clock-into-drawer t)
+ '(org-emphasis-alist (quote (("*" bold) ("/" italic) ("_" underline) ("=" org-code verbatim) ("`" org-code verbatim) ("~" org-verbatim verbatim) ("+" (:strike-through t)))))
  '(org-export-author-info nil)
  '(org-export-babel-evaluate nil)
  '(org-export-creator-info nil)
