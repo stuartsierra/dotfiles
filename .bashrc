@@ -145,6 +145,3 @@ function ssh-reagent {
 if [ -d ~/src/clj/clojurescript ]; then
     export CLOJURESCRIPT_HOME=~/src/clj/clojurescript
 fi
-
-# rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
