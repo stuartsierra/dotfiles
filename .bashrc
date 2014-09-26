@@ -115,15 +115,10 @@ function newchrome {
 }
 
 ## GPG Agent
-# if [[ -f "${HOME}/.gpg-agent-info" ]]; then
-#     . "${HOME}/.gpg-agent-info"
-#     export GPG_AGENT_INFO
-#     #export SSH_AUTH_SOCK
-# fi
+## From http://sudoers.org/2013/11/05/gpg-agent.html
 GPG_AGENT=$(which gpg-agent)
 GPG_TTY=`tty`
 export GPG_TTY
-
 if [[ -f ${GPG_AGENT} && -e "${HOME}/.bash_gpg" ]]; then
     source "${HOME}/.bash_gpg"
 fi

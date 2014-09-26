@@ -13,6 +13,7 @@ create_ssh_config
 link_with_backup .path
 link_with_backup .bashrc
 link_with_backup .bash_profile
+link_with_backup .bash_gpg
 link_with_backup .gitconfig
 link_with_backup .gitignore_global
 link_with_backup .rvmrc
