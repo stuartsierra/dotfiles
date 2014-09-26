@@ -10,7 +10,6 @@ source $DOTFILES/install_functions.sh
 update_submodules
 
 create_ssh_config
-link_with_backup .path
 link_with_backup .bashrc
 link_with_backup .bash_profile
 link_with_backup .bash_gpg
@@ -40,6 +39,8 @@ install_relevance_etc
 
 backup ~/.relevance-etc
 ln -s $DOTFILES/submodules/relevance/etc $HOME/.relevance-etc
+
+write_home_path_file
 
 if [[ "$USER" != "stuart" ]]; then
     unset_git_user
