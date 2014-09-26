@@ -10,6 +10,11 @@ LIGHT_GREEN="\[\033[1;32m\]"
  LIGHT_GRAY="\[\033[0;37m\]"
  COLOR_NONE="\[\e[0m\]"
 
+# Used later (maybe in .bash_local) to determine if this is an
+# interactive shell
+if [[ ! -z "$PS1" ]]; then
+    export INTERACTIVE_SHELL=true
+fi
 
 # Basic environment
 export TERM=xterm-256color
