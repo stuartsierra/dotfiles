@@ -291,40 +291,33 @@ and CDR is beginning position."
 ;; CLOJURE/LISP/NREPL/CIDER
 
 (require 'cider)
+(require 'clojure-mode)
+(require 'paredit)
+(require 'align-cljlet)
 
 (show-paren-mode 1)
 
-(autoload 'clojure-mode "clojure-mode" nil t)
-(autoload 'align-cljlet "align-cljlet" nil t)
+(defun clojure-paredit-hook () (paredit-mode +1))
+(add-hook 'clojure-mode-hook 'clojure-paredit-hook)
 
-(eval-after-load 'clojure-mode
-  '(progn
-     (require 'paredit)
-     (require 'clj-refactor)
-     (defun clojure-paredit-hook () (paredit-mode +1))
-     (defun clj-refactor-hook ()
-       (clj-refactor-mode 1)
-       (cljr-add-keybindings-with-prefix "C-c C-m"))
-     (add-hook 'clojure-mode-hook 'clojure-paredit-hook)
-     (add-hook 'clojure-mode-hook 'clj-refactor-hook)
+(define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
+(define-key clojure-mode-map "{" 'paredit-open-brace)
+(define-key clojure-mode-map "}" 'paredit-close-brace)
 
-     (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
-     (define-key clojure-mode-map "{" 'paredit-open-brace)
-     (define-key clojure-mode-map "}" 'paredit-close-brace)
-     (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
-     (define-key paredit-mode-map (kbd "M-[") nil)
+(define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
+(define-key paredit-mode-map (kbd "M-[") nil)
 
-     ;; Custom indentation rules; see clojure-indent-function
-     (define-clojure-indent
-       (for-all 'defun)
-       (describe 'defun)
-       (testing 'defun)
-       (given 'defun)
-       (using 'defun)
-       (with 'defun)
-       (it 'defun)
-       (do-it 'defun)
-       (go-loop 'defun))))
+;; Custom indentation rules; see clojure-indent-function
+(define-clojure-indent
+  (for-all 'defun)
+  (describe 'defun)
+  (testing 'defun)
+  (given 'defun)
+  (using 'defun)
+  (with 'defun)
+  (it 'defun)
+  (do-it 'defun)
+  (go-loop 'defun))
 
 (setq cider-words-of-inspiration '(""))
 
@@ -376,7 +369,7 @@ ring."
 (defun cider-run-tests ()
   (interactive)
   (cider-execute-in-current-repl
-   "(clojure.test/run-tests)"))
+   (or (get-register ?t) "(clojure.test/run-tests)")))
 
 (defun cider-clear-repl-buffer ()
   (interactive)
@@ -387,6 +380,11 @@ ring."
       (cider-clear-buffer))))
 
 (global-set-key (kbd "s-t") 'cider-run-tests)
+(global-set-key (kbd "s-1") '(lambda () (interactive) (cider-eval-register-in-repl ?1)))
+(global-set-key (kbd "s-2") '(lambda () (interactive) (cider-eval-register-in-repl ?2)))
+(global-set-key (kbd "s-3") '(lambda () (interactive) (cider-eval-register-in-repl ?3)))
+(global-set-key (kbd "s-4") '(lambda () (interactive) (cider-eval-register-in-repl ?4)))
+(global-set-key (kbd "s-5") '(lambda () (interactive) (cider-eval-register-in-repl ?5)))
 (global-set-key (kbd "s-r") 'cider-refresh)
 (global-set-key (kbd "s-R") 'cider-reset)
 
