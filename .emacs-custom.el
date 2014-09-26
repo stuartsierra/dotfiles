@@ -14,7 +14,6 @@
  '(auto-word-wrap-default-function nil)
  '(backup-directory-alist (quote (("." . "/tmp/emacs-backups"))))
  '(backward-delete-char-untabify-method (quote all))
- '(cider-popup-stacktraces nil)
  '(column-number-mode t)
  '(custom-safe-themes (quote ("53639fe1e9d5e1addf6449d623e4c5cb4446e9e61701e878afb8ae8c3150624e" "2b91408c2bc8b2e4857f93bd1f8e00cc6104e5ea7ee77738dcfc5f0d4bc4709f" "1875632bec1cc9954c7bfe7babb5177a9f2ecda73d255041a24c7e6428059ed5" "26a2398fa2c7bdaf5e456484ff45fade498e9e500ebad2ddf84d3509a952e98d" default)))
  '(delete-old-versions t)
