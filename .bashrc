@@ -59,12 +59,6 @@ if [ -e /Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt ]; then
     alias truecrypt="/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt -t"
 fi
 
-alias copy_music_to_droid="rsync --ignore-existing -avz ~/Music/iTunes/iTunes\ Media/Music/ /Volumes/ANDROID/Music"
-
-alias copy_photos_from_droid="rsync --ignore-existing -avz /Volumes/NO\ NAME/DCIM/100MEDIA/ /Users/stuart/Pictures/my-photos/"
-
-alias swank="java -Dclojure.compile.path=target/classes -cp src/test/resources:src/test/clojure:src/main/resources:src/main/clojure:target/test-classes:target/classes:target/dependency/* clojure.main -e \"(require 'swank.swank) (swank.swank/start-repl)\""
-
 if which open > /dev/null; then
     alias e="open -a Emacs.app"
 elif which emacs > /dev/null; then
