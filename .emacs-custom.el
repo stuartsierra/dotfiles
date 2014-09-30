@@ -24,7 +24,7 @@
  '(global-linum-mode t)
  '(image-dired-external-viewer "/usr/bin/open")
  '(indent-tabs-mode nil)
- '(initial-buffer-choice t)
+ '(inhibit-startup-screen t)
  '(linum-format "%3d")
  '(magit-commit-all-when-nothing-staged (quote ask-stage))
  '(magit-process-popup-time -1)
