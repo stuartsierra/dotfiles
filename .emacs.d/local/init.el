@@ -422,6 +422,30 @@ ring."
   (let ((body (org-babel-expand-src-block)))
     (kill-new body)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hideshow minor mode
+
+(require 'hideshow)
+
+(defvar hs-hiding-all-enabled nil)
+
+(defun hs-toggle-hiding-all ()
+  (interactive)
+  (if hs-hiding-all-enabled
+      (hs-show-all)
+    (hs-hide-all))
+  (setq hs-hiding-all-enabled (not hs-hiding-all-enabled)))
+
+(defun enable-hs-minor-mode ()
+  (hs-minor-mode 1)
+  (make-local-variable 'hs-hiding-all-enabled)
+  (local-set-key (kbd "C-c C-s") 'hs-toggle-hiding)
+  (local-set-key (kbd "C-c C-S-s") 'hs-toggle-hiding-all))
+
+(add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General Text Manipulation
 
