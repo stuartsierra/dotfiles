@@ -346,7 +346,7 @@ ring."
   (interactive)
   (save-some-buffers t 'clj-file-p)
   (cider-execute-in-current-repl
-   "(clojure.tools.namespace.repl/refresh)"))
+   "(require 'clojure.tools.namespace.repl) (clojure.tools.namespace.repl/refresh)"))
 
 (defun cider-reset ()
   (interactive)
