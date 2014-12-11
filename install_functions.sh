@@ -87,6 +87,7 @@ $HOME/bin
 /opt/local/bin
 /usr/bin
 /bin
+/usr/local/sbin
 /usr/sbin
 /sbin
 /opt/X11/bin
