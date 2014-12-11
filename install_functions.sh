@@ -48,10 +48,10 @@ function install_magit {
     (
         cd "$DOTFILES/.emacs.d"
         if [ ! -d magit ]; then
-            wget -O magit-1.2.0.tar.gz \
-                https://github.com/magit/magit/archive/1.2.0.tar.gz
-            tar xzf magit-1.2.0.tar.gz
-            mv magit-1.2.0 magit
+            wget -O magit-1.2.1.tar.gz \
+                https://github.com/magit/magit/archive/1.2.1.tar.gz
+            tar xzf magit-1.2.1.tar.gz
+            mv magit-1.2.1 magit
         fi
         cd magit
         make
