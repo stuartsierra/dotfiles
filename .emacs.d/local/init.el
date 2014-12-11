@@ -358,9 +358,9 @@ ring."
   (interactive "cEval register in CIDER REPL: ")
   (cider-execute-in-current-repl (get-register register)))
 
-(defun cider-eval-expression-at-point-in-repl ()
+(defun cider-eval-sexp-at-point-in-repl ()
   (interactive)
-  (let ((form (cider-defun-at-point)))
+  (let ((form (cider-sexp-at-point)))
     ;; Strip excess whitespace
     (while (string-match "\\`\s+\\|\n+\\'" form)
       (setq form (replace-match "" t t form)))
@@ -379,6 +379,7 @@ ring."
       (set-buffer (cider-find-or-create-repl-buffer))
       (cider-clear-buffer))))
 
+(define-key cider-mode-map (kbd "C-c C-c") 'cider-eval-sexp-at-point-in-repl)
 (global-set-key (kbd "s-t") 'cider-run-tests)
 (global-set-key (kbd "s-1") '(lambda () (interactive) (cider-eval-register-in-repl ?1)))
 (global-set-key (kbd "s-2") '(lambda () (interactive) (cider-eval-register-in-repl ?2)))
