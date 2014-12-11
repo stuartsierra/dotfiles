@@ -452,6 +452,13 @@ Goes backward if ARG is negative; error if CHAR not found."
 (global-unset-key "\M-z")
 (global-set-key "\M-z" 'zap-up-to-char)
 
+(defun replace-c-style-escapes (start end)
+  "Replace C-style escaped tabs \\t and newlines \\n with real
+characters."
+  (interactive "*r")
+  (replace-string "\\n" "\n" nil start end)
+  (replace-string "\\t" "\t" nil start end))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Create temporary buffer
