@@ -37,4 +37,9 @@ fi
 
 CLASSPATH="$CLOJURE_JAR:$CLASSPATH"
 
-exec "$RLWRAP" java -cp "$CLASSPATH" clojure.main "$@"
+if [[ -e project.clj ]]; then
+    java -cp `lein classpath` clojure.main
+else
+    exec "$RLWRAP" java -cp "$CLASSPATH" clojure.main "$@"
+fi
+
