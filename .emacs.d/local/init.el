@@ -413,6 +413,15 @@ ring."
   (let ((body (cadr (org-babel-get-src-block-info))))
     (cider-execute-in-current-repl body)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-babel execute by copy & paste
+
+(defun org-babel-copy ()
+  (interactive)
+  (let ((body (org-babel-expand-src-block)))
+    (kill-new body)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General Text Manipulation
 
