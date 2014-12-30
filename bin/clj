@@ -4,7 +4,9 @@ set -e
 
 VERSION="1.7.0-alpha4"
 
-RLWRAP=`which rlwrap`
+if [[ "$EMACS" != "t" ]]; then
+    RLWRAP=`which rlwrap`
+fi
 
 function print_usage {
     echo "Usage: $0 [-v clojure_version] [-c extra_classpath]"
@@ -26,7 +28,7 @@ shift $(($OPTIND - 1))
 
 CLOJURE_JAR="$HOME/.m2/repository/org/clojure/clojure/$VERSION/clojure-$VERSION.jar"
 
-if [ ! -e "$CLOJURE_JAR" ]; then
+if [[ ! -e "$CLOJURE_JAR" ]]; then
     mvn dependency:get \
         -DrepoId=sonatype \
         -DrepoUrl=https://oss.sonatype.org/content/repositories/public/ \
@@ -38,8 +40,8 @@ fi
 CLASSPATH="$CLOJURE_JAR:$CLASSPATH"
 
 if [[ -e project.clj ]]; then
-    java -cp `lein classpath` clojure.main
+    java -cp `lein classpath` clojure.main "$@"
 else
-    exec "$RLWRAP" java -cp "$CLASSPATH" clojure.main "$@"
+    exec $RLWRAP java -cp "$CLASSPATH" clojure.main "$@"
 fi
 
