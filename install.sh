@@ -32,8 +32,6 @@ install_elpa
 link_with_backup .emacs
 link_with_backup .emacs-custom.el
 install_org_mode
-install_magit
-compile_local_emacs_lisp
 
 install_relevance_etc
 
@@ -45,3 +43,5 @@ write_home_path_file
 if [[ "$USER" != "stuart" ]]; then
     unset_git_user
 fi
+
+echo "$0 completed successfully."

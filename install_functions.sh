@@ -44,24 +44,6 @@ function install_org_mode {
     )
 }
 
-function install_magit {
-    (
-        cd "$DOTFILES/.emacs.d"
-        if [ ! -d magit ]; then
-            wget -O magit-1.2.1.tar.gz \
-                https://github.com/magit/magit/archive/1.2.1.tar.gz
-            tar xzf magit-1.2.1.tar.gz
-            mv magit-1.2.1 magit
-        fi
-        cd magit
-        make
-    )
-}
-
-function compile_local_emacs_lisp {
-    emacs -batch -f batch-byte-recompile-directory "$DOTFILES/.emacs.d/local"
-}
-
 # SSH autocomplete depends on ~/.ssh/config and known_hosts existing
 function create_ssh_config {
     mkdir -p "$HOME/.ssh"

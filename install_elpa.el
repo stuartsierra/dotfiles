@@ -1,29 +1,32 @@
 (setq user-init-file "/tmp/.emacs")
 
-;; Marmalade: http://marmalade-repo.org/
 (require 'package)
+;; MELPA: http://melpa.org/
 (add-to-list 'package-archives
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
+             '("melpa" . "http://melpa.org/packages/") t)
+;; ;; Marmalade: http://marmalade-repo.org/
+;; (add-to-list 'package-archives
+;;              '("marmalade" .
+;;                "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 (package-refresh-contents)
 
 (defvar my-packages
   '(
-    clj-refactor
     color-theme
-    dash
     dash
     gh
     gist
+    magit
     multiple-cursors
     paredit
     pkg-info
+    queue
     ruby-mode
     s
     smex
-    typopunct
+    xml-rpc
     yasnippet
     ))
 
