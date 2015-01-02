@@ -17,13 +17,15 @@
 # from the one you set up the first time you ran this script. Every
 # new instance of Google Chrome launched by this script will be
 # completely isolated from the others.
-
+#
+# Note that Chrome on OS X will import the contents of
+# ~/Library/Safari/History.plist when run for the first time.
 
 
 ### Customize these
 
-# Permanent directory to store the user-data directory of your 'fresh'
-# Chrome configuration.
+# Permanent directory to store the user-data directories of your
+# 'fresh' Chrome configurations.
 fresh_dir="$HOME/.fresh-chrome"
 
 # Temporary directory in which to create new user-data directories for
@@ -32,20 +34,49 @@ tmp_dir="/tmp"
 
 
 
+### Functions
+
+function launch_chrome {
+    local user_data_dir="$1"
+    exec open -na "Google Chrome" --args "--user-data-dir=${user_data_dir}"
+}
+
+
+
 ### Main script begins
 
 set -e
 
-timestamp=`date +%Y%m%d%H%M%S`
+default_dir="${fresh_dir}/_default"
+chrome_name="$1"
 
-if [[ -e "$fresh_dir" ]]; then
-    user_dir="$tmp_dir/chrome-$timestamp-$RANDOM"
-    cp -r "$fresh_dir" "$user_dir"
-    exec open -na "Google Chrome" --args "--user-data-dir=$user_dir"
-else
-    exec open -na "Google Chrome" --args "--user-data-dir=$fresh_dir"
+if [[ ! -e "$default_dir" ]]; then
+    if [[ ! -z "$chrome_name" ]]; then
+        echo "Default Chrome user directory does not exist;"
+        echo "have you run this script before?"
+        echo "Run this script without arguments to create it,"
+        echo "Then try again."
+        exit 1
+    fi
+    mkdir -p "$default_dir"
+    echo "Launching Chrome with default user dir ${default_dir}"
+    echo "Customize this Chrome to set defaults for future uses"
+    launch_chrome "$default_dir"
 fi
 
+if [[ -z "$chrome_name" ]]; then
+    timestamp=`date +%Y%m%d%H%M%S`
+    user_dir="${tmp_dir}/fresh-chrome-${timestamp}-${RANDOM}"
+else
+    user_dir="${fresh_dir}/${chrome_name}"
+fi
+
+if [[ ! -e "$user_dir" ]]; then
+    cp -r "$default_dir" "$user_dir"
+fi
+
+echo "Launching Google Chrome with user dir ${user_dir}"
+launch_chrome "$user_dir"
 
 # The MIT License (MIT)
 #
