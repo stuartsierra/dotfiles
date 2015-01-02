@@ -57,7 +57,7 @@ The result is a plist with keys :value, :stderr and :stdout."
 (defun org-babel-execute:clojure (body params)
   "Evaluate a block of Clojure code with Babel."
   (let* ((result (org-babel-cider-send-request-sync
-                  (nrepl-eval-request body (cider-current-ns))))
+                  (nrepl--eval-request body (cider-current-ns))))
          (timeout (plist-get result :timeout))
          (value (plist-get result :value))
          (err-value (plist-get result :error))
