@@ -16,6 +16,7 @@
   '(
     color-theme
     dash
+    exec-path-from-shell
     gh
     gist
     magit

@@ -22,16 +22,35 @@ export TERM=xterm-256color
 export PS1="${BLUE}\h:\W \$${COLOR_NONE} "
 export EDITOR=/usr/bin/nano
 
-# My path
-if [[ -e "$HOME/.path" ]]; then
-    path=""
-    while read -r; do
-        if [[ ! -z "$path" ]]; then path="$path:"; fi
-        path="$path$REPLY"
-    done < "$HOME/.path"
-    export PATH="$path"
-fi
+# PATH munging
+# See http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_11_02.html
+EGREP=$(which egrep)
 
+pathmunge () {
+    if ! echo $PATH | $EGREP -q "(^|:)$1($|:)" ; then
+        if [ "$2" = "after" ] ; then
+            PATH=$PATH:$1
+        else
+            PATH=$1:$PATH
+        fi
+    fi
+}
+
+pathmunge /sbin
+pathmunge /usr/sbin
+pathmunge /usr/local/sbin
+pathmunge /bin
+pathmunge /usr/bin
+pathmunge /opt/local/bin
+pathmunge /usr/local/bin
+pathmunge "$HOME/bin"
+
+pathmunge /opt/X11/bin after
+pathmunge /usr/texbin after
+pathmunge "$HOME/.relevance-etc/scripts" after
+
+export PATH
+unset pathmunge
 
 # My aliases
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -80,7 +99,6 @@ fi
 
 # Relevance "etc" scripts
 if [ -d ~/.relevance-etc ]; then
-    export PATH=$PATH:~/.relevance-etc/scripts
     source ~/.relevance-etc/bash/git.sh
     # source ~/.relevance-etc/bash/git_prompt.sh
     source ~/.relevance-etc/bash/ssh_autocompletion.sh

@@ -628,23 +628,15 @@ if the major mode is one of 'delete-trailing-whitespace-modes'"
                     'unicode
                     '("Menlo" . "iso10646-1")))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Executable $PATH from ~/.path
-
 (defun slurp (path)
   "Return file's contents as a string."
   (with-temp-buffer
     (insert-file-contents path)
     (buffer-string)))
 
-(let ((path (slurp "~/.path")))
-  (mapcar (lambda (s)
-            (if (zerop (length s))
-                nil
-              (progn (push s exec-path)
-                     (setenv "PATH" (concat (getenv "PATH") ":" s)))))
-          (split-string path "\n")))
+;; from https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;; Work around path bug on OS X
 (when (string-equal "/" default-directory)
