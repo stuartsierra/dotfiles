@@ -97,8 +97,8 @@ if [ -f /opt/local/etc/profile.d/cdargs-bash.sh ]; then
 fi
 
 # Git autocompletion
-if [ -f /opt/local/etc/bash_completion ]; then
-      source /opt/local/etc/bash_completion
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
 fi
 
 # Java on OS X
