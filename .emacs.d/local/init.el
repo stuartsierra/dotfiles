@@ -389,6 +389,20 @@ ring."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-mode and Pivotal Tracker
+
+(defun org-insert-custom-link (url description)
+  (insert "[[" url "][" description "]]"))
+
+(defun org-insert-pivotal-link (story-id)
+  (interactive "sPivotal Tracker story ID: ")
+  (org-insert-custom-link
+   (concat "https://www.pivotaltracker.com/story/show/"
+           story-id)
+   story-id))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hideshow minor mode
 
 (require 'hideshow)
