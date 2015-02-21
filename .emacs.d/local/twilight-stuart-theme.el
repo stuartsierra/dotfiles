@@ -77,6 +77,7 @@
  '(magit-diff-add ((((class color) (background dark)) (:foreground "green"))))
  '(org-hide ((((background dark)) (:foreground "#141414"))))
  '(org-clock-overlay ((t (:foreground "#fff"))))
+ '(org-verbatim ((t (:foreground "grey55"))))
  '(outline-4 ((t (:foreground "#8F8A80"))))
 
  '(diff-removed ((((class color) (background dark)) (:foreground "orange"))))
