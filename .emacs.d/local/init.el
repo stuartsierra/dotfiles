@@ -223,15 +223,6 @@
 (global-set-key "\C-con" 'todays-daypage)
 (global-set-key "\C-coN" 'find-daypage)
 
-(defun org-to-confluence ()
-  "Convert region from org-mode to Confluence wiki syntax"
-  (interactive)
-  (save-excursion
-   (let ((start (region-beginning))
-         (end (region-end)))
-     (replace-regexp "^\\*\\*\\* \\(.+\\)$" "\nh2. \\1\n" nil start end)
-     (replace-regexp "^\\*\\*\\*" "" nil start end))))
-
 (defun my-agenda ()
   (interactive)
   (org-agenda nil "n"))
