@@ -40,9 +40,10 @@
  '(ns-tool-bar-size-mode (quote regular) t)
  '(org-agenda-files
    (quote
-    ("~/Documents/agenda/relevance.org" "~/Documents/agenda/personal.org" "~/Documents/agenda/other/")))
- '(org-clock-idle-time 10)
+    ("~/Documents/agenda/relevance.org" "~/Documents/agenda/cognitect.org" "~/Documents/agenda/personal.org" "~/Documents/agenda/other/")))
+ '(org-clock-idle-time 20)
  '(org-clock-into-drawer t)
+ '(org-confirm-babel-evaluate nil)
  '(org-edit-fixed-width-region-mode (quote fundamental-mode))
  '(org-export-author-info nil)
  '(org-export-babel-evaluate nil)
@@ -60,6 +61,7 @@
  '(org-html-htmlize-output-type (quote css))
  '(org-return-follows-link t)
  '(org-special-ctrl-a/e t)
+ '(org-src-tab-acts-natively t)
  '(org-src-window-setup (quote current-window))
  '(org-startup-folded (quote showeverything))
  '(org-tag-alist
@@ -69,7 +71,9 @@
      ("twentypercent" . 116)
      ("offclock" . 111)
      ("product" . 112))))
+ '(org-todo-keyword-faces (quote (("INPROGRESS" . "CYAN"))))
  '(org-todo-keywords (quote ((sequence "TODO" "INPROGRESS" "DONE"))))
+ '(org-yank-folded-subtrees nil)
  '(safe-local-variable-values
    (quote
     ((eval setq org-export-htmlize-output-type
