@@ -22,6 +22,7 @@
     ("0138f068907ef5508768e2205918489dc47d2d6ebe5c863d9d4bdb77ef8d1a10" "67ddf78aadc3b1ed08a5c26dbe0f49752d90bdc11c08d145f1f637215a686f1b" "53639fe1e9d5e1addf6449d623e4c5cb4446e9e61701e878afb8ae8c3150624e" "2b91408c2bc8b2e4857f93bd1f8e00cc6104e5ea7ee77738dcfc5f0d4bc4709f" "1875632bec1cc9954c7bfe7babb5177a9f2ecda73d255041a24c7e6428059ed5" "26a2398fa2c7bdaf5e456484ff45fade498e9e500ebad2ddf84d3509a952e98d" default)))
  '(delete-old-versions t)
  '(dired-listing-switches "-alg")
+ '(exec-path-from-shell-variables (quote ("PATH" "MANPATH" "GROOVY_HOME")))
  '(fringe-mode nil nil (fringe))
  '(global-auto-revert-mode t)
  '(global-hl-line-mode t)
