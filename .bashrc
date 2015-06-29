@@ -22,6 +22,9 @@ export TERM=xterm-256color
 export PS1="${BLUE}\h:\W \$${COLOR_NONE} "
 export EDITOR=/usr/bin/nano
 
+# Go language; https://golang.org/doc/code.html#GOPATH
+export GOPATH="${HOME}/go"
+
 # PATH munging
 # See http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_11_02.html
 EGREP=$(which egrep)
@@ -48,6 +51,8 @@ pathmunge "$HOME/bin"
 pathmunge /opt/X11/bin after
 pathmunge /usr/texbin after
 pathmunge "$HOME/.relevance-etc/scripts" after
+pathmunge "$GOPATH/bin" after
+pathmunge /usr/local/opt/go/libexec/bin after
 
 export PATH
 unset pathmunge
