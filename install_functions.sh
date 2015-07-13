@@ -15,11 +15,6 @@ function link_with_backup {
     ln -s "$source" "$target"
 }
 
-function install_elpa {
-    rm -rf "$DOTFILES/.emacs.d/elpa"
-    emacs --script "$DOTFILES/install_elpa.el"
-}
-
 function update_submodules {
     git submodule init
     git submodule update
@@ -32,7 +27,8 @@ function install_relevance_etc {
 
 function install_org_mode {
     (
-        cd "$DOTFILES/.emacs.d"
+        mkdir -p "$DOTFILES/.emacs.d/vendor"
+        cd "$DOTFILES/.emacs.d/vendor"
         if [ ! -d org-mode ]; then
             wget -O org-mode-master.zip \
                 https://github.com/stuartsierra/org-mode/archive/master.zip

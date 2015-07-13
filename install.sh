@@ -29,8 +29,6 @@ link_with_backup bin/tab
 link_with_backup bin/trunctail
 
 link_with_backup .emacs.d
-install_elpa
-link_with_backup .emacs
 link_with_backup .emacs-custom.el
 install_org_mode
 

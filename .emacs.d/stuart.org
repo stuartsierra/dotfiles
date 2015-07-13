@@ -1,0 +1,701 @@
+#+TITLE: Stuart Sierra's Emacs Configuration
+
+Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://github.com/cndreisbach/emacs.d][Clinton Dreisbach]]
+
+* Preliminaries
+  
+** User details
+   
+   #+BEGIN_SRC emacs-lisp
+     (setq user-full-name "Stuart Sierra")
+     (setq user-mail-address "mail@stuartsierra.com")
+   #+END_SRC
+
+** Common Lisp extensions
+
+   According to [[http://emacswiki.org/emacs/CommonLispForEmacs][Common Lisp for Emacs]], the ~cl~ package is deprecated
+   in favor of ~cl-lib~.
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'cl-lib)
+   #+END_SRC
+
+   But some packages still depend on the un-prefixed names in the old
+   ~cl~ package, and for some reason it doesn't get loaded
+   automatically.
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'cl)
+   #+END_SRC
+
+   (I noticed this in the CIDER REPL when =M-p= didn't work because
+   ~assert~ was not defined.)
+   
+* Package management (ELPA)
+
+** Vendored packages
+
+   The =~/.emacs.d/vendor= directory, and any directory in it, should
+   be on the ~load-path~.
+
+   Note: the =org-mode= directory is already added in =init.el= for
+   bootstrapping.
+
+   #+BEGIN_SRC emacs-lisp
+     (defvar stuart/vendor-dir (expand-file-name "vendor" user-emacs-directory))
+
+     (add-to-list 'load-path stuart/vendor-dir)
+
+     (when (file-directory-p stuart/vendor-dir)
+       (dolist (project (directory-files stuart/vendor-dir t "\\w+"))
+         (when (file-directory-p project)
+           (add-to-list 'load-path project))))
+   #+END_SRC
+
+** Repository setup
+
+   See [[http://melpa.org/#/][MELPA]]
+
+   I don't use the [[http://orgmode.org/elpa.html][Org Emacs lisp Package Archive]] because I want the
+   8.3 beta version from Git.
+
+   [[http://www.emacswiki.org/emacs/MarmaladeRepo][Marmalade]] is reported to have connectivity problems and out-of-date packages.
+
+   #+BEGIN_SRC emacs-lisp
+     (load "package")
+     (package-initialize)
+     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+   #+END_SRC
+
+** Example of pinned package repositories
+
+   Example from [[https://github.com/clojure-emacs/cider][CIDER]] README
+
+   #+BEGIN_SRC emacs-lisp :eval no :tangle no
+     (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+   #+END_SRC
+
+   Example from [[https://clojurians.slack.com/archives/cider/p1435848876001077][Slack]]
+
+   #+BEGIN_SRC emacs-lisp :eval no :tangle no
+     (when (boundp 'package-pinned-packages)
+       (setq package-pinned-packages
+             '((cider        . "melpa-stable")
+               (clj-refactor . "melpa-stable")
+               (clojure-mode . "melpa-stable")
+               (paradox      . "melpa-stable")
+               (smartparens  . "melpa-stable"))))
+   #+END_SRC
+
+** Magit warning
+
+   Magit displays a warning every time you install it unless you have this.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq magit-last-seen-setup-instructions "1.4.0")
+   #+END_SRC
+
+** Default packages
+
+   I have CIDER in =vendor= but the [[http://melpa.org/#/cider][CIDER package]] depends on
+   clojure-mode 4.0.0 / dash 2.4.1 / emacs 24.3 / pkg-info 0.4 / queue
+   0.1.1
+
+   #+BEGIN_SRC emacs-lisp
+     (defvar stuart/packages
+       '(
+         async
+         dash
+         clojure-mode
+         exec-path-from-shell
+         gh
+         gist
+         gnuplot
+         groovy-mode
+         helm
+         hlinum
+         linum-off
+         magit
+         multiple-cursors
+         paredit
+         pkg-info
+         queue
+         rainbow-delimiters
+         ruby-mode
+         s
+         smex
+         xml-rpc
+         ))
+   #+END_SRC
+
+** Installing packages
+
+   #+BEGIN_SRC emacs-lisp
+     (defun stuart/all-packages-installed-p ()
+       (cl-loop for pkg in stuart/packages
+                when (not (package-installed-p pkg)) do (cl-return nil)
+                finally (cl-return t)))
+
+     (unless (stuart/all-packages-installed-p)
+       (message "%s" "Refreshing package database...")
+       (package-refresh-contents)
+       (dolist (pkg stuart/packages)
+         (when (not (package-installed-p pkg))
+           (package-install pkg))))
+   #+END_SRC
+   
+* PATH and environment
+
+  from https://github.com/purcell/exec-path-from-shell
+
+  #+BEGIN_SRC emacs-lisp
+    (when (memq window-system '(mac ns))
+      (exec-path-from-shell-initialize))
+  #+END_SRC
+
+* Global settings
+
+** Splash screen
+
+   #+BEGIN_SRC emacs-lisp
+     (setq inhibit-splash-screen t
+           initial-scratch-message nil
+           initial-major-mode 'org-mode)
+   #+END_SRC
+
+** Scroll, tool, and menu bars
+
+   #+BEGIN_SRC emacs-lisp
+     (scroll-bar-mode -1)
+     (tool-bar-mode -1)
+     (menu-bar-mode -1)
+   #+END_SRC
+
+** Selecting text more like GUI apps
+
+   Except ~delete-selection-mode~
+
+   #+BEGIN_SRC emacs-lisp
+     (transient-mark-mode t)
+     (setq x-select-enable-clipboard t)
+   #+END_SRC
+
+** Show empty lines
+
+   #+BEGIN_SRC emacs-lisp
+     (setq indicate-empty-lines t)
+   #+END_SRC
+
+** Single-character yes/no prompt
+
+   #+BEGIN_SRC emacs-lisp
+     (defalias 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+
+** Faster keystroke feedback
+
+   #+BEGIN_SRC emacs-lisp
+     (setq echo-keystrokes 0.1)
+   #+END_SRC
+
+** Never use dialog boxes
+
+   #+BEGIN_SRC emacs-lisp
+     (setq use-dialog-box nil)
+   #+END_SRC
+
+** Always use visible bell
+
+   #+BEGIN_SRC emacs-lisp
+     (setq visible-bell t)
+   #+END_SRC
+
+** Always show parens
+
+   #+BEGIN_SRC emacs-lisp
+     (show-paren-mode t)
+   #+END_SRC
+
+* Editing text
+
+** indent-region
+
+   #+BEGIN_SRC emacs-lisp
+     (defun indent-buffer ()
+       (interactive)
+       (indent-region (point-min) (point-max)))
+   #+END_SRC
+
+** unfill-region
+
+   From http://www.emacswiki.org/emacs/UnfillRegion
+
+   #+BEGIN_SRC emacs-lisp
+     (defun unfill-region (beg end)
+       "Unfill the region, joining text paragraphs into a single
+       logical line. This is useful, e.g., for use with
+       `visual-line-mode'."
+       (interactive "*r")
+       (let ((fill-column (point-max)))
+         (fill-region beg end)))
+   #+END_SRC
+
+** zap-up-to-char
+
+   #+BEGIN_SRC emacs-lisp
+     (defun zap-up-to-char (arg char)
+       "Kill up to but not including ARGth occurrence of CHAR.
+     Case is ignored if `case-fold-search' is non-nil in the current buffer.
+     Goes backward if ARG is negative; error if CHAR not found."
+       (interactive "p\ncZap up to char: ")
+       ;; Avoid "obsolete" warnings for translation-table-for-input.
+       (with-no-warnings
+         (if (char-table-p translation-table-for-input)
+             (setq char (or (aref translation-table-for-input char) char))))
+       (kill-region (point) (progn
+                              (search-forward (char-to-string char) nil nil arg)
+                                             ;                        (goto-char (if (> arg 0) (1- (point)) (1+ (point))))
+                              (1- (point))))
+       (goto-char (1- (point))))
+
+     (global-unset-key "\M-z")
+     (global-set-key "\M-z" 'zap-up-to-char)
+   #+END_SRC
+
+** Temporary buffer
+
+   #+BEGIN_SRC emacs-lisp
+     (defun temp-buffer ()
+       (interactive)
+       (switch-to-buffer "*temp*"))
+
+     (global-set-key (kbd "C-c o t") 'temp-buffer)
+   #+END_SRC
+
+** Line numbering
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'linum-off)
+     (require 'hlinum)
+   #+END_SRC
+
+** Typographical punctuation
+
+   From http://www.emacswiki.org/emacs/TypographicalPunctuationMarks
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'typopunct)
+
+     (defconst typopunct-ellipsis (decode-char 'ucs #x2026))
+     (defconst typopunct-middot   (decode-char 'ucs #xB7)) ; or 2219
+
+     (defun typopunct-insert-ellipsis-or-middot (arg)
+       "Change three consecutive dots to a typographical ellipsis mark."
+       (interactive "p")
+       (cond
+        ((and (= 1 arg)
+              (eq (char-before) ?^))
+         (delete-char -1)
+         (insert typopunct-middot))
+        ((and (= 1 arg)
+              (eq this-command last-command)
+              (looking-back "\\.\\."))
+         (replace-match "")
+         (insert typopunct-ellipsis))
+        (t
+         (self-insert-command arg))))
+
+     (define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
+   #+END_SRC
+
+* Window management
+
+** rotate-windows
+
+   from http://emacswiki.org/emacs/TransposeWindows
+
+   #+BEGIN_SRC emacs-lisp
+     (defun rotate-windows ()
+       "Rotate your windows"
+       (interactive)
+       (cond
+        ((not (> (count-windows) 1))
+         (message "You can't rotate a single window!"))
+        (t
+         (let ((i 1)
+               (num-windows (count-windows)))
+           (while  (< i num-windows)
+             (let* ((w1 (elt (window-list) i))
+                    (w2 (elt (window-list) (+ (% i num-windows) 1)))
+                    (b1 (window-buffer w1))
+                    (b2 (window-buffer w2))
+                    (s1 (window-start w1))
+                    (s2 (window-start w2)))
+               (set-window-buffer w1 b2)
+               (set-window-buffer w2 b1)
+               (set-window-start w1 s2)
+               (set-window-start w2 s1)
+               (setq i (1+ i))))))))
+   #+END_SRC
+
+** Switch windows like tabs
+
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "s-}") 'other-window)
+     (global-set-key (kbd "s-{") (lambda () (interactive) (other-window -1)))
+   #+END_SRC
+
+* Org mode
+
+** Org keybindings
+
+   #+BEGIN_SRC emacs-lisp
+     (org-defkey org-mode-map (kbd "RET") 'org-return-indent)
+   #+END_SRC
+
+** Org-babel copy-and-paste to shell
+
+   #+BEGIN_SRC emacs-lisp
+     (defun org-babel-copy ()
+       (interactive)
+       (let ((body (org-babel-expand-src-block)))
+         (kill-new body)))
+   #+END_SRC
+
+** Org-babel and Clojure
+
+   See [[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-clojure.html][Org-babel-clojure]]
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'ob-clojure)
+     (require 'cider)
+     (setq org-babel-clojure-backend 'cider)
+   #+END_SRC
+
+   My custom Clojure evaluation function
+
+   #+BEGIN_SRC emacs-lisp :results silent
+     (defun nrepl-error-p (nrepl-result)
+       "True if nrepl-result signaled an error."
+       (member "eval-error" (nrepl-dict-get nrepl-result "status")))
+
+     (defun org-babel-execute:clojure (body params)
+       "Execute a block of Clojure code with Babel."
+       (let ((expanded (org-babel-expand-body:clojure body params))
+             result)
+         (let ((result-params (cdr (assoc :result-params params)))
+               (nrepl-result (nrepl-sync-request:eval expanded)))
+           ;; handle errors, show result
+           (if (nrepl-error-p nrepl-result)
+               (nrepl-dict-get nrepl-result "err")
+             (progn
+               (setq result
+                     (nrepl-dict-get
+                      nrepl-result
+                      (if (or (member "output" result-params)
+                              (member "pp" result-params)
+                              (member "code" result-params))
+                          "out"
+                        "value")))
+                                             ;(setq params (list "code" "pp"))
+               ;; Maybe parse result into table
+               (org-babel-result-cond (cdr (assoc :result-params params))
+                 result
+                 (condition-case nil (org-babel-script-escape result)
+                   (error result))))))))
+   #+END_SRC
+
+** Day pages
+
+   See [[http://almostobsolete.net/daypage.html][A day page for Org-Mode - AlmostObsolete.net]]
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'org)
+     (require 'org-clock)
+     (require 'org-faces)
+
+     (add-hook 'org-mode-hook 'auto-fill-mode)
+
+     (when (fboundp 'set-word-wrap)
+       (add-hook 'org-mode-hook 'set-word-wrap))
+
+     (setq stuart/daypage-path "~/Documents/daypage/")
+
+     (defvar stuart/daypage-default-project nil)
+     (defvar stuart/daypage-default-tags nil)
+
+     (defun stuart/find-daypage (&optional date)
+       "Go to the day page for the specified date,
+        or toady's if none is specified."
+       (interactive (list
+                     (org-read-date "" 'totime nil nil
+                                    (current-time) "")))
+       (setq date (or date (current-time)))
+       (let* ((file (expand-file-name
+                     (concat stuart/daypage-path
+                             (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
+              (buffer (find-buffer-visiting file)))
+         (if buffer
+             (pop-to-buffer buffer)
+           (find-file file))
+         (when (= 0 (buffer-size))
+           (let ((datestr (format-time-string "%Y-%m-%d %A" date)))
+             ;; Insert an initial heading for the page
+             (insert datestr)
+             (when stuart/daypage-default-project
+               (insert " : " stuart/daypage-default-project "\n\n")
+               (insert "* " stuart/daypage-default-project)
+               (when stuart/daypage-default-tags
+                 (org-set-tags-to stuart/daypage-default-tags)))))))
+
+     (defun stuart/todays-daypage ()
+       "Go straight to today's day page without prompting for a date."
+       (interactive)
+       (stuart/find-daypage))
+
+     (defun stuart/my-agenda ()
+       (interactive)
+       (org-agenda nil "n"))
+   #+END_SRC
+
+** Abbreviations and templates for org-mode
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'org-mode-hook (lambda () (abbrev-mode 1)))
+
+     (define-skeleton skel-org-block-elisp
+       "Insert an emacs-lisp SRC block"
+       ""
+       "#+BEGIN_SRC emacs-lisp\n"
+       _ - \n
+       "#+END_SRC\n")
+
+     (define-abbrev org-mode-abbrev-table "elsrc" "" 'skel-org-block-elisp)
+
+     (define-skeleton skel-org-block-clojure
+       "Inserts a Clojure SRC block"
+       ""
+       "#+BEGIN_SRC clojure\n"
+       _ - \n
+       "#+END_SRC\n")
+
+     (define-abbrev org-mode-abbrev-table "cljsrc" "" 'skel-org-block-clojure)
+
+     (define-skeleton skel-org-block-clojure-hidden
+       "Insert a Clojure SRC block with results hidden"
+       ""
+       "#+BEGIN_SRC clojure :results silent\n"
+       _ - \n
+       "#+END_SRC\n")
+
+     (define-abbrev org-mode-abbrev-table "cljsrch" "" 'skel-org-block-clojure-hidden)
+
+     (define-skeleton skel-org-block-clojure-pprint
+       "Insert a Clojure SRC block with results pretty-printed in a SRC block"
+       ""
+       "#+BEGIN_SRC clojure :results pp code\n"
+       _ - \n
+       "#+END_SRC\n")
+
+     (define-abbrev org-mode-abbrev-table "cljsrcp" "" 'skel-org-block-clojure-pprint)
+   #+END_SRC
+
+* Global keybindings
+
+** Text scale increase/decrease
+
+   Use SUPER (Windows or Command key) with + - 0 like in a web browser.
+
+   Ignore whether we're pressing the SHIFT key.
+
+   #+BEGIN_SRC emacs-lisp
+     (defun text-scale-reset ()
+       "Disables text scaling (zoom)"
+       (interactive)
+       (text-scale-set 0))
+
+     (global-set-key (kbd "s-=") 'text-scale-increase)
+     (global-set-key (kbd "s--") 'text-scale-decrease)
+     (global-set-key (kbd "s-0") 'text-scale-reset)
+     (global-set-key (kbd "s-+") 'text-scale-increase)
+     (global-set-key (kbd "s-_") 'text-scale-decrease)
+     (global-set-key (kbd "s-)") 'text-scale-reset)
+   #+END_SRC
+
+** Magit
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'magit)
+     (global-set-key (kbd "C-x m") 'magit-status)
+   #+END_SRC
+
+** Org daypage and agenda
+
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-c o n") 'stuart/todays-daypage)
+     (global-set-key (kbd "C-c o N") 'stuart/find-daypage)
+     (global-set-key (kbd "C-c o a") 'stuart/my-agenda)
+   #+END_SRC
+
+** Prevent minimize or suspend with Ctrl-Z
+
+   #+BEGIN_SRC emacs-lisp
+                                             ;(global-unset-key (kbd "C-z"))
+   #+END_SRC
+
+* Programming
+
+** Hide-show mode
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'hideshow)
+
+     (defvar hs-hiding-all-enabled nil)
+
+     (defun hs-toggle-hiding-all ()
+       (interactive)
+       (if hs-hiding-all-enabled
+           (hs-show-all)
+         (hs-hide-all))
+       (setq hs-hiding-all-enabled (not hs-hiding-all-enabled)))
+
+     (defun enable-hs-minor-mode ()
+       (hs-minor-mode 1)
+       (make-local-variable 'hs-hiding-all-enabled)
+       (local-set-key (kbd "C-c C-s") 'hs-toggle-hiding)
+       (local-set-key (kbd "C-c C-S-s") 'hs-toggle-hiding-all))
+   #+END_SRC
+
+** Emacs Lisp
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+     (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+     (add-hook 'emacs-lisp-mode-hook 'subword-mode)
+     (add-hook 'emacs-lisp-mode-hook 'enable-hs-minor-mode)
+   #+END_SRC
+
+** Clojure
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'auto-mode-alist 
+                  '("\\.cljs$" . clojure-mode)
+                  '("\\.edn$" . clojure-mode))
+
+     (add-hook 'clojure-mode-hook 'paredit-mode)
+     (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+     (add-hook 'clojure-mode-hook 'subword-mode)
+     (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
+
+     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+
+     (add-hook 'cider-repl-mode-hook 'paredit-mode)
+     (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+     (add-hook 'cider-repl-mode-hook 'subword-mode)
+
+     (global-set-key (kbd "C-c o r") cider-switch-to-repl-command)
+
+     (setq cider-words-of-inspiration '(""))
+   #+END_SRC
+
+*** Copy name of current namespace
+
+    #+BEGIN_SRC emacs-lisp
+      (defun cider-copy-current-ns ()
+        "Copies the name of the current Clojure namespace to the kill
+      ring."
+        (interactive)
+        (let ((ns (cider-current-ns)))
+          (kill-new ns)
+          (message ns)))
+
+      (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
+    #+END_SRC
+
+* Emacs server
+
+  #+BEGIN_SRC emacs-lisp
+    (server-start)
+  #+END_SRC
+
+* Helm mode (experimental)
+
+  Based on [[http://tuhdo.github.io/helm-intro.html][A Package in a league of its own: Helm]]
+
+  #+BEGIN_SRC emacs-lisp
+    (require 'helm)
+    (require 'helm-config)
+    (require 'helm-adaptive)
+    (helm-mode 1)
+
+    (global-set-key (kbd "C-c h") 'helm-command-prefix)
+    (global-unset-key (kbd "C-x c"))
+
+    ;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+    ;; (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+    ;; (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+    (global-set-key (kbd "M-x") 'helm-M-x)
+    (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+    (global-set-key (kbd "C-x b") 'helm-mini)
+    (global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+    (setq helm-M-x-fuzzy-match t
+          helm-buffers-fuzzy-matching t
+          helm-recentf-fuzzy-match t)
+
+    (helm-adaptive-mode t)
+  #+END_SRC
+
+  Helm doesn't sort by most-frequently-used, as with IDO or SMEX.
+  There is a helm feature called "adaptive sort" but it doesn't seem
+  to be well-supported: see [[http://emacs.stackexchange.com/questions/5311/is-there-any-way-to-order-helm-results-by-commonly-used][StackOverflow question]].
+
+  ELPA has to be initialized before enabling adaptive mode.
+  See [[https://groups.google.com/forum/#!topic/emacs-helm/cm-Wb5LTRZI][help enabling helm adaptive sort]].
+
+  Maybe try [[https://github.com/wasamasa/dotemacs/blob/master/unpublished/helm-smex.el][helm-smex.el]]?
+
+  See also [[http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm][How should I change my workflow when moving from IDO to Helm]]
+
+* Themes
+
+  #+BEGIN_SRC emacs-lisp
+    (add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
+    (load-theme 'twilight-stuart t)
+  #+END_SRC
+
+* OS X extensions
+
+  #+BEGIN_SRC emacs-lisp
+    (when (fboundp 'tabbar-mode) (tabbar-mode -1))
+
+    (when (boundp 'osx-key-mode-map)
+      (define-key osx-key-mode-map (kbd "C-;") nil))
+
+    ;; from https://gist.github.com/1297644
+    (defun finder (location)
+      "Fire up finder in a location relative to pwd."
+      (interactive "sOpen finder at this location (relative to pwd): ")
+      (start-process "finder" "findxer" "open" "-a" "Finder.app" location))
+
+    ;; Has to come late in the initialization process
+    (when (display-graphic-p)
+      (menu-bar-mode 1))
+
+    ;; Fix Unicode character spacing; see http://stackoverflow.com/q/8779351
+    (when (string-equal system-type "darwin")
+      (set-fontset-font "fontset-default"
+                        'unicode
+                        '("Menlo" . "iso10646-1")))
+  #+END_SRC
+
+* Local extensions
+
+  Customizations that are local to this computer.
+
+  #+BEGIN_SRC emacs-lisp
+    (let ((local-config (expand-file-name "local.el" user-emacs-directory)))
+      (when (file-exists-p local-config)
+        (load local-config)))
+  #+END_SRC

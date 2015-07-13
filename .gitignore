@@ -1,8 +1,9 @@
-.emacs.d/elpa
 *.elc
 *~
-.emacs.d/swank
-.emacs.d/org-mode
+.emacs.d/elpa
+.emacs.d/helm-adaptive-history
+.emacs.d/stuart.el
+.emacs.d/vendor/org-mode
 .emacs.d/magit
 .org-id-locations
 *.tar.gz
