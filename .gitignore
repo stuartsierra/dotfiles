@@ -5,6 +5,8 @@
 .emacs.d/stuart.el
 .emacs.d/vendor/org-mode
 .emacs.d/magit
+.emacs.d/local.el
+.emacs.d/recentf
 .org-id-locations
 *.tar.gz
 *.zip
