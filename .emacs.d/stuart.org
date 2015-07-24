@@ -460,44 +460,13 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** Abbreviations and templates for org-mode
 
+   Mode-specific versions of the built-in ~<e~ and ~<s~ abbreviations:
+
    #+BEGIN_SRC emacs-lisp
-     (add-hook 'org-mode-hook (lambda () (abbrev-mode 1)))
-
-     (define-skeleton skel-org-block-elisp
-       "Insert an emacs-lisp SRC block"
-       ""
-       "#+BEGIN_SRC emacs-lisp\n"
-       _ - \n
-       "#+END_SRC\n")
-
-     (define-abbrev org-mode-abbrev-table "elsrc" "" 'skel-org-block-elisp)
-
-     (define-skeleton skel-org-block-clojure
-       "Inserts a Clojure SRC block"
-       ""
-       "#+BEGIN_SRC clojure\n"
-       _ - \n
-       "#+END_SRC\n")
-
-     (define-abbrev org-mode-abbrev-table "cljsrc" "" 'skel-org-block-clojure)
-
-     (define-skeleton skel-org-block-clojure-hidden
-       "Insert a Clojure SRC block with results hidden"
-       ""
-       "#+BEGIN_SRC clojure :results silent\n"
-       _ - \n
-       "#+END_SRC\n")
-
-     (define-abbrev org-mode-abbrev-table "cljsrch" "" 'skel-org-block-clojure-hidden)
-
-     (define-skeleton skel-org-block-clojure-pprint
-       "Insert a Clojure SRC block with results pretty-printed in a SRC block"
-       ""
-       "#+BEGIN_SRC clojure :results pp code\n"
-       _ - \n
-       "#+END_SRC\n")
-
-     (define-abbrev org-mode-abbrev-table "cljsrcp" "" 'skel-org-block-clojure-pprint)
+    (push '("clj" "#+BEGIN_SRC clojure :results hidden\n?\n#+END_SRC")
+          org-structure-template-alist)
+    (push '("el" "#+BEGIN_SRC emacs-lisp :results hidden\n?\n#+END_SRC")
+          org-structure-template-alist)
    #+END_SRC
 
 * Global keybindings
