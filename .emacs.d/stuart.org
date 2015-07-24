@@ -398,7 +398,6 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
                               (member "code" result-params))
                           "out"
                         "value")))
-                                             ;(setq params (list "code" "pp"))
                ;; Maybe parse result into table
                (org-babel-result-cond (cdr (assoc :result-params params))
                  result
