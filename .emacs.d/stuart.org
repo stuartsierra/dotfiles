@@ -114,6 +114,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          groovy-mode
          helm
          hlinum
+         htmlize
          linum-off
          magit
          multiple-cursors
