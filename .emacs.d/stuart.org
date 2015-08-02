@@ -111,6 +111,8 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          gh
          gist
          gnuplot
+         go-eldoc
+         go-mode
          groovy-mode
          helm
          hlinum
