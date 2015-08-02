@@ -3,9 +3,9 @@
 Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://github.com/cndreisbach/emacs.d][Clinton Dreisbach]]
 
 * Preliminaries
-  
+
 ** User details
-   
+
    #+BEGIN_SRC emacs-lisp
      (setq user-full-name "Stuart Sierra")
      (setq user-mail-address "mail@stuartsierra.com")
@@ -30,7 +30,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
    (I noticed this in the CIDER REPL when =M-p= didn't work because
    ~assert~ was not defined.)
-   
+
 * Package management (ELPA)
 
 ** Vendored packages
@@ -147,7 +147,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          (when (not (package-installed-p pkg))
            (package-install pkg))))
    #+END_SRC
-   
+
 * PATH and environment
 
   from https://github.com/purcell/exec-path-from-shell
@@ -557,7 +557,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 ** Clojure
 
    #+BEGIN_SRC emacs-lisp
-     (add-to-list 'auto-mode-alist 
+     (add-to-list 'auto-mode-alist
                   '("\\.cljs$" . clojure-mode)
                   '("\\.edn$" . clojure-mode))
 
