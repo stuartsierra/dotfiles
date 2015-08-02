@@ -108,6 +108,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          dash
          clojure-mode
          exec-path-from-shell
+         find-file-in-project
          gh
          gist
          gnuplot
@@ -472,6 +473,13 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    #+END_SRC
 
 * Global keybindings
+
+** find-file-in-project
+
+   #+BEGIN_SRC emacs-lisp :results silent
+     (global-set-key (kbd "C-x M-f") 'find-file-in-project)
+   #+END_SRC
+
 
 ** Text scale increase/decrease
 
