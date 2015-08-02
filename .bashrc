@@ -80,6 +80,8 @@ alias beep="echo -e '\a'"
 
 alias pgrep='ps aux | grep'
 
+alias gs='git status'
+
 # for Perl5 / CPAN
 if [ -e /opt/local/lib/perl5 ]; then
     export PERL5LIB="/opt/local/lib/perl5/5.8.8:/opt/local/lib/perl5/site_perl/5.8.8:/opt/local/lib/perl5/vendor_perl/5.8.8"
@@ -104,7 +106,7 @@ fi
 
 # Relevance "etc" scripts
 if [ -d ~/.relevance-etc ]; then
-    source ~/.relevance-etc/bash/git.sh
+    # source ~/.relevance-etc/bash/git.sh
     # source ~/.relevance-etc/bash/git_prompt.sh
     source ~/.relevance-etc/bash/ssh_autocompletion.sh
 fi
