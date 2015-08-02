@@ -126,6 +126,12 @@ if [ -f ~/.git-completion.bash ]; then
     source ~/.git-completion.bash
 fi
 
+# Git helper functions
+function git-delete-merged-branches() {
+    git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d
+    git remote prune origin
+}
+
 # Java on OS X
 if [[ -f /usr/libexec/java_home ]]; then
     export JAVA_HOME="$(/usr/libexec/java_home)"
