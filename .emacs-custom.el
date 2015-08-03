@@ -27,6 +27,7 @@
  '(global-auto-revert-mode t)
  '(global-hl-line-mode t)
  '(global-linum-mode t)
+ '(helm-external-programs-associations (quote (("html" . "open"))))
  '(image-dired-external-viewer "/usr/bin/open")
  '(indent-tabs-mode nil)
  '(indicate-empty-lines t)
