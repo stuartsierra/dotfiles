@@ -84,6 +84,7 @@
      (eval define-clojure-indent
            (to-data
             (quote defun))))))
+ '(save-interprogram-paste-before-kill t)
  '(sentence-end-double-space nil)
  '(slime-kill-without-query-p t)
  '(slime-net-coding-system (quote utf-8-unix))
