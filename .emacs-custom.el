@@ -54,7 +54,6 @@
    "java -cp \"/opt/local/share/java/*\" net.sf.saxon.Transform -o %o %i %s")
  '(org-export-docbook-xslt-stylesheet "/opt/local/share/xsl/docbook-xsl/fo/docbook.xsl")
  '(org-export-html-validation-link "")
- '(org-export-htmlize-output-type (quote css))
  '(org-export-time-stamp-file nil)
  '(org-export-with-section-numbers nil)
  '(org-export-with-tags nil)
