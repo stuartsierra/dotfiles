@@ -60,6 +60,7 @@
  '(org-export-docbook-xslt-stylesheet "/opt/local/share/xsl/docbook-xsl/fo/docbook.xsl")
  '(org-export-html-validation-link "")
  '(org-export-time-stamp-file nil)
+ '(org-export-with-author nil)
  '(org-export-with-section-numbers nil)
  '(org-export-with-tags nil)
  '(org-export-with-toc nil)
