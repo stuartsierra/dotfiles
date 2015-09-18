@@ -29,6 +29,7 @@
  '(global-linum-mode t)
  '(helm-default-external-file-browser "open")
  '(helm-external-programs-associations (quote (("html" . "open") ("pdf" . "open"))))
+ '(helm-grep-ag-command "ag --line-numbers -S --color --nogroup %s %s")
  '(image-dired-external-viewer "/usr/bin/open")
  '(indent-tabs-mode nil)
  '(indicate-empty-lines t)
