@@ -77,7 +77,12 @@
      ("twentypercent" . 116)
      ("offclock" . 111)
      ("product" . 112))))
- '(org-todo-keyword-faces (quote (("INPROGRESS" . "CYAN"))))
+ '(org-todo-keyword-faces
+   (quote
+    (("INPROGRESS" . "cyan")
+     ("STARTED" . "cyan")
+     ("BLOCKED" . "red")
+     ("WAITING" . "orange"))))
  '(org-todo-keywords (quote ((sequence "TODO" "INPROGRESS" "DONE"))))
  '(org-yank-folded-subtrees nil)
  '(safe-local-variable-values
