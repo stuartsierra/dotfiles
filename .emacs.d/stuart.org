@@ -659,6 +659,28 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
   See also [[http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm][How should I change my workflow when moving from IDO to Helm]]
 
+* Quick statistics on region
+
+  #+BEGIN_SRC emacs-lisp :results silent
+    (defun numbers-in-region ()
+      (let ((numbers ()))
+        (save-excursion
+          (when (< (mark) (point))
+            (exchange-point-and-mark))
+          (while (re-search-forward "-?[0-9]+\\(\\.[0-9]+\\)?")
+            (push (string-to-number (match-string 0)) numbers))
+          (nreverse numbers))))
+
+    (defun mean (numbers)
+      (/ (float (apply '+ numbers)) (length numbers)))
+
+    (defun mean-in-region ()
+      (interactive)
+      (let ((m (mean (numbers-in-region))))
+        (kill-new (number-to-string m))
+        (message (format "Mean: %f" m))))
+  #+END_SRC
+
 * Themes
 
   #+BEGIN_SRC emacs-lisp
