@@ -619,9 +619,9 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
     (global-set-key (kbd "C-x b") 'helm-mini)
     (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-    (setq helm-M-x-fuzzy-match t
-          helm-buffers-fuzzy-matching t
-          helm-recentf-fuzzy-match t)
+    (setq helm-M-x-fuzzy-match nil
+          helm-buffers-fuzzy-matching nil
+          helm-recentf-fuzzy-match nil)
 
     (helm-adaptive-mode t)
   #+END_SRC
