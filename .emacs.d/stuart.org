@@ -64,27 +64,10 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    #+BEGIN_SRC emacs-lisp
      (load "package")
      (package-initialize)
-     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-   #+END_SRC
-
-** Example of pinned package repositories
-
-   Example from [[https://github.com/clojure-emacs/cider][CIDER]] README
-
-   #+BEGIN_SRC emacs-lisp :eval no :tangle no
-     (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
-   #+END_SRC
-
-   Example from [[https://clojurians.slack.com/archives/cider/p1435848876001077][Slack]]
-
-   #+BEGIN_SRC emacs-lisp :eval no :tangle no
-     (when (boundp 'package-pinned-packages)
-       (setq package-pinned-packages
-             '((cider        . "melpa-stable")
-               (clj-refactor . "melpa-stable")
-               (clojure-mode . "melpa-stable")
-               (paradox      . "melpa-stable")
-               (smartparens  . "melpa-stable"))))
+     (add-to-list 'package-archives
+                  '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
    #+END_SRC
 
 ** Magit warning
@@ -102,9 +85,8 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    0.1.1
 
    #+BEGIN_SRC emacs-lisp
-     (defvar stuart/packages
+     (defvar stuart/stable-packages
        '(
-         async
          dash
          clojure-mode
          exec-path-from-shell
@@ -114,22 +96,63 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          gnuplot
          go-eldoc
          go-mode
+         magit
+         multiple-cursors
+         paredit
+         pkg-info
+         rainbow-delimiters
+         ruby-mode
+         s
+         smex
+         ))
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (defvar stuart/unstable-packages
+       '(
+         async
          groovy-mode
          helm
          hlinum
          htmlize
          linum-off
-         magit
-         multiple-cursors
-         paredit
-         pkg-info
          queue
-         rainbow-delimiters
-         ruby-mode
-         s
-         smex
          xml-rpc
          ))
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (defvar stuart/packages
+       (append stuart/stable-packages
+               stuart/unstable-packages))
+   #+END_SRC
+
+** Pinned package repositories
+
+   Example from [[https://github.com/clojure-emacs/cider][CIDER]] README
+
+   #+BEGIN_SRC emacs-lisp :eval no :tangle no
+     (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+   #+END_SRC
+
+   Example from [[https://clojurians.slack.com/archives/cider/p1435848876001077][Slack]]
+
+   #+BEGIN_SRC emacs-lisp :eval no :tangle no
+     (when (boundp 'package-pinned-packages)
+       (setq package-pinned-packages
+             '((cider        . "melpa-stable")
+               (clj-refactor . "melpa-stable")
+               (clojure-mode . "melpa-stable")
+               (paredit      . "melpa-stable")
+               (magit        . "melpa-stable")
+               (smex         . "melpa-stable")
+               )))
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (dolist (pkg stuart/stable-packages)
+       (add-to-list 'package-pinned-packages
+                    (cons pkg "melpa-stable") t))
    #+END_SRC
 
 ** Installing packages
@@ -219,7 +242,6 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    #+BEGIN_SRC emacs-lisp
      (show-paren-mode t)
    #+END_SRC
-
 * Editing text
 
 ** indent-region
