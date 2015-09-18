@@ -36,6 +36,7 @@
  '(inhibit-startup-screen t)
  '(linum-format "%3d")
  '(magit-commit-all-when-nothing-staged (quote ask-stage))
+ '(magit-diff-section-arguments (quote ("--ignore-all-space" "--no-ext-diff")))
  '(magit-process-popup-time -1)
  '(magit-set-upstream-on-push t)
  '(menu-bar-mode nil)
