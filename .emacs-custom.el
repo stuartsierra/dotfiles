@@ -40,6 +40,7 @@
  '(magit-process-popup-time -1)
  '(magit-set-upstream-on-push t)
  '(menu-bar-mode nil)
+ '(nrepl-log-messages t)
  '(ns-pop-up-frames nil)
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
