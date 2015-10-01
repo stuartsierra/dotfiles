@@ -487,9 +487,11 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
    Mode-specific versions of the built-in ~<e~ and ~<s~ abbreviations:
 
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :results silent
     (push '("clj" "#+BEGIN_SRC clojure :results silent\n?\n#+END_SRC")
           org-structure-template-alist)
+     (push '("cljp" "#+BEGIN_SRC clojure :results pp code\n?\n#+END_SRC")
+           org-structure-template-alist)
     (push '("el" "#+BEGIN_SRC emacs-lisp :results silent\n?\n#+END_SRC")
           org-structure-template-alist)
    #+END_SRC
