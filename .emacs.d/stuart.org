@@ -96,6 +96,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          gnuplot
          go-eldoc
          go-mode
+         graphviz-dot-mode
          magit
          multiple-cursors
          paredit
@@ -386,6 +387,22 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
        (interactive)
        (let ((body (org-babel-expand-src-block)))
          (kill-new body)))
+   #+END_SRC
+
+** Org-babel and Graphviz
+
+   See [[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-dot.html][Dot Source Code Blocks in Org Mode]]
+
+   #+BEGIN_SRC emacs-lisp :results silent
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((dot . t))) ; this line activates dot
+   #+END_SRC
+
+   Tell Org that "dot" source should be rendered in ~graphviz-dot-mode~:
+
+   #+BEGIN_SRC emacs-lisp :results silent
+   (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
    #+END_SRC
 
 ** Org-babel and Clojure
