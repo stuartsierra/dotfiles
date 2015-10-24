@@ -1,3 +1,4 @@
+
 #+TITLE: Stuart Sierra's Emacs Configuration
 
 Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://github.com/cndreisbach/emacs.d][Clinton Dreisbach]]
@@ -97,6 +98,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          go-eldoc
          go-mode
          graphviz-dot-mode
+         ido-vertical-mode
          magit
          multiple-cursors
          paredit
@@ -113,7 +115,6 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
        '(
          async
          groovy-mode
-         helm
          hlinum
          htmlize
          linum-off
@@ -335,6 +336,36 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
    #+END_SRC
 
+* IDO
+
+  IDO is built into Emacs.
+
+  #+BEGIN_SRC emacs-lisp :results silent
+    (require 'ido)
+    (ido-mode t)
+  #+END_SRC
+
+** Vertical layout
+
+   [[https://github.com/creichert/ido-vertical-mode.el][github: creichert/ido-vertical-mode.el]]
+
+   #+BEGIN_SRC emacs-lisp :results silent
+     (require 'ido-vertical-mode)
+     (ido-vertical-mode 1)
+     (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+   #+END_SRC
+
+** SMEX
+
+   [[https://github.com/nonsequitur/smex/][github: nonsequitur/smex]]
+
+   #+BEGIN_SRC emacs-lisp :results silent
+     (require 'smex)
+     (smex-initialize)
+     (global-set-key (kbd "M-x") 'smex)
+     (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+   #+END_SRC
+
 * Window management
 
 ** rotate-windows
@@ -505,12 +536,12 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    Mode-specific versions of the built-in ~<e~ and ~<s~ abbreviations:
 
    #+BEGIN_SRC emacs-lisp :results silent
-    (push '("clj" "#+BEGIN_SRC clojure :results silent\n?\n#+END_SRC")
-          org-structure-template-alist)
+     (push '("clj" "#+BEGIN_SRC clojure :results silent\n?\n#+END_SRC")
+           org-structure-template-alist)
      (push '("cljp" "#+BEGIN_SRC clojure :results pp code\n?\n#+END_SRC")
            org-structure-template-alist)
-    (push '("el" "#+BEGIN_SRC emacs-lisp :results silent\n?\n#+END_SRC")
-          org-structure-template-alist)
+     (push '("el" "#+BEGIN_SRC emacs-lisp :results silent\n?\n#+END_SRC")
+           org-structure-template-alist)
    #+END_SRC
 
 * Global keybindings
@@ -637,46 +668,6 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
   #+BEGIN_SRC emacs-lisp
     (server-start)
   #+END_SRC
-
-* Helm mode (experimental)
-
-  Based on [[http://tuhdo.github.io/helm-intro.html][A Package in a league of its own: Helm]]
-
-  #+BEGIN_SRC emacs-lisp
-    (require 'helm)
-    (require 'helm-config)
-    (require 'helm-adaptive)
-    (helm-mode 1)
-
-    (global-set-key (kbd "C-c h") 'helm-command-prefix)
-    (global-unset-key (kbd "C-x c"))
-
-    ;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-    ;; (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-    ;; (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-
-    (global-set-key (kbd "M-x") 'helm-M-x)
-    (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-    (global-set-key (kbd "C-x b") 'helm-mini)
-    (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-    (setq helm-M-x-fuzzy-match nil
-          helm-buffers-fuzzy-matching nil
-          helm-recentf-fuzzy-match nil)
-
-    (helm-adaptive-mode t)
-  #+END_SRC
-
-  Helm doesn't sort by most-frequently-used, as with IDO or SMEX.
-  There is a helm feature called "adaptive sort" but it doesn't seem
-  to be well-supported: see [[http://emacs.stackexchange.com/questions/5311/is-there-any-way-to-order-helm-results-by-commonly-used][StackOverflow question]].
-
-  ELPA has to be initialized before enabling adaptive mode.
-  See [[https://groups.google.com/forum/#!topic/emacs-helm/cm-Wb5LTRZI][help enabling helm adaptive sort]].
-
-  Maybe try [[https://github.com/wasamasa/dotemacs/blob/master/unpublished/helm-smex.el][helm-smex.el]]?
-
-  See also [[http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm][How should I change my workflow when moving from IDO to Helm]]
 
 * Quick statistics on region
 
