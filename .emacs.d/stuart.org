@@ -89,15 +89,13 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** Default packages
 
-   I have CIDER in =vendor= but the [[http://melpa.org/#/cider][CIDER package]] depends on
-   clojure-mode 4.0.0 / dash 2.4.1 / emacs 24.3 / pkg-info 0.4 / queue
-   0.1.1
+   I have CIDER and clojure-mode in =vendor= but the [[http://melpa.org/#/cider][CIDER package]]
+   depends on dash 2.4.1 / emacs 24.3 / pkg-info 0.4 / queue 0.1.1
 
    #+BEGIN_SRC emacs-lisp
      (defvar stuart/stable-packages
        '(
          dash
-         clojure-mode
          exec-path-from-shell
          find-file-in-project
          gh
