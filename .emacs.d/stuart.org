@@ -351,16 +351,6 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
     (ido-mode t)
   #+END_SRC
 
-** Vertical layout
-
-   [[https://github.com/creichert/ido-vertical-mode.el][github: creichert/ido-vertical-mode.el]]
-
-   #+BEGIN_SRC emacs-lisp :results silent
-     (require 'ido-vertical-mode)
-     (ido-vertical-mode 1)
-     (setq ido-vertical-define-keys 'C-n-and-C-p-only)
-   #+END_SRC
-
 ** SMEX
 
    [[https://github.com/nonsequitur/smex/][github: nonsequitur/smex]]
