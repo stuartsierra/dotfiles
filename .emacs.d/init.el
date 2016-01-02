@@ -8,3 +8,4 @@
 (require 'ob-tangle)
 (org-babel-load-file (expand-file-name "stuart.org" user-emacs-directory))
 (put 'erase-buffer 'disabled nil)
+(put 'set-goal-column 'disabled nil)
