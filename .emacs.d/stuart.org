@@ -673,7 +673,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
         (save-excursion
           (when (< (mark) (point))
             (exchange-point-and-mark))
-          (while (re-search-forward "-?[0-9]+\\(\\.[0-9]+\\)?")
+          (while (re-search-forward "-?[0-9]+\\(\\.[0-9]+\\)?" (mark) t)
             (push (string-to-number (match-string 0)) numbers))
           (nreverse numbers))))
 
