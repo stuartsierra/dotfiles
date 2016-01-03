@@ -239,10 +239,21 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (setq use-dialog-box nil)
    #+END_SRC
 
-** Always use visible bell
+** Visible bell
+
+   Emacs 24.5.1 has a [[http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/][bug]] under OS X El Capitan, fixed in Emacs 25,
+   that causes display artifacts when using the visible bell.
+
+   This alternative from [[http://www.emacswiki.org/emacs/AlarmBell][EmacsWiki: Alarm Bell]] works:
 
    #+BEGIN_SRC emacs-lisp
-     (setq visible-bell t)
+     (defun my-visible-bell ()
+       "Flash the mode line as a visible bell."
+       (invert-face 'mode-line)
+       (run-with-timer 0.2 nil 'invert-face 'mode-line))
+
+     (setq visible-bell nil
+           ring-bell-function #'my-visible-bell)
    #+END_SRC
 
 ** Always show parens
