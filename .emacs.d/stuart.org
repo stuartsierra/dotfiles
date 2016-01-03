@@ -90,12 +90,11 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 ** Default packages
 
    I have CIDER and clojure-mode in =vendor= but the [[http://melpa.org/#/cider][CIDER package]]
-   depends on dash 2.4.1 / emacs 24.3 / pkg-info 0.4 / queue 0.1.1
+   depends on emacs 24.3 / pkg-info 0.4 / queue 0.1.1 / seq 1.9 / spinner 1.4
 
    #+BEGIN_SRC emacs-lisp
      (defvar stuart/stable-packages
        '(
-         dash
          exec-path-from-shell
          find-file-in-project
          gh
@@ -120,11 +119,14 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (defvar stuart/unstable-packages
        '(
          async
+         dash
          groovy-mode
          hlinum
          htmlize
          linum-off
          queue
+         seq
+         spinner
          xml-rpc
          ))
    #+END_SRC
@@ -447,25 +449,52 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
    See [[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-clojure.html][Org-babel-clojure]]
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'ob-clojure)
-     (require 'cider)
-     (setq org-babel-clojure-backend 'cider)
-   #+END_SRC
+   My custom Clojure evaluation. Works with Org 8.3.2 and CIDER 0.10.0
 
-   My custom Clojure evaluation function
+   Adapted from ~ob-clojure.el~ in the org-mode distribution.
+   ~cider-nrepl-sync-request:eval~ comes from [[file:~/dotfiles/submodules/cider/cider-client.el::(defun%20cider-nrepl-sync-request:eval%20(input%20&optional%20ns)][cider-client.el]] in CIDER
 
    #+BEGIN_SRC emacs-lisp :results silent
+     (require 'cider)
+
+     (defvar org-babel-default-header-args:clojure '())
+     (defvar org-babel-header-args:clojure '((package . :any)))
+
+     (defun org-babel-expand-body:clojure (body params)
+       "Expand source code BODY according to PARAMS, return the
+     expanded body."
+       (let* ((vars (mapcar #'cdr (org-babel-get-header params :var)))
+              (result-params (cdr (assoc :result-params params)))
+              (print-level nil)
+              (print-length nil)
+              (body (org-babel-trim
+                     (if (> (length vars) 0)
+                         (concat "(let ["
+                                 (mapconcat
+                                  (lambda (var)
+                                    (format "%S (quote %S)" (car var) (cdr var)))
+                                  vars "\n      ")
+                                 "]\n" body ")")
+                       body))))
+         (if (or (member "code" result-params) (member "pp" result-params))
+             (format (concat "(clojure.pprint/with-pprint-dispatch clojure.pprint/%s-dispatch "
+                             "(clojure.pprint/pprint (do %s))) ")
+                     (if (member "code" result-params) "code" "simple")
+                     body)
+           body)))
+
      (defun nrepl-error-p (nrepl-result)
-       "True if nrepl-result signaled an error."
+       "True if nrepl-result contains an error status."
        (member "eval-error" (nrepl-dict-get nrepl-result "status")))
 
      (defun org-babel-execute:clojure (body params)
        "Execute a block of Clojure code with Babel."
+       (when (not (cider-current-connection))
+         (error "No CIDER connection"))
        (let ((expanded (org-babel-expand-body:clojure body params))
              result)
          (let ((result-params (cdr (assoc :result-params params)))
-               (nrepl-result (nrepl-sync-request:eval expanded)))
+               (nrepl-result (cider-nrepl-sync-request:eval expanded)))
            ;; handle errors, show result
            (if (nrepl-error-p nrepl-result)
                (nrepl-dict-get nrepl-result "err")
@@ -479,10 +508,12 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
                           "out"
                         "value")))
                ;; Maybe parse result into table
-               (org-babel-result-cond (cdr (assoc :result-params params))
+               (org-babel-result-cond result-params
                  result
                  (condition-case nil (org-babel-script-escape result)
-                   (error result))))))))
+                   (error "%s" result))))))))
+
+     (provide 'ob-clojure)
    #+END_SRC
 
 ** Day pages
@@ -651,7 +682,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
      (add-hook 'cider-repl-mode-hook 'subword-mode)
 
-     (global-set-key (kbd "C-c o r") cider-switch-to-repl-command)
+     (global-set-key (kbd "C-c o r") 'cider-switch-to-repl-buffer)
 
      (setq cider-words-of-inspiration '(""))
    #+END_SRC
