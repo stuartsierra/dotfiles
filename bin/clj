@@ -2,10 +2,10 @@
 
 set -e
 
-VERSION="1.7.0-alpha5"
+VERSION="1.8.0"
 
 if [[ "$EMACS" != "t" ]]; then
-    RLWRAP=`which rlwrap`
+    RLWRAP="$(which rlwrap)"
 fi
 
 function print_usage {
@@ -39,9 +39,13 @@ fi
 
 CLASSPATH="$CLOJURE_JAR:$CLASSPATH"
 
+SERVER="-Dclojure.server.repl={:port 5555 :accept clojure.core.server/repl}"
+
 if [[ -e project.clj ]]; then
-    java -cp `lein classpath` clojure.main "$@"
-else
-    exec $RLWRAP java -cp "$CLASSPATH" clojure.main "$@"
+    if [[ project.clj -nt .classpath ]]; then
+        lein classpath > .classpath
+    fi
+    CLASSPATH="$(cat .classpath)"
 fi
 
+exec $RLWRAP java -cp "$CLASSPATH" "$SERVER" clojure.main "$@"
