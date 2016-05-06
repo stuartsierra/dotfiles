@@ -64,6 +64,7 @@
  '(org-html-htmlize-output-type (quote css))
  '(org-return-follows-link t)
  '(org-special-ctrl-a/e t)
+ '(org-src-fontify-natively t)
  '(org-src-tab-acts-natively t)
  '(org-src-window-setup (quote current-window))
  '(org-startup-folded (quote showeverything))
