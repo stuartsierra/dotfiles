@@ -14,6 +14,7 @@
 	ls = ls-files
 	# Show files ignored by git:
 	ign = ls-files -o -i --exclude-standard
+        fpl = push --force-with-lease
 [color]
 	ui = true
 [push]
