@@ -97,7 +97,6 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
        '(
          exec-path-from-shell
          find-file-in-project
-         gh
          gist
          gnuplot
          go-eldoc
@@ -355,14 +354,14 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
    #+END_SRC
 
-* IDO
+* IDO & SMEX
 
-  IDO is built into Emacs.
+** IDO is built into Emacs.
 
-  #+BEGIN_SRC emacs-lisp :results silent
-    (require 'ido)
-    (ido-mode t)
-  #+END_SRC
+   #+BEGIN_SRC emacs-lisp :results silent
+     (require 'ido)
+     (ido-mode t)
+   #+END_SRC
 
 ** SMEX
 
@@ -547,7 +546,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
                              (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
               (buffer (find-buffer-visiting file)))
          (if buffer
-             (pop-to-buffer buffer)
+             (switch-to-buffer buffer)
            (find-file file))
          (when (= 0 (buffer-size))
            (let ((datestr (format-time-string "%Y-%m-%d %A" date)))
@@ -579,6 +578,8 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (push '("cljp" "#+BEGIN_SRC clojure :results pp code\n?\n#+END_SRC")
            org-structure-template-alist)
      (push '("el" "#+BEGIN_SRC emacs-lisp :results silent\n?\n#+END_SRC")
+           org-structure-template-alist)
+     (push '("sh" "#+BEGIN_SRC shell-script :results silent\n?\n#+END_SRC")
            org-structure-template-alist)
    #+END_SRC
 
@@ -675,8 +676,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
      (add-hook 'clojure-mode-hook 'subword-mode)
      (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
-
-     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+     (add-hook 'clojure-mode-hook 'eldoc-mode)
 
      (add-hook 'cider-repl-mode-hook 'paredit-mode)
      (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
@@ -685,6 +685,8 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (global-set-key (kbd "C-c o r") 'cider-switch-to-repl-buffer)
 
      (setq cider-words-of-inspiration '(""))
+
+     (define-key cider-repl-mode-map (kbd "C-c M-o") 'cider-repl-clear-buffer)
    #+END_SRC
 
 *** Copy name of current namespace
