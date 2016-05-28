@@ -36,8 +36,6 @@ install_relevance_etc
 backup ~/.relevance-etc
 ln -s $DOTFILES/submodules/relevance/etc $HOME/.relevance-etc
 
-write_home_path_file
-
 if [[ "$USER" != "stuart" ]]; then
     unset_git_user
 fi

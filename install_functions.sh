@@ -57,19 +57,3 @@ function unset_git_user {
         fi
     done
 }
-
-function write_home_path_file {
-    cat <<EOF > "$HOME/.path"
-$HOME/bin
-/usr/local/bin
-/opt/local/bin
-/usr/bin
-/bin
-/usr/local/sbin
-/usr/sbin
-/sbin
-/opt/X11/bin
-/usr/texbin
-$HOME/.relevance-etc/scripts
-EOF
-}
