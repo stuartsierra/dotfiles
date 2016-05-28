@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'projector
- '(highlight ((t (:background "darkseagreen2"))))
+ '(highlight ((t (:background "light cyan"))))
  '(font-lock-builtin-face ((t (:foreground "dark slate blue"))))
  '(font-lock-comment-delimiter-face ((default (:inherit font-lock-comment-face))))
  '(font-lock-comment-face ((t (:foreground "Firebrick"))))
@@ -24,7 +24,8 @@
  '(org-block-end-line ((t (:foreground "Gray"))))
  '(org-meta-line ((t (:foreground "Gray"))))
  '(org-block-background ((t :background "#eee")))
- '(outline-2 ((t :foreground "DarkGreen")))
+ '(outline-2 ((t :foreground "Purple")))
+ '(outline-3 ((t :foreground "DarkRed")))
  '(default ((t (:background "white" :foreground "black")))))
 
 (provide-theme 'projector)
