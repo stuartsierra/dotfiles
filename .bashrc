@@ -161,6 +161,11 @@ if [[ -e /usr/local/etc/bash_completion.d/password-store ]]; then
     source /usr/local/etc/bash_completion.d/password-store
 fi
 
+## AWS command line interface
+if ( which aws_completer > /dev/null ); then
+    complete -C aws_completer aws
+fi
+
 # Re-acquire forwarded SSH key
 # from http://tychoish.com/rhizome/9-awesome-ssh-tricks/
 function ssh-reagent {
