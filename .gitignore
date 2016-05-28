@@ -8,6 +8,7 @@
 .emacs.d/local.el
 .emacs.d/recentf
 .emacs.d/eshell
+.emacs.d/ido.last
 .org-id-locations
 *.tar.gz
 *.zip
