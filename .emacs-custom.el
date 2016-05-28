@@ -62,6 +62,7 @@
  '(org-export-with-tags nil)
  '(org-export-with-toc nil)
  '(org-html-htmlize-output-type (quote css))
+ '(org-html-validation-link "")
  '(org-return-follows-link t)
  '(org-special-ctrl-a/e t)
  '(org-src-fontify-natively t)
