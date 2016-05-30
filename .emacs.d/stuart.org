@@ -201,10 +201,16 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** Scroll, tool, and menu bars
 
+   Check for symbol bindings, since some of these may not exist in
+   text-only Emacs.
+
    #+BEGIN_SRC emacs-lisp
-     (scroll-bar-mode -1)
-     (tool-bar-mode -1)
-     (menu-bar-mode -1)
+     (when (fboundp 'scroll-bar-mode)
+       (scroll-bar-mode -1))
+     (when (fboundp 'tool-bar-mode)
+       (tool-bar-mode -1))
+     (when (fboundp 'menu-bar-mode)
+       (menu-bar-mode -1))
    #+END_SRC
 
 ** Selecting text more like GUI apps
