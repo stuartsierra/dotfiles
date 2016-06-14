@@ -736,6 +736,21 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
     (server-start)
   #+END_SRC
 
+* Eshell
+
+** Prompt
+
+   #+BEGIN_SRC emacs-lisp :results silent
+     (require 'eshell)
+
+     (defun stuart/eshell-prompt ()
+       "Eshell prompt function that prints PWD without full path"
+       (concat (file-name-nondirectory (eshell/pwd))
+               (if (= (user-uid) 0) " # " " $ ")))
+
+     (setq eshell-prompt-function 'stuart/eshell-prompt)
+   #+END_SRC
+
 * Quick statistics on region
 
   #+BEGIN_SRC emacs-lisp :results silent
