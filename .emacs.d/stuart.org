@@ -1,4 +1,3 @@
-
 #+TITLE: Stuart Sierra's Emacs Configuration
 
 Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://github.com/cndreisbach/emacs.d][Clinton Dreisbach]]
