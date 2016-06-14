@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="1.8.0"
+VERSION="1.9.0-alpha5"
 
 if [[ "$EMACS" != "t" ]]; then
     RLWRAP="$(which rlwrap)"
