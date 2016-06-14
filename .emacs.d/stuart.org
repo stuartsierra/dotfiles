@@ -589,6 +589,27 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
            org-structure-template-alist)
    #+END_SRC
 
+** Inserting links
+
+   #+BEGIN_SRC emacs-lisp :results silent
+     (defun stuart/org-insert-link (url description)
+       (insert "[[" url "][" description "]]"))
+
+     (defconst pivotal-story-regex
+       "^\\(https://www\\.pivotaltracker\\.com/story/show/\\|#\\)\\([0-9]+\\)")
+
+     (defun org-insert-pivotal-link (story-id-or-url)
+       (interactive "sPivotal Tracker story ID or URL: ")
+       (when (null (string-match pivotal-story-regex story-id-or-url))
+         (error "Invalid Pivotal Tracker story ID or URL '%s'"
+                story-id-or-url))
+       (let ((story-id (match-string 2 story-id-or-url)))
+         (stuart/org-insert-link
+          (concat "https://www.pivotaltracker.com/story/show/"
+                  story-id)
+          (concat "#" story-id))))
+   #+END_SRC
+
 * Global keybindings
 
 ** find-file-in-project
