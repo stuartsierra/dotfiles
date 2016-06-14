@@ -166,6 +166,14 @@ if ( which aws_completer > /dev/null ); then
     complete -C aws_completer aws
 fi
 
+## 'tag' wrapper for 'ag'
+# See https://github.com/aykamko/tag
+export TAG_CMD_FMT_STRING="emacsclient -n +{{.LineNumber}} {{.Filename}}"
+if hash ag 2>/dev/null; then
+  tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null; }
+  alias ag=tag
+fi
+
 # Re-acquire forwarded SSH key
 # from http://tychoish.com/rhizome/9-awesome-ssh-tricks/
 function ssh-reagent {
