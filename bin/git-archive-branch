@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -eu
+
+branch_name="$1"
+
+base_branch="${2:-master}"
+
+author_timestamp="$(git log -n 1 --format=format:%aI "$branch_name")"
+
+author_date="${author_timestamp:0:10}"
+
+tag_name="archive/${author_date}-${branch_name}"
+
+merge_base_commit="$(git merge-base "$branch_name" "$base_branch")"
+
+(
+    cat <<EOF
+
+
+This tag contains the following commits since diverging from
+branch $base_branch at commit $merge_base_commit
+
+EOF
+    git log "${merge_base_commit}..${branch_name}" 
+) > /tmp/git-archive-tag-message
+
+git tag -a "$tag_name" "$branch_name"
