@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# clean -- safely delete temporary files from a Git repository
+
+# Deletes all .gitignore'd, untracked files from Git repository. If
+# there are any untracked files in the repository which are *not*
+# .gitignore'd, it will do nothing.
+
+if ( git status --porcelain | grep '\Q??\E' ); then
+   echo "There are untracked files; not cleaning"
+   exit 1
+fi
+
+set -vue
+
+git clean -dfx
