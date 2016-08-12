@@ -2,24 +2,38 @@
 
 set -e
 
-VERSION="1.9.0-alpha10"
+### Defaults
 
-if [[ "$EMACS" != "t" ]]; then
-    RLWRAP="$(which rlwrap)"
-fi
+clojure_version="1.9.0-alpha10"
+
+### Command line
 
 function print_usage {
-    echo "Usage: $0 [-v clojure_version] [-c extra_classpath]"
-    echo "Launches specified Clojure version ($VERSION by default)."
-    echo "Option -c may be repeated to augment the Java classpath."
-    echo "Remaining options are passed to Clojure."
+    cat <<EOF
+Usage: $0 [-v clojure_version] [-c extra_classpath] [-j jvm_ARG] [-- args...]
+
+Launches specified Clojure version (${clojure_version} by default).
+
+Classpath is generated from Leiningen project.clj if it exists.
+
+Options:
+
+ -c dir_or_jar   adds to the Java classpath (when no project.clj)
+
+ -j jvm_arg      adds arguments to java
+
+ --              terminate special args; remaining args passed to Clojure
+EOF
 }
 
-while getopts "hv:c:s:-" OPT; do
+java_args=()
+
+while getopts "hv:c:j:s:-" OPT; do
     case "$OPT" in
-        v) VERSION="$OPTARG" ;;
-        c) CLASSPATH="$CLASSPATH:$OPTARG" ;;
-        s) SOCKET_REPL_PORT="$OPTARG" ;;
+        v) clojure_version="$OPTARG" ;;
+        c) classpath="$classpath:$OPTARG" ;;
+        s) socket_repl_port="$OPTARG" ;;
+        j) java_args+=("$OPTARG") ;;
         -) break ;;
         h) print_usage; exit ;;
     esac
@@ -27,29 +41,45 @@ done
 
 shift $(($OPTIND - 1))
 
-CLOJURE_JAR="$HOME/.m2/repository/org/clojure/clojure/$VERSION/clojure-$VERSION.jar"
+### Download Clojure JAR from Maven repository
 
-if [[ ! -e "$CLOJURE_JAR" ]]; then
+clojure_jar_path="$HOME/.m2/repository/org/clojure/clojure/$clojure_version/clojure-${clojure_version}.jar"
+
+if [[ ! -e "${clojure_jar_path}" ]]; then
     mvn dependency:get \
         -DrepoId=sonatype \
         -DrepoUrl=https://oss.sonatype.org/content/repositories/public/ \
         -DgroupId=org.clojure \
         -DartifactId=clojure \
-        "-Dversion=$VERSION"
+        "-Dversion=${clojure_version}"
 fi    
 
-CLASSPATH="$CLOJURE_JAR:$CLASSPATH"
+### Building the classpath
+
+classpath="${clojure_jar_path}:${classpath}"
 
 if [[ -e project.clj ]]; then
     if [[ project.clj -nt .classpath ]]; then
         lein classpath > .classpath
     fi
-    CLASSPATH="$(cat .classpath)"
+    classpath="$(cat .classpath)"
 fi
 
-if [[ -n "$SOCKET_REPL_PORT" ]]; then
-    SERVER="-Dclojure.server.repl={:port $SOCKET_REPL_PORT :accept clojure.core.server/repl}"
-    exec $RLWRAP java -cp "$CLASSPATH" "$SERVER" clojure.main "$@"
-else
-    exec $RLWRAP java -cp "$CLASSPATH" clojure.main "$@"
+### Building the command line
+
+command_line=()
+
+if [[ "$EMACS" != "t" ]]; then
+    command_line+=("$(which rlwrap)")
 fi
+
+command_line+=("java" "-cp" "$classpath")
+command_line+=("${java_args[@]}")
+
+if [[ -n "$socket_repl_port" ]]; then
+    command_line+=("-Dclojure.server.repl={:port ${socket_repl_port} :accept clojure.core.server/repl}")
+fi
+
+command_line+=("clojure.main")
+
+exec "${command_line[@]}" "$@"
