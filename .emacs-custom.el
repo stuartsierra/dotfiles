@@ -41,6 +41,7 @@
  '(ns-pop-up-frames nil)
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
+ '(org-adapt-indentation nil)
  '(org-agenda-files
    (quote
     ("~/Documents/agenda/relevance.org" "~/Documents/agenda/cognitect.org" "~/Documents/agenda/personal.org" "~/Documents/agenda/other/")))
