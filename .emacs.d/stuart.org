@@ -715,6 +715,13 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (define-key cider-repl-mode-map (kbd "C-c M-o") 'cider-repl-clear-buffer)
    #+END_SRC
 
+*** clojure-mode Indentation
+
+#+BEGIN_SRC emacs-lisp :results silent
+(put-clojure-indent 'for-all :defn)
+(put-clojure-indent 'fdef :defn)
+#+END_SRC
+
 *** Copy name of current namespace
 
     #+BEGIN_SRC emacs-lisp
