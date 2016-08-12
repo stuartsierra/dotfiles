@@ -520,6 +520,23 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (provide 'ob-clojure)
    #+END_SRC
 
+** Org-babel and [[http://plantuml.com/][PlantUML]]
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8039/plantuml.8039.jar")
+
+  (defun stuart/safe-display-inline-images ()
+    (condition-case nil
+        (org-display-inline-images)
+      (error nil)))
+
+  (add-hook 'org-babel-after-execute-hook 'stuart/safe-display-inline-images 'append)
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((plantuml . t)))
+#+END_SRC
+
 ** Day pages
 
    See [[http://almostobsolete.net/daypage.html][A day page for Org-Mode - AlmostObsolete.net]]
