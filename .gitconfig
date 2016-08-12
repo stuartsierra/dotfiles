@@ -2,9 +2,10 @@
 	name = Stuart Sierra
 	email = mail@stuartsierra.com
 [alias]
-	st = status
+        st = status
 	ci = commit
 	br = branch
+        ba = branch -a
 	co = checkout
 	df = diff
 	dc = diff --cached
@@ -15,6 +16,7 @@
 	# Show files ignored by git:
 	ign = ls-files -o -i --exclude-standard
         fpl = push --force-with-lease
+        pod = push origin --delete
 [color]
 	ui = true
 [push]
