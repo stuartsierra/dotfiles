@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="1.9.0-alpha5"
+VERSION="1.9.0-alpha10"
 
 if [[ "$EMACS" != "t" ]]; then
     RLWRAP="$(which rlwrap)"
@@ -15,10 +15,11 @@ function print_usage {
     echo "Remaining options are passed to Clojure."
 }
 
-while getopts "hv:c:-" OPT; do
+while getopts "hv:c:s:-" OPT; do
     case "$OPT" in
         v) VERSION="$OPTARG" ;;
         c) CLASSPATH="$CLASSPATH:$OPTARG" ;;
+        s) SOCKET_REPL_PORT="$OPTARG" ;;
         -) break ;;
         h) print_usage; exit ;;
     esac
@@ -39,8 +40,6 @@ fi
 
 CLASSPATH="$CLOJURE_JAR:$CLASSPATH"
 
-SERVER="-Dclojure.server.repl={:port 5555 :accept clojure.core.server/repl}"
-
 if [[ -e project.clj ]]; then
     if [[ project.clj -nt .classpath ]]; then
         lein classpath > .classpath
@@ -48,4 +47,9 @@ if [[ -e project.clj ]]; then
     CLASSPATH="$(cat .classpath)"
 fi
 
-exec $RLWRAP java -cp "$CLASSPATH" "$SERVER" clojure.main "$@"
+if [[ -n "$SOCKET_REPL_PORT" ]]; then
+    SERVER="-Dclojure.server.repl={:port $SOCKET_REPL_PORT :accept clojure.core.server/repl}"
+    exec $RLWRAP java -cp "$CLASSPATH" "$SERVER" clojure.main "$@"
+else
+    exec $RLWRAP java -cp "$CLASSPATH" clojure.main "$@"
+fi
