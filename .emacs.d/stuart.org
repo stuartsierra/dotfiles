@@ -449,7 +449,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
    #+END_SRC
 
-** Org-babel and Clojure
+** Org-babel and Clojure (CIDER)
 
    See [[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-clojure.html][Org-babel-clojure]]
 
@@ -519,6 +519,12 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
      (provide 'ob-clojure)
    #+END_SRC
+
+** Org-babel and Clojure (inf-clojure)
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (require 'inf-clojure)
+#+END_SRC
 
 ** Org-babel and [[http://plantuml.com/][PlantUML]]
 
