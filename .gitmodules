@@ -13,3 +13,6 @@
 [submodule "submodules/cider"]
 	path = submodules/cider
 	url = https://github.com/stuartsierra/cider.git
+[submodule "submodules/inf-clojure"]
+	path = submodules/inf-clojure
+	url = https://github.com/stuartsierra/inf-clojure.git
