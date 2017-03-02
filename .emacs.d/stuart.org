@@ -716,26 +716,51 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** Clojure
 
+*** inf-clojure mode
+
+   #+BEGIN_SRC emacs-lisp :results silent
+     (require 'inf-clojure)
+     (require 'paredit)
+     (require 'clojure-mode)
+
+     (defun disable-comint-autoexpand ()
+       (setq comint-input-autoexpand nil))
+
+     (add-hook 'inf-clojure-mode-hook 'paredit-mode)
+     (add-hook 'inf-clojure-mode-hook 'clojure-paredit-setup)
+     (add-hook 'inf-clojure-mode-hook 'rainbow-delimiters-mode)
+     (add-hook 'inf-clojure-mode-hook 'subword-mode)
+     (add-hook 'inf-clojure-mode-hook 'disable-comint-autoexpand)
+
+     (global-set-key (kbd "C-c o r") 'inf-clojure-switch-to-repl)
+     (clojure-paredit-setup inf-clojure-mode-map)
+   #+END_SRC
+
+*** inf-clojure to socket
+
+Comint mode can bind directly to a socket, no intermediate program
+required. Great for socket-REPL!
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun inf-clojure-socket (host port)
+    (interactive (list (read-string "Host: " nil nil "localhost" nil)
+                       (read-number "Port: " 5555)))
+    (inf-clojure (cons host port)))
+#+END_SRC
+
+*** clojure-mode
+
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'auto-mode-alist
                   '("\\.cljs$" . clojure-mode)
                   '("\\.edn$" . clojure-mode))
 
      (add-hook 'clojure-mode-hook 'paredit-mode)
+     (add-hook 'clojure-mode-hook 'inf-clojure-minor-mode)
      (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
      (add-hook 'clojure-mode-hook 'subword-mode)
      (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
      (add-hook 'clojure-mode-hook 'eldoc-mode)
-
-     (add-hook 'cider-repl-mode-hook 'paredit-mode)
-     (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
-     (add-hook 'cider-repl-mode-hook 'subword-mode)
-
-     (global-set-key (kbd "C-c o r") 'cider-switch-to-repl-buffer)
-
-     (setq cider-words-of-inspiration '(""))
-
-     (define-key cider-repl-mode-map (kbd "C-c M-o") 'cider-repl-clear-buffer)
    #+END_SRC
 
 *** clojure-mode Indentation
