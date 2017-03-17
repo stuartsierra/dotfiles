@@ -94,6 +94,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    #+BEGIN_SRC emacs-lisp
      (defvar stuart/stable-packages
        '(
+         ag
          exec-path-from-shell
          find-file-in-project
          gist
