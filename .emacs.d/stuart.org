@@ -785,6 +785,44 @@ required. Great for socket-REPL!
       (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
     #+END_SRC
 
+*** Searching for occurances of a symbol
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defconst stuart/clojure-symbol-invalid-characters
+    "][;@`~,\s\t\n\r\"\'\\^\(\)\{\}\\")
+
+  (defconst stuart/clojure-symbol-invalid-first-character
+    (concat stuart/clojure-symbol-invalid-characters ":0-9"))
+
+  (defconst stuart/clojure-bare-symbol-regexp
+    (concat "[^" stuart/clojure-symbol-invalid-first-character
+            "][^" stuart/clojure-symbol-invalid-characters "]*"))
+
+  (defconst stuart/clojure-qualified-symbol-regexp
+    (concat "\\(" stuart/clojure-bare-symbol-regexp
+            "/\\)?\\(" stuart/clojure-bare-symbol-regexp "\\)"))
+
+  (defun stuart/clojure-unqualified-symbol-at-point ()
+    "Returns the string name of the Clojure symbol at point,
+  omitting any namespace-qualifying prefix."
+    (let ((sym (thing-at-point 'symbol t)))
+      (string-match stuart/clojure-qualified-symbol-regexp sym)
+      (match-string 2 sym)))
+
+  (defun clojure-grep-symbol-at-point (regexp &optional dir confirm)
+    "Runs recursive grep for the current Clojure symbol at point,
+  ignoring any namespace-qualifier prefix."
+    (interactive
+     (let* ((regexp (read-regexp
+                     "Search for"
+                     (regexp-quote (clojure-unqualified-symbol-at-point))))
+            (dir (read-directory-name "Base directory: "
+                                      nil default-directory t))
+            (confirm (equal current-prefix-arg '(4))))
+       (list regexp dir confirm)))
+    (rgrep regexp "*.clj*" dir confirm))
+#+END_SRC
+
 * Emacs server
 
   #+BEGIN_SRC emacs-lisp
