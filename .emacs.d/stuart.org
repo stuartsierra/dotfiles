@@ -425,6 +425,40 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (org-defkey org-mode-map (kbd "RET") 'org-return-indent)
    #+END_SRC
 
+** Copy URL from org-moge link
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun org-copy-url-from-link ()
+    (interactive)
+    (let ((link-info (assoc :link (org-context))))
+      (when link-info
+        (let ((text (kill-new (buffer-substring-no-properties (or (cadr link-info) (point-min))
+                                                              (or (caddr link-info) (point-max))))))
+          (string-match org-bracket-link-regexp text)
+          (kill-new (substring text (match-beginning 1) (match-end 1)))))))
+#+END_SRC
+
+** Org copy formatted text to clipboard
+
+To paste formatted content into a rich-text application
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun org-copy-formatted ()
+    "Export visible region to HTML, then copy to clipboard as rich text."
+    (interactive)
+    (save-window-excursion
+      (let* ((buf (org-export-to-buffer 'html "*Formatted Copy*" nil nil t t))
+             (html (with-current-buffer buf (buffer-string))))
+        (with-current-buffer buf
+          (shell-command-on-region
+           (point-min)
+           (point-max)
+           "textutil -stdin -format html -convert rtf -stdout | pbcopy"))
+        (kill-buffer buf))))
+#+END_SRC
+
+Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-org-mode-text-from-Emacs-to-other-applications/][kitchingroup.cheme.cmu.edu]] [[http://kitchingroup.cheme.cmu.edu/copying.html][CC-BY-SA 4.0]].
+
 ** Org-babel copy-and-paste to shell
 
    #+BEGIN_SRC emacs-lisp
