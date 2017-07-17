@@ -147,15 +147,6 @@ function newchrome {
     open -na 'Google Chrome' --args --user-data-dir="$dir"
 }
 
-## GPG Agent
-## From http://sudoers.org/2013/11/05/gpg-agent.html
-GPG_AGENT=$(which gpg-agent)
-GPG_TTY=`tty`
-export GPG_TTY
-if [[ -f ${GPG_AGENT} && -e "${HOME}/.bash_gpg" ]]; then
-    source "${HOME}/.bash_gpg"
-fi
-
 ## 'pass' Password Manager; http://www.zx2c4.com/projects/password-store/
 if [[ -e /usr/local/etc/bash_completion.d/password-store ]]; then
     source /usr/local/etc/bash_completion.d/password-store
