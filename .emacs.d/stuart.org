@@ -801,6 +801,12 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 (add-hook 'cider-repl-mode-hook #'paredit-mode)
 #+END_SRC
 
+*** Disable CIDER "words of inspiration"
+
+#+BEGIN_SRC emacs-lisp :results silent
+(setq cider-words-of-inspiration ())
+#+END_SRC
+
 *** inf-clojure mode
 
    #+BEGIN_SRC emacs-lisp :results silent
