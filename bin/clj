@@ -4,7 +4,7 @@ set -e
 
 ### Defaults
 
-clojure_version="1.9.0-alpha14"
+clojure_version="1.9.0-alpha17"
 
 ### Command line
 
