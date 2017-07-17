@@ -97,7 +97,9 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          ag
          exec-path-from-shell
          find-file-in-project
+         gh
          gist
+         git-commit
          gnuplot
          go-eldoc
          go-mode
@@ -138,6 +140,8 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** Pinned package repositories
 
+*** Examples (not evaluated)
+
    Example from [[https://github.com/clojure-emacs/cider][CIDER]] README
 
    #+BEGIN_SRC emacs-lisp :eval no :tangle no
@@ -157,6 +161,8 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
                (smex         . "melpa-stable")
                )))
    #+END_SRC
+
+*** Pinning my stable packages
 
    #+BEGIN_SRC emacs-lisp
      (dolist (pkg stuart/stable-packages)
@@ -195,8 +201,13 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-splash-screen t
-           initial-scratch-message nil
-           initial-major-mode 'org-mode)
+           initial-scratch-message nil)
+   #+END_SRC
+
+** Start in org mode
+
+   #+BEGIN_SRC emacs-lisp :results silent
+   (setq initial-major-mode 'org-mode)
    #+END_SRC
 
 ** Scroll, tool, and menu bars
@@ -268,6 +279,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    #+BEGIN_SRC emacs-lisp
      (show-paren-mode t)
    #+END_SRC
+
 * Editing text
 
 ** indent-region
@@ -675,7 +687,6 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
      (global-set-key (kbd "C-x M-f") 'find-file-in-project)
    #+END_SRC
 
-
 ** Text scale increase/decrease
 
    Use SUPER (Windows or Command key) with + - 0 like in a web browser.
@@ -714,7 +725,7 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 ** Prevent minimize or suspend with Ctrl-Z
 
    #+BEGIN_SRC emacs-lisp
-                                             ;(global-unset-key (kbd "C-z"))
+     (global-unset-key (kbd "C-z"))
    #+END_SRC
 
 * Programming
@@ -751,6 +762,45 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 
 ** Clojure
 
+*** clojure-mode
+
+   #+BEGIN_SRC emacs-lisp
+     (defun stuart/clojure-mode-connect-repl ()
+       "Enable the minor mode for either CIDER or inf-clojure,
+       whichever is currently running."
+       (cond
+        ((cider-connected-p) (cider-mode))
+        ((inf-clojure-connected-p) (inf-clojure-minor-mode))
+        (t (message "No Clojure REPL connected"))))
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'auto-mode-alist
+                  '("\\.cljs$" . clojure-mode)
+                  '("\\.edn$" . clojure-mode))
+
+     (add-hook 'clojure-mode-hook 'stuart/clojure-mode-connect-repl)
+     (add-hook 'clojure-mode-hook 'paredit-mode)
+     (add-hook 'clojure-mode-hook 'clojure-paredit-setup)
+     (add-hook 'clojure-mode-hook 'subword-mode)
+     (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
+     (add-hook 'clojure-mode-hook 'eldoc-mode)
+   #+END_SRC
+
+*** Custom Clojure indentation rules
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (define-clojure-indent
+    (for-all :defn)
+    (fdef :defn))
+#+END_SRC
+
+*** CIDER
+
+#+BEGIN_SRC emacs-lisp :results silent
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
+#+END_SRC
+
 *** inf-clojure mode
 
    #+BEGIN_SRC emacs-lisp :results silent
@@ -763,12 +813,8 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 
      (add-hook 'inf-clojure-mode-hook 'paredit-mode)
      (add-hook 'inf-clojure-mode-hook 'clojure-paredit-setup)
-     (add-hook 'inf-clojure-mode-hook 'rainbow-delimiters-mode)
      (add-hook 'inf-clojure-mode-hook 'subword-mode)
      (add-hook 'inf-clojure-mode-hook 'disable-comint-autoexpand)
-
-     (global-set-key (kbd "C-c o r") 'inf-clojure-switch-to-repl)
-     (clojure-paredit-setup inf-clojure-mode-map)
    #+END_SRC
 
 *** inf-clojure to socket
@@ -781,28 +827,6 @@ required. Great for socket-REPL!
     (interactive (list (read-string "Host: " nil nil "localhost" nil)
                        (read-number "Port: " 5555)))
     (inf-clojure (cons host port)))
-#+END_SRC
-
-*** clojure-mode
-
-   #+BEGIN_SRC emacs-lisp
-     (add-to-list 'auto-mode-alist
-                  '("\\.cljs$" . clojure-mode)
-                  '("\\.edn$" . clojure-mode))
-
-     (add-hook 'clojure-mode-hook 'paredit-mode)
-     (add-hook 'clojure-mode-hook 'inf-clojure-minor-mode)
-     (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-     (add-hook 'clojure-mode-hook 'subword-mode)
-     (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
-     (add-hook 'clojure-mode-hook 'eldoc-mode)
-   #+END_SRC
-
-*** clojure-mode Indentation
-
-#+BEGIN_SRC emacs-lisp :results silent
-(put-clojure-indent 'for-all :defn)
-(put-clojure-indent 'fdef :defn)
 #+END_SRC
 
 *** Copy name of current namespace
