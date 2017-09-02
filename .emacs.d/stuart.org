@@ -106,18 +106,21 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          graphviz-dot-mode
          ido-vertical-mode
          ledger-mode
+         lua-mode
          magit
+         markdown-mode
          multiple-cursors
          paredit
          pkg-info
          rainbow-delimiters
+         restclient
          ruby-mode
          s
          smex
          ))
    #+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :results silent
      (defvar stuart/unstable-packages
        '(
          async
