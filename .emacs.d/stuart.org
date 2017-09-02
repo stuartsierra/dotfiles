@@ -105,6 +105,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          go-mode
          graphviz-dot-mode
          ido-vertical-mode
+         ledger-mode
          magit
          multiple-cursors
          paredit
