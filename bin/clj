@@ -69,8 +69,9 @@ fi
 
 command_line=()
 
-if [[ "$EMACS" != "t" ]]; then
-    command_line+=("$(which rlwrap)")
+rlwrap="$(which rlwrap)"
+if [[ "$EMACS" != "t" && -n "$rlwrap" ]]; then
+    command_line+=("$rlwrap")
 fi
 
 command_line+=("java" "-cp" "$classpath")
