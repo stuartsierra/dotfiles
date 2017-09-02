@@ -53,6 +53,7 @@ pathmunge /usr/texbin after
 pathmunge "$HOME/.relevance-etc/scripts" after
 pathmunge "$GOPATH/bin" after
 pathmunge /usr/local/opt/go/libexec/bin after
+pathmunge /usr/local/opt/curl/bin
 
 export PATH
 unset pathmunge
