@@ -873,6 +873,33 @@ required. Great for socket-REPL!
       (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
     #+END_SRC
 
+*** Evaluate expressions in current REPL
+
+As if they had been typed into the REPL buffer.
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun stuart/cider-eval-in-repl (expr)
+    "Evaluates EXPR by switching to the CIDER REPL buffer and
+  inserting it, followed by a return."
+    (interactive "sEval in REPL: ")
+    (cider-switch-to-repl-buffer)
+    (cider-repl-next-prompt)
+    (insert expr)
+    (cider-repl-return))
+#+END_SRC
+
+*** ~reset~ in current REPL
+
+#+BEGIN_SRC clojure :results silent
+  (defun stuart/cider-reset ()
+    "Evaluates (reset) in the current CIDER REPL buffer."
+    (interactive)
+    (stuart/cider-eval-in-repl "(reset)"))
+
+  (global-unset-key (kbd "s-r"))
+  (global-set-key (kbd "s-r") 'stuart/cider-reset)
+#+END_SRC
+
 *** Searching for occurances of a symbol
 
 #+BEGIN_SRC emacs-lisp :results silent
