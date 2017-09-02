@@ -186,3 +186,8 @@ function ssh-reagent {
 if [ -d ~/src/clj/clojurescript ]; then
     export CLOJURESCRIPT_HOME=~/src/clj/clojurescript
 fi
+
+# iterm2 shell integration; see https://iterm2.com/documentation-shell-integration.html
+if [ -e ~/.iterm2_shell_integration.bash ]; then
+    source ~/.iterm2_shell_integration.bash
+fi
