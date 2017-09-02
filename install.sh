@@ -31,11 +31,6 @@ link_with_backup .emacs.d
 link_with_backup .emacs-custom.el
 install_org_mode
 
-install_relevance_etc
-
-backup ~/.relevance-etc
-ln -s $DOTFILES/submodules/relevance/etc $HOME/.relevance-etc
-
 if [[ "$USER" != "stuart" ]]; then
     unset_git_user
 fi

@@ -20,11 +20,6 @@ function update_submodules {
     git submodule update
 }
 
-function install_relevance_etc {
-    backup "$HOME/.relevance-etc"
-    ln -s "$DOTFILES/submodules/relevance/etc" "$HOME/.relevance-etc"
-}
-
 function install_org_mode {
     (
         mkdir -p "$DOTFILES/.emacs.d/vendor"
