@@ -647,6 +647,26 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
        (org-agenda nil "n"))
    #+END_SRC
 
+** Daypage directories
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun stuart/find-daypage-dir (&optional date)
+    "Go to the directory of related files for the specified date,
+    or today's if none is specified."
+    (interactive (list
+                  (org-read-date "" 'totime nil nil
+                                 (current-time) "")))
+    (setq date (or date (current-time)))
+    (let* ((dir (expand-file-name
+                 (concat stuart/daypage-path
+                         (format-time-string "daypage-%Y-%m-%d-%a" date))))
+           (buffer (find-buffer-visiting dir)))
+      (mkdir dir t)
+      (if buffer
+          (switch-to-buffer buffer)
+        (find-file dir))))
+#+END_SRC
+
 ** Abbreviations and templates for org-mode
 
    Mode-specific versions of the built-in ~<e~ and ~<s~ abbreviations:
