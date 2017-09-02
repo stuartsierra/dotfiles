@@ -91,7 +91,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    I have CIDER and clojure-mode in =vendor= but the [[http://melpa.org/#/cider][CIDER package]]
    depends on emacs 24.3 / pkg-info 0.4 / queue 0.1.1 / seq 1.9 / spinner 1.4
 
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :results silent
      (defvar stuart/stable-packages
        '(
          ag
@@ -136,7 +136,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          ))
    #+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :results silent
      (defvar stuart/packages
        (append stuart/stable-packages
                stuart/unstable-packages))
@@ -168,7 +168,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 *** Pinning my stable packages
 
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :results silent
      (dolist (pkg stuart/stable-packages)
        (add-to-list 'package-pinned-packages
                     (cons pkg "melpa-stable") t))
@@ -176,7 +176,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** Installing packages
 
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :results silent
      (defun stuart/all-packages-installed-p ()
        (cl-loop for pkg in stuart/packages
                 when (not (package-installed-p pkg)) do (cl-return nil)
