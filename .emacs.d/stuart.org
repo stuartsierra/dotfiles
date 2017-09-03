@@ -113,7 +113,6 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          paredit
          pkg-info
          rainbow-delimiters
-         restclient
          ruby-mode
          s
          smex
@@ -130,6 +129,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          htmlize
          linum-off
          queue
+         restclient
          seq
          spinner
          xml-rpc
