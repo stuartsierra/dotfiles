@@ -19,7 +19,7 @@
 [color]
 	ui = true
 [push]
-	default = tracking
+	default = simple
 [color "branch"]
 	current = yellow reverse
 	local = yellow
