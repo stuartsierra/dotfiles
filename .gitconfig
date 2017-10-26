@@ -2,21 +2,20 @@
 	name = Stuart Sierra
 	email = mail@stuartsierra.com
 [alias]
-        st = status
-	ci = commit
+	st = status
 	br = branch
-        ba = branch -a
+	ba = branch -a
 	co = checkout
-	df = diff
-	dc = diff --cached
-	lg = log -p
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
 	# Show files ignored by git:
-	ign = ls-files -o -i --exclude-standard
-        fpl = push --force-with-lease
-        pod = push origin --delete
+	ignored = ls-files -o -i --exclude-standard
+	fpl = push --force-with-lease
+	reup = !git fetch && git rebase origin/master
+	wip = !git add . && git commit -m "WIP"
+        # Push branch to origin with same name as local branch
+        pu = !ref="$(git symbolic-ref HEAD 2>/dev/null)" && branch="${ref##refs/heads/}" && git push -u origin "${branch}:${branch}"
 [color]
 	ui = true
 [push]
