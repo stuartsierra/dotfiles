@@ -891,9 +891,16 @@ As if they had been typed into the REPL buffer.
 *** ~reset~ in current REPL
 
 #+BEGIN_SRC emacs-lisp :results silent
+  (defun stuart/save-clojure-buffers ()
+    (interactive)
+    (save-some-buffers t (lambda ()
+                           (string-match "\\.\\(clj[sc]?\\|edn\\)$"
+                                         (buffer-file-name)))))
+
   (defun stuart/cider-reset ()
     "Evaluates (reset) in the current CIDER REPL buffer."
     (interactive)
+    (stuart/save-clojure-buffers)
     (stuart/cider-eval-in-repl "(reset)"))
 
   (global-unset-key (kbd "s-r"))
