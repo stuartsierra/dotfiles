@@ -19,8 +19,11 @@ esac
 
 # Basic environment
 export TERM=xterm-256color
-export PS1="${BLUE}\h:\W \$${COLOR_NONE} "
 export EDITOR=/usr/bin/nano
+
+# Prompt: see http://bashrcgenerator.com/
+export PROMPT_DIRTRIM=3
+export PS1="\[\033[38;5;2m\]\h:\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;5m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
 # Go language; https://golang.org/doc/code.html#GOPATH
 export GOPATH="${HOME}/go"
