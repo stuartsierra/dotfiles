@@ -580,7 +580,7 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 ** Org-babel and [[http://plantuml.com/][PlantUML]]
 
 #+BEGIN_SRC emacs-lisp :results silent
-  (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8039/plantuml.8039.jar")
+  (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/1.2017.16/libexec/plantuml.jar")
 
   (defun stuart/safe-display-inline-images ()
     (condition-case nil
