@@ -194,3 +194,9 @@ fi
 if [ -e ~/.iterm2_shell_integration.bash ]; then
     source ~/.iterm2_shell_integration.bash
 fi
+
+# 'z' fast directory switcher
+if [ -e /usr/local/etc/profile.d/z.sh ]; then
+    source /usr/local/etc/profile.d/z.sh
+fi
+
