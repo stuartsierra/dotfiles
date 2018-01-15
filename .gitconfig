@@ -1,6 +1,6 @@
 [user]
-	name = Stuart Sierra
-	email = mail@stuartsierra.com
+        name = Stuart Sierra
+        useConfigOnly = true
 [alias]
 	st = status
 	br = branch
