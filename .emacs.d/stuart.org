@@ -812,6 +812,8 @@ Minor-mode maps take precedence over buffer-local keybindings (see
 the paredit binding and recreate it locally.
 
 #+BEGIN_SRC emacs-lisp :results silent
+  (require 'paredit)
+
   (define-key paredit-mode-map (kbd "M-r") nil)  ; remove binding
 
   (define-key clojure-mode-map (kbd "M-r") #'paredit-raise-sexp)
