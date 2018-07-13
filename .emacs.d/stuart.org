@@ -803,6 +803,22 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 
 ** Clojure
 
+*** Paredit mode with CIDER REPL
+
+Paredit's binding for =M-r= clashes with CIDER REPL's.
+
+Minor-mode maps take precedence over buffer-local keybindings (see
+[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Active-Keymaps.html][Active Keymaps]]) so ~local-set-key~ doesn't fix this. We have to remove
+the paredit binding and recreate it locally.
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (define-key paredit-mode-map (kbd "M-r") nil)  ; remove binding
+
+  (define-key clojure-mode-map (kbd "M-r") #'paredit-raise-sexp)
+
+  (add-hook 'cider-repl-mode-hook #'paredit-mode)
+#+END_SRC
+
 *** clojure-mode
 
    #+BEGIN_SRC emacs-lisp
@@ -834,12 +850,6 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
   (define-clojure-indent
     (for-all :defn)
     (fdef :defn))
-#+END_SRC
-
-*** CIDER
-
-#+BEGIN_SRC emacs-lisp :results silent
-(add-hook 'cider-repl-mode-hook #'paredit-mode)
 #+END_SRC
 
 *** Disable CIDER "words of inspiration"
