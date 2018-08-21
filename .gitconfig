@@ -3,6 +3,7 @@
         useConfigOnly = true
 [alias]
 	st = status
+	amend = commit --amend --no-edit
 	br = branch
 	ba = branch -a
 	co = checkout
