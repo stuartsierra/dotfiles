@@ -16,6 +16,7 @@
  '(auto-word-wrap-default-function nil)
  '(backup-directory-alist (quote (("." . "/tmp/emacs-backups"))))
  '(backward-delete-char-untabify-method (quote all))
+ '(blink-cursor-mode nil)
  '(cider-prompt-for-symbol nil)
  '(cider-repl-display-help-banner nil)
  '(column-number-mode t)
