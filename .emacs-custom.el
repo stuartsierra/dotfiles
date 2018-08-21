@@ -23,6 +23,7 @@
  '(dired-listing-switches "-alg")
  '(exec-path-from-shell-variables (quote ("PATH" "MANPATH" "GROOVY_HOME")))
  '(fringe-mode nil nil (fringe))
+ '(git-commit-summary-max-length 70)
  '(global-auto-revert-mode t)
  '(global-hl-line-mode t)
  '(global-linum-mode t)
