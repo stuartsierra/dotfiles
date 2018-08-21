@@ -33,6 +33,7 @@
  '(indent-tabs-mode nil)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
+ '(js-indent-level 2)
  '(linum-format "%3d")
  '(magit-commit-all-when-nothing-staged (quote ask-stage))
  '(magit-diff-section-arguments (quote ("--no-ext-diff")))
