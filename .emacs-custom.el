@@ -44,9 +44,6 @@
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
  '(org-adapt-indentation nil)
- '(org-agenda-files
-   (quote
-    ("~/Documents/agenda/relevance.org" "~/Documents/agenda/cognitect.org" "~/Documents/agenda/personal.org" "~/Documents/agenda/other/")))
  '(org-clock-idle-time 20)
  '(org-clock-into-drawer t)
  '(org-confirm-babel-evaluate nil)
