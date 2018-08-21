@@ -57,6 +57,9 @@ pathmunge "$HOME/.relevance-etc/scripts" after
 pathmunge "$GOPATH/bin" after
 pathmunge /usr/local/opt/go/libexec/bin after
 pathmunge /usr/local/opt/curl/bin
+# For Python virtualenv and pipsi:
+pathmunge "$HOME/.local/bin"
+pathmunge /usr/local/opt/python3/bin
 
 export PATH
 unset pathmunge
