@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Searches current directory (recursively) for files with '@2x' in
+# their names, converts them to half-size at 72 dbi
+
+files=()
+while read -r -d $'\0'; do
+    files+=("$REPLY")
+done < <(find . -name '*@2x*' -print0)
+
+for source in "${files[@]}"; do 
+    target="${source/@2x/}"
+    echo "$source => $target"
+    convert "$source" -resize 50% -density 72 "$target"
+done
+
