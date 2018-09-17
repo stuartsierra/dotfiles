@@ -20,6 +20,9 @@
  '(cider-prompt-for-symbol nil)
  '(cider-repl-display-help-banner nil)
  '(column-number-mode t)
+ '(custom-safe-themes
+   (quote
+    ("672f62c9944f34dd276992f1da1554228958e79f33cb65e720703e72e04122da" "f32737ba1638efe480145b27f1c2c7f6676113f6d355ef1a2458084f69959584" default)))
  '(delete-old-versions t)
  '(dired-listing-switches "-alg")
  '(exec-path-from-shell-variables (quote ("PATH" "MANPATH" "GROOVY_HOME")))
@@ -47,6 +50,7 @@
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
  '(org-adapt-indentation nil)
+ '(org-agenda-files (quote ("~/Documents/agenda/")))
  '(org-clock-idle-time 20)
  '(org-clock-into-drawer t)
  '(org-confirm-babel-evaluate nil)

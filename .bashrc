@@ -20,6 +20,7 @@ esac
 # Basic environment
 export TERM=xterm-256color
 export EDITOR=/usr/bin/nano
+export HISTCONTROL=ignoreboth
 
 # Prompt: see http://bashrcgenerator.com/
 export PROMPT_DIRTRIM=3
@@ -51,6 +52,7 @@ pathmunge /opt/local/bin
 pathmunge /usr/local/bin
 pathmunge "$HOME/bin"
 
+pathmunge "$HOME/.jenv/bin"
 pathmunge /opt/X11/bin after
 pathmunge /usr/texbin after
 pathmunge "$HOME/.relevance-etc/scripts" after
@@ -198,8 +200,12 @@ if [ -e ~/.iterm2_shell_integration.bash ]; then
     source ~/.iterm2_shell_integration.bash
 fi
 
+# jenv: Java version manager, http://www.jenv.be/
+if which jenv > /dev/null; then
+    eval "$(jenv init -)"
+fi
+
 # 'z' fast directory switcher
 if [ -e /usr/local/etc/profile.d/z.sh ]; then
     source /usr/local/etc/profile.d/z.sh
 fi
-

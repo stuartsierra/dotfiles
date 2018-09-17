@@ -974,6 +974,14 @@ As if they had been typed into the REPL buffer.
     (rgrep regexp "*.clj*" dir confirm))
 #+END_SRC
 
+* Ledger
+
+** File types
+
+#+BEGIN_SRC emacs-lisp :results silent
+(add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode))
+#+END_SRC
+
 * Emacs server
 
   #+BEGIN_SRC emacs-lisp
