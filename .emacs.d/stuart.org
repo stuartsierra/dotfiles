@@ -555,7 +555,7 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 
      (defun org-babel-execute:clojure (body params)
        "Execute a block of Clojure code with Babel."
-       (when (not (cider-current-connection))
+       (when (not (cider-current-repl 'clj))
          (error "No CIDER connection"))
        (let ((expanded (org-babel-expand-body:clojure body params))
              result)
@@ -849,13 +849,33 @@ the paredit binding and recreate it locally.
                   '("\\.cljs$" . clojure-mode)
                   '("\\.edn$" . clojure-mode))
 
-     (add-hook 'clojure-mode-hook 'stuart/clojure-mode-connect-repl)
+     ;;(add-hook 'clojure-mode-hook 'stuart/clojure-mode-connect-repl)
      (add-hook 'clojure-mode-hook 'paredit-mode)
      (add-hook 'clojure-mode-hook 'clojure-paredit-setup)
      (add-hook 'clojure-mode-hook 'subword-mode)
      (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
      (add-hook 'clojure-mode-hook 'eldoc-mode)
    #+END_SRC
+
+*** CIDER session management current
+
+Since (some version) CIDER manages multiple REPL sessions with the
+[[https://github.com/vspinu/sesman][Sesman]] library. As a result, a buffer must be linked to a session
+before you can evaluate Clojure in it. See [[https://github.com/clojure-emacs/cider/issues/2464][CIDER #2464]].
+
+Since [[https://github.com/clojure-emacs/cider/issues/2483][CIDER #2483]] sessions are automatically linked for dependency
+files found through =M-.=, but this doesn't work for an arbitrary file
+at an arbitrary location.
+
+This is a workaround [[https://github.com/clojure-emacs/cider/issues/2464#issuecomment-425671148][suggested in #2464]]:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun stuart/sesman-link-last-session ()
+    (interactive)
+    (sesman-link-with-buffer
+     (current-buffer)
+     (car (hash-table-values sesman-sessions-hashmap))))
+#+END_SRC
 
 *** Custom Clojure indentation rules
 
