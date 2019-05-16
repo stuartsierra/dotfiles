@@ -96,7 +96,8 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 ** Default packages
 
    I have CIDER and clojure-mode in =vendor= but the [[http://melpa.org/#/cider][CIDER package]]
-   depends on emacs 24.3 / pkg-info 0.4 / queue 0.1.1 / seq 1.9 / spinner 1.4
+   depends on clojure-mode 5.9 / emacs 25 / pkg-info 0.4 / queue 0.2 /
+   seq 2.16 / sesman 0.3.2 / spinner 1.7
 
    #+BEGIN_SRC emacs-lisp :results silent
      (defvar stuart/stable-packages
@@ -118,13 +119,16 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          markdown-mode
          multiple-cursors
          paredit
-         pkg-info
+         pkg-info   ; CIDER dependency
          rainbow-delimiters
          ruby-mode
          s
+         sesman  ; CIDER dependency
          smex
          ))
    #+END_SRC
+
+   Some packages are not available in MELPA-stable:
 
    #+BEGIN_SRC emacs-lisp :results silent
      (defvar stuart/unstable-packages
@@ -135,10 +139,10 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          hlinum
          htmlize
          linum-off
-         queue
+         queue   ; CIDER dependency
          restclient
-         seq
-         spinner
+         seq  ; CIDER dependency
+         spinner  ; CIDER dependency
          xml-rpc
          ))
    #+END_SRC
