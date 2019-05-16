@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+
+git checkout master
+
+git pull
+
+git remote prune origin
+
+# Delete local branches which have been merged to master
+git branch --merged | grep -v "\*" | grep -v 'master$' | xargs -n 1 git branch -d
+
