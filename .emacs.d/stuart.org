@@ -41,6 +41,13 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
      (add-to-list 'load-path stuart/local-dir)
    #+END_SRC
 
+*** find-on-github
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (autoload 'find-on-github "find-on-github")
+  (autoload 'browse-on-github "find-on-github")
+#+END_SRC
+
 ** Vendored packages
 
    The =~/.emacs.d/vendor= directory, and any directory in it, should
