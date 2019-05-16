@@ -78,39 +78,47 @@
          nil)
         (t (concat "#L" (int-to-string (line-number-at-pos (point)))))))
 
-(defun github-url ()
+(defun current-git-commit ()
+  (call-git "rev-parse" "HEAD"))
+
+(defun github-url (branch-or-commit)
   "Returns a GitHub URL for viewing the current file at the
-  current commit. If region is active, selects the region of
+  commit or branch name. If region is active, selects the region of
   lines. Otherwise selects the line at point."
   (let* ((remote-url (call-git "config" "--get" "remote.origin.url"))
          (web-url-base (git-remote-to-web-url remote-url))
-         (commit (call-git "rev-parse" "HEAD"))
          (relative-path (call-git "rev-parse" "--show-prefix"))
          (file-name (when (buffer-file-name)
                       (file-name-nondirectory (buffer-file-name)))))
     (concat web-url-base
             (if file-name "/blob/" "/tree/")
-            commit "/" relative-path file-name
+            branch-or-commit "/" relative-path file-name
             (when file-name (github-hash-fragment)))))
 
-(defun find-on-github ()
+(defun find-on-github (branch-or-commit)
   "If the current buffer is showing a file or directory in a Git
   repository, displays a URL for it on github.com with the
   current line or region highlighted. Also copies the URL to the
   kill ring."
-  (interactive)
-  (let ((url (github-url)))
+  (interactive
+   (if current-prefix-arg
+       (list (read-string "Git branch (default master): " nil nil "master"))
+     (list (current-git-commit))))
+  (let ((url (github-url branch-or-commit)))
     (kill-new url)
     (message url)))
 
-(defun browse-on-github ()
+(defun browse-on-github (branch-or-commit)
   "If the current buffer is showing a file or directory in a Git
   repository, opens a web browser showing that file on github.com
   at the current commit, with the current line or region
   highlighted. Also displays the URL and copies it to the kill
   ring."
-  (interactive)
-  (let ((url (github-url)))
+  (interactive
+   (if current-prefix-arg
+       (list (read-string "Git branch (default master): " nil nil "master"))
+     (list (current-git-commit))))
+  (let ((url (github-url branch-or-commit)))
     (kill-new url)
     (message url)
     (browse-url url)))
