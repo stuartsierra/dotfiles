@@ -70,6 +70,9 @@
  '(org-export-with-toc nil)
  '(org-html-htmlize-output-type (quote css))
  '(org-html-validation-link "")
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m)))
  '(org-return-follows-link t)
  '(org-special-ctrl-a/e t)
  '(org-src-fontify-natively t)
