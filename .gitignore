@@ -9,6 +9,9 @@
 .emacs.d/recentf
 .emacs.d/eshell
 .emacs.d/ido.last
+.emacs.d/.mc-lists.el
+.emacs.d/games/
+.emacs.d/network-security.data
 .org-id-locations
 *.tar.gz
 *.zip
