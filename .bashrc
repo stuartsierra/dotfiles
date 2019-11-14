@@ -24,7 +24,7 @@ export HISTCONTROL=ignoreboth
 
 # Prompt: see http://bashrcgenerator.com/
 export PROMPT_DIRTRIM=3
-export PS1="\[\033[38;5;2m\]\h:\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;5m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+export PS1="\[\033[38;5;2m\]\h:\[\033[38;5;4m\]\w\[\033[38;5;15m\] \[\033[38;5;5m\]\\$ \[\033[00m\]"
 
 # Go language; https://golang.org/doc/code.html#GOPATH
 export GOPATH="${HOME}/go"
