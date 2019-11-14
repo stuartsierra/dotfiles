@@ -29,42 +29,7 @@ export PS1="\[\033[38;5;2m\]\h:\[\033[38;5;4m\]\w\[\033[38;5;15m\] \[\033[38;5;5
 # Go language; https://golang.org/doc/code.html#GOPATH
 export GOPATH="${HOME}/go"
 
-# PATH munging
-# See http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_11_02.html
-EGREP=$(which egrep)
-
-pathmunge () {
-    if ! echo $PATH | $EGREP -q "(^|:)$1($|:)" ; then
-        if [ "$2" = "after" ] ; then
-            PATH=$PATH:$1
-        else
-            PATH=$1:$PATH
-        fi
-    fi
-}
-
-pathmunge /sbin
-pathmunge /usr/sbin
-pathmunge /usr/local/sbin
-pathmunge /bin
-pathmunge /usr/bin
-pathmunge /opt/local/bin
-pathmunge /usr/local/bin
-pathmunge "$HOME/bin"
-
-pathmunge "$HOME/.jenv/bin"
-pathmunge /opt/X11/bin after
-pathmunge /usr/texbin after
-pathmunge "$HOME/.relevance-etc/scripts" after
-pathmunge "$GOPATH/bin" after
-pathmunge /usr/local/opt/go/libexec/bin after
-pathmunge /usr/local/opt/curl/bin
-# For Python virtualenv and pipsi:
-pathmunge "$HOME/.local/bin"
-pathmunge /usr/local/opt/python3/bin
-
-export PATH
-unset pathmunge
+export PATH="/Users/stuart/bin:/Users/stuart/.jenv/bin:/Users/stuart/.local/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/usr/local/opt/python3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/Users/stuart/go/bin"
 
 # My aliases
 if [[ "$(uname)" == "Darwin" ]]; then
