@@ -68,20 +68,6 @@
  '(org-src-tab-acts-natively t)
  '(org-src-window-setup (quote current-window))
  '(org-startup-folded (quote showeverything))
- '(org-tag-alist
-   (quote
-    (("billable" . 98)
-     ("nonbillable" . 110)
-     ("twentypercent" . 116)
-     ("offclock" . 111)
-     ("product" . 112))))
- '(org-todo-keyword-faces
-   (quote
-    (("INPROGRESS" . "cyan")
-     ("STARTED" . "cyan")
-     ("BLOCKED" . "red")
-     ("WAITING" . "orange"))))
- '(org-todo-keywords (quote ((sequence "TODO" "INPROGRESS" "DONE"))))
  '(org-yank-folded-subtrees nil)
  '(save-interprogram-paste-before-kill t)
  '(sentence-end-double-space nil)
