@@ -90,14 +90,6 @@ if [[ -f /usr/libexec/java_home ]]; then
     export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
-# Google Chrome Testing instances
-function newchrome {
-    local now=`date +%Y%m%d%H%M%S`
-    local dir=/tmp/chrome$now
-    cp -R ~/fresh-chrome "$dir"
-    open -na 'Google Chrome' --args --user-data-dir="$dir"
-}
-
 ## 'pass' Password Manager; http://www.zx2c4.com/projects/password-store/
 if [[ -e /usr/local/etc/bash_completion.d/password-store ]]; then
     source /usr/local/etc/bash_completion.d/password-store
