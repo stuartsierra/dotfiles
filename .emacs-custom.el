@@ -13,9 +13,10 @@
  '(cider-prompt-for-symbol nil)
  '(cider-repl-display-help-banner nil)
  '(column-number-mode t)
+ '(custom-enabled-themes (quote (sanityinc-solarized-dark)))
  '(custom-safe-themes
    (quote
-    ("672f62c9944f34dd276992f1da1554228958e79f33cb65e720703e72e04122da" "f32737ba1638efe480145b27f1c2c7f6676113f6d355ef1a2458084f69959584" default)))
+    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "672f62c9944f34dd276992f1da1554228958e79f33cb65e720703e72e04122da" "f32737ba1638efe480145b27f1c2c7f6676113f6d355ef1a2458084f69959584" default)))
  '(delete-old-versions t)
  '(dired-listing-switches "-alg")
  '(fringe-mode nil nil (fringe))
