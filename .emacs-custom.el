@@ -15,7 +15,6 @@
     ("672f62c9944f34dd276992f1da1554228958e79f33cb65e720703e72e04122da" "f32737ba1638efe480145b27f1c2c7f6676113f6d355ef1a2458084f69959584" default)))
  '(delete-old-versions t)
  '(dired-listing-switches "-alg")
- '(exec-path-from-shell-variables (quote ("PATH" "MANPATH" "GROOVY_HOME")))
  '(fringe-mode nil nil (fringe))
  '(git-commit-summary-max-length 70)
  '(global-auto-revert-mode t)
