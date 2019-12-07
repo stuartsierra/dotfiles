@@ -95,14 +95,12 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** Default packages
 
-   I have CIDER and clojure-mode in =vendor= but the [[http://melpa.org/#/cider][CIDER package]]
-   depends on clojure-mode 5.9 / emacs 25 / pkg-info 0.4 / queue 0.2 /
-   seq 2.16 / sesman 0.3.2 / spinner 1.7
-
    #+BEGIN_SRC emacs-lisp :results silent
      (defvar stuart/stable-packages
        '(
          ag
+         cider
+         clojure-mode
          exec-path-from-shell
          find-file-in-project
          gh
@@ -113,6 +111,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          go-mode
          graphviz-dot-mode
          ido-vertical-mode
+         inf-clojure
          ledger-mode
          lua-mode
          magit
