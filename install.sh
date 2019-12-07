@@ -28,7 +28,6 @@ link_with_backup bin/tab
 link_with_backup bin/trunctail
 
 link_with_backup .emacs.d
-link_with_backup .emacs-custom.el
 install_org_mode
 
 if [[ "$USER" != "stuart" ]]; then
