@@ -44,8 +44,8 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 *** find-on-github
 
 #+BEGIN_SRC emacs-lisp :results silent
-  (autoload 'find-on-github "find-on-github")
-  (autoload 'browse-on-github "find-on-github")
+  (autoload 'find-on-github "find-on-github" "" t)
+  (autoload 'browse-on-github "find-on-github" "" t)
 #+END_SRC
 
 ** Vendored packages
