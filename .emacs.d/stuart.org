@@ -1062,13 +1062,6 @@ As if they had been typed into the REPL buffer.
         (message (format "Mean: %f" m))))
   #+END_SRC
 
-* Themes
-
-  #+BEGIN_SRC emacs-lisp
-    (add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
-    (load-theme 'twilight-stuart t)
-  #+END_SRC
-
 * OS X extensions
 
   #+BEGIN_SRC emacs-lisp
