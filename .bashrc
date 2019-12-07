@@ -56,11 +56,6 @@ alias pgrep='ps aux | grep'
 
 alias gs='git status'
 
-# for Perl5 / CPAN
-if [ -e /opt/local/lib/perl5 ]; then
-    export PERL5LIB="/opt/local/lib/perl5/5.8.8:/opt/local/lib/perl5/site_perl/5.8.8:/opt/local/lib/perl5/vendor_perl/5.8.8"
-fi
-    
 if which open > /dev/null; then
     alias e="open -a Emacs.app"
 elif which emacs > /dev/null; then
