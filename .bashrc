@@ -135,11 +135,6 @@ if which jenv > /dev/null; then
     eval "$(jenv init -)"
 fi
 
-# 'z' fast directory switcher
-if [ -e /usr/local/etc/profile.d/z.sh ]; then
-    source /usr/local/etc/profile.d/z.sh
-fi
-
 # nvm: Node.js version manager, https://github.com/creationix/nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
