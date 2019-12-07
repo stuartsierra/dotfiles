@@ -1,3 +1,0 @@
-[submodule "submodules/find-file-in-project"]
-	path = submodules/find-file-in-project
-	url = https://github.com/technomancy/find-file-in-project.git
