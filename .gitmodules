@@ -4,6 +4,3 @@
 [submodule "submodules/align-cljlet"]
 	path = submodules/align-cljlet
 	url = https://github.com/gstamp/align-cljlet.git
-[submodule "submodules/inf-clojure"]
-	path = submodules/inf-clojure
-	url = https://github.com/stuartsierra/inf-clojure.git
