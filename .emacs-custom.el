@@ -3,7 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auto-word-wrap-default-function nil)
  '(backup-directory-alist (quote (("." . "/tmp/emacs-backups"))))
  '(backward-delete-char-untabify-method (quote all))
  '(blink-cursor-mode nil)
