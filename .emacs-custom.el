@@ -73,6 +73,9 @@
  '(org-src-window-setup (quote current-window))
  '(org-startup-folded (quote showeverything))
  '(org-yank-folded-subtrees nil)
+ '(package-selected-packages
+   (quote
+    (org xml-rpc typescript-mode smex rainbow-delimiters paredit ob-restclient multiple-cursors markdown-mode magit lua-mode linum-off ledger-mode inf-clojure ido-vertical-mode htmlize hlinum groovy-mode graphviz-dot-mode graphql-mode go-eldoc gnuplot gist flycheck-clj-kondo find-file-in-project exec-path-from-shell color-theme-sanityinc-solarized clojure-mode-extra-font-locking cider ag)))
  '(save-interprogram-paste-before-kill t)
  '(sentence-end-double-space nil)
  '(slime-kill-without-query-p t)
