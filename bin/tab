@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $1 = "do" ]]; then
+    command="do"
+    shift
+fi
+
 if [ -z "$1" ]; then
     TITLE=$(basename $(pwd))
 else
@@ -7,3 +12,7 @@ else
 fi	
 
 echo -ne "\033]0;$TITLE\007"
+
+if [[ $command = "do" ]]; then
+    exec "$@"
+fi
