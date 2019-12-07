@@ -711,6 +711,17 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
           (concat "https://www.pivotaltracker.com/story/show/"
                   story-id)
           (concat "#" story-id))))
+
+     (defconst favro-story-regex
+       "^\\(https://favro.com/[^?]+\\?card=\\)\\([a-zA-Z0-9-]+\\)")
+
+     (defun org-insert-favro-link (url)
+       (interactive "sFavro URL: ")
+       (when (null (string-match favro-story-regex url))
+         (error "Invalid Favro URL '%s'" url))
+       (let ((full-url (match-string 0 url))
+             (story-id (match-string 2 url)))
+         (stuart/org-insert-link full-url story-id)))
    #+END_SRC
 
 * Calc spreadsheet and math
