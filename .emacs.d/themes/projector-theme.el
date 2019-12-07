@@ -23,6 +23,7 @@
  '(org-block-begin-line ((t (:foreground "Gray"))))
  '(org-block-end-line ((t (:foreground "Gray"))))
  '(org-meta-line ((t (:foreground "Gray"))))
+ '(org-block ((t (:foreground "dark slate blue"))))
  '(org-block-background ((t :background "#eee")))
  '(outline-2 ((t :foreground "Purple")))
  '(outline-3 ((t :foreground "DarkRed")))
