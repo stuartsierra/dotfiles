@@ -1,6 +1,3 @@
-[submodule "submodules/relevance/etc"]
-	path = submodules/relevance/etc
-	url = https://github.com/relevance/etc.git
 [submodule "submodules/find-file-in-project"]
 	path = submodules/find-file-in-project
 	url = https://github.com/technomancy/find-file-in-project.git
