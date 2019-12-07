@@ -101,6 +101,7 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
          ag
          cider
          clojure-mode
+         color-theme-sanityinc-solarized
          exec-path-from-shell
          find-file-in-project
          gh
