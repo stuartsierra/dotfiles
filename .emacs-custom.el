@@ -58,7 +58,6 @@
  '(org-export-with-section-numbers nil)
  '(org-export-with-tags nil)
  '(org-export-with-toc nil)
- '(org-html-htmlize-output-type (quote css))
  '(org-html-validation-link "")
  '(org-modules
    (quote
