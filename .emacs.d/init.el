@@ -4,9 +4,6 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-;; Load my local copy of org-mode, not the version included with Emacs
-(push (expand-file-name "vendor/org-mode/lisp" user-emacs-directory) load-path)
-
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 
