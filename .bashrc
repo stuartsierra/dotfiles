@@ -74,11 +74,6 @@ if [ -e ~/.bash_local ]; then
     source ~/.bash_local
 fi
 
-# cdargs
-if [ -f /opt/local/etc/profile.d/cdargs-bash.sh ]; then
-    source /opt/local/etc/profile.d/cdargs-bash.sh
-fi
-
 # Git autocompletion
 if [ -f ~/.git-completion.bash ]; then
     source ~/.git-completion.bash
