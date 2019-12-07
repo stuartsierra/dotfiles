@@ -74,18 +74,6 @@ if [ -e ~/.bash_local ]; then
     source ~/.bash_local
 fi
 
-# Relevance "etc" scripts
-if [ -d ~/.relevance-etc ]; then
-    # source ~/.relevance-etc/bash/git.sh
-    # source ~/.relevance-etc/bash/git_prompt.sh
-    source ~/.relevance-etc/bash/ssh_autocompletion.sh
-fi
-
-# Relevance pairing
-if [ -e ~/sourcecode.tc ]; then
-    alias sourcecode="truecrypt -t -k '' --protect-hidden=no $HOME/sourcecode.tc $HOME/src"
-fi
-
 # cdargs
 if [ -f /opt/local/etc/profile.d/cdargs-bash.sh ]; then
     source /opt/local/etc/profile.d/cdargs-bash.sh
