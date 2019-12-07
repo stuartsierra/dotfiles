@@ -94,9 +94,6 @@ fi
 if [[ -e /usr/local/etc/bash_completion.d/password-store ]]; then
     source /usr/local/etc/bash_completion.d/password-store
 fi
-if [[ -e /usr/local/etc/bash_completion.d/pass ]]; then
-    source /usr/local/etc/bash_completion.d/pass
-fi
 
 ## AWS command line interface
 if ( which aws_completer > /dev/null ); then
