@@ -1,6 +1,3 @@
 [submodule "submodules/find-file-in-project"]
 	path = submodules/find-file-in-project
 	url = https://github.com/technomancy/find-file-in-project.git
-[submodule "submodules/align-cljlet"]
-	path = submodules/align-cljlet
-	url = https://github.com/gstamp/align-cljlet.git
