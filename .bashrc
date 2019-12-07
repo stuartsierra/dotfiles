@@ -63,10 +63,6 @@ if [ -e /opt/local/lib/perl5 ]; then
     export PERL5LIB="/opt/local/lib/perl5/5.8.8:/opt/local/lib/perl5/site_perl/5.8.8:/opt/local/lib/perl5/vendor_perl/5.8.8"
 fi
     
-if [ -e /Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt ]; then
-    alias truecrypt="/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt -t"
-fi
-
 if which open > /dev/null; then
     alias e="open -a Emacs.app"
 elif which emacs > /dev/null; then
