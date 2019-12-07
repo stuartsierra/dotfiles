@@ -854,6 +854,7 @@ the paredit binding and recreate it locally.
      (add-hook 'clojure-mode-hook 'subword-mode)
      (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
      (add-hook 'clojure-mode-hook 'eldoc-mode)
+     (add-hook 'clojure-mode-hook 'flycheck-mode)
    #+END_SRC
 
 *** CIDER session management current
@@ -1002,6 +1003,12 @@ As if they had been typed into the REPL buffer.
             (confirm (equal current-prefix-arg '(4))))
        (list regexp dir confirm)))
     (rgrep regexp "*.clj*" dir confirm))
+#+END_SRC
+
+*** clj-kondo Flycheck (linting)
+
+#+BEGIN_SRC emacs-lisp :results silent
+(require 'flycheck-clj-kondo)
 #+END_SRC
 
 * Ledger
