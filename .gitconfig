@@ -17,6 +17,7 @@
 	wip = !git add . && git commit -m "WIP"
         # Push branch to origin with same name as local branch
         pu = !ref="$(git symbolic-ref HEAD 2>/dev/null)" && branch="${ref##refs/heads/}" && git push -u origin "${branch}:${branch}"
+        cleanup = !git checkout master && git pull && git remote prune origin && git branch --merged | grep -v master | xargs git branch -d
 [color]
 	ui = true
 [push]
