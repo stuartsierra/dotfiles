@@ -42,6 +42,7 @@
  '(org-agenda-files (quote ("~/Documents/agenda/")))
  '(org-clock-idle-time 20)
  '(org-clock-into-drawer t)
+ '(org-clock-mode-line-total (quote today))
  '(org-confirm-babel-evaluate nil)
  '(org-edit-fixed-width-region-mode (quote fundamental-mode))
  '(org-export-author-info nil)
