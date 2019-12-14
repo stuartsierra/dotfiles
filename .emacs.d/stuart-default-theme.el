@@ -22,7 +22,7 @@
  '(org-clock-mode-line-total (quote today))
  '(org-confirm-babel-evaluate nil)
  '(org-edit-fixed-width-region-mode (quote fundamental-mode))
- '(org-modules (quote (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m)))
+ '(org-modules (quote (org-tempo org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m)))
  '(org-return-follows-link t)
  '(org-special-ctrl-a/e t)
  '(org-src-fontify-natively t)
