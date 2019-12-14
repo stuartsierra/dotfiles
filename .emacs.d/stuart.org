@@ -469,6 +469,20 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
          (stuart/org-insert-link full-url story-id)))
    #+END_SRC
 
+* Org-babel
+
+** Load org-babel languages
+
+#+begin_src emacs-lisp :results silent
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((shell . t)
+      (plantuml . t)
+      (dot . t)
+      (ruby . t)
+      (clojure . t)))
+#+end_src
+
 * Calc spreadsheet and math
 
 ** Units for Bytes
