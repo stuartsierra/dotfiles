@@ -10,6 +10,7 @@
  '(delete-old-versions t)
  '(dired-listing-switches "-alg")
  '(git-commit-summary-max-length 70)
+ '(indent-tabs-mode nil)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(linum-format "%3d")
