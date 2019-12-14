@@ -603,6 +603,15 @@ buffer with that session. But first we have to set the buffer-local
 
 ** Clojure
 
+*** Loading libraries
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (require 'clojure-mode)
+  (require 'inf-clojure)
+  (require 'flycheck-clj-kondo)
+  (require 'paredit)
+#+END_SRC
+
 *** Paredit mode with CIDER REPL
 
 Paredit's binding for =M-r= clashes with CIDER REPL's.
@@ -612,8 +621,6 @@ Minor-mode maps take precedence over buffer-local keybindings (see
 the paredit binding and recreate it locally.
 
 #+BEGIN_SRC emacs-lisp :results silent
-  (require 'paredit)
-
   (define-key paredit-mode-map (kbd "M-r") nil)  ; remove binding
 
   (define-key clojure-mode-map (kbd "M-r") #'paredit-raise-sexp)
@@ -684,10 +691,6 @@ This is a workaround [[https://github.com/clojure-emacs/cider/issues/2464#issuec
 *** inf-clojure mode
 
    #+BEGIN_SRC emacs-lisp :results silent
-     (require 'inf-clojure)
-     (require 'paredit)
-     (require 'clojure-mode)
-
      (defun disable-comint-autoexpand ()
        (setq comint-input-autoexpand nil))
 
@@ -793,12 +796,6 @@ As if they had been typed into the REPL buffer.
             (confirm (equal current-prefix-arg '(4))))
        (list regexp dir confirm)))
     (rgrep regexp "*.clj*" dir confirm))
-#+END_SRC
-
-*** clj-kondo Flycheck (linting)
-
-#+BEGIN_SRC emacs-lisp :results silent
-(require 'flycheck-clj-kondo)
 #+END_SRC
 
 * Ledger
