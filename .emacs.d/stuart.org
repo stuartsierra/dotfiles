@@ -6,40 +6,40 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** User details
 
-   #+BEGIN_SRC emacs-lisp
-     (setq user-full-name "Stuart Sierra")
-     (setq user-mail-address "mail@stuartsierra.com")
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Stuart Sierra")
+  (setq user-mail-address "mail@stuartsierra.com")
+#+END_SRC
 
 ** Common Lisp extensions
 
-   According to [[http://emacswiki.org/emacs/CommonLispForEmacs][Common Lisp for Emacs]], the ~cl~ package is deprecated
-   in favor of ~cl-lib~.
+According to [[http://emacswiki.org/emacs/CommonLispForEmacs][Common Lisp for Emacs]], the ~cl~ package is deprecated
+in favor of ~cl-lib~.
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'cl-lib)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (require 'cl-lib)
+#+END_SRC
 
-   But some packages still depend on the un-prefixed names in the old
-   ~cl~ package, and for some reason it doesn't get loaded
-   automatically.
+But some packages still depend on the un-prefixed names in the old
+~cl~ package, and for some reason it doesn't get loaded
+automatically.
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'cl)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (require 'cl)
+#+END_SRC
 
-   (I noticed this in the CIDER REPL when =M-p= didn't work because
-   ~assert~ was not defined.)
+(I noticed this in the CIDER REPL when =M-p= didn't work because
+~assert~ was not defined.)
 
 * Package management (ELPA)
 
 ** Local elisp files
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (defvar stuart/local-dir (expand-file-name "local" user-emacs-directory))
+#+BEGIN_SRC emacs-lisp :results silent
+  (defvar stuart/local-dir (expand-file-name "local" user-emacs-directory))
 
-     (add-to-list 'load-path stuart/local-dir)
-   #+END_SRC
+  (add-to-list 'load-path stuart/local-dir)
+#+END_SRC
 
 *** find-on-github
 
@@ -50,270 +50,270 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
 
 ** Vendored packages
 
-   The =~/.emacs.d/vendor= directory, and any directory in it, should
-   be on the ~load-path~.
+The =~/.emacs.d/vendor= directory, and any directory in it, should
+be on the ~load-path~.
 
-   #+BEGIN_SRC emacs-lisp
-     (defvar stuart/vendor-dir (expand-file-name "vendor" user-emacs-directory))
+#+BEGIN_SRC emacs-lisp
+  (defvar stuart/vendor-dir (expand-file-name "vendor" user-emacs-directory))
 
-     (add-to-list 'load-path stuart/vendor-dir)
+  (add-to-list 'load-path stuart/vendor-dir)
 
-     (when (file-directory-p stuart/vendor-dir)
-       (dolist (project (directory-files stuart/vendor-dir t "\\w+"))
-         (when (file-directory-p project)
-           (add-to-list 'load-path project))))
-   #+END_SRC
+  (when (file-directory-p stuart/vendor-dir)
+    (dolist (project (directory-files stuart/vendor-dir t "\\w+"))
+      (when (file-directory-p project)
+        (add-to-list 'load-path project))))
+#+END_SRC
 
 * PATH and environment
 
-  from https://github.com/purcell/exec-path-from-shell
+from https://github.com/purcell/exec-path-from-shell
 
-  #+BEGIN_SRC emacs-lisp
-    (when (memq window-system '(mac ns))
-      (exec-path-from-shell-initialize))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize))
+#+END_SRC
 
 * Global settings
 
 ** Splash screen
 
-   #+BEGIN_SRC emacs-lisp
-     (setq inhibit-splash-screen t
-           initial-scratch-message nil)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-splash-screen t
+        initial-scratch-message nil)
+#+END_SRC
 
 ** Start in org mode
 
-   #+BEGIN_SRC emacs-lisp :results silent
-   (setq initial-major-mode 'org-mode)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :results silent
+  (setq initial-major-mode 'org-mode)
+#+END_SRC
 
 ** Scroll, tool, and menu bars
 
-   Check for symbol bindings, since some of these may not exist in
-   text-only Emacs.
+Check for symbol bindings, since some of these may not exist in
+text-only Emacs.
 
-   #+BEGIN_SRC emacs-lisp
-     (when (fboundp 'scroll-bar-mode)
-       (scroll-bar-mode -1))
-     (when (fboundp 'tool-bar-mode)
-       (tool-bar-mode -1))
-     (when (fboundp 'menu-bar-mode)
-       (menu-bar-mode -1))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+  (when (fboundp 'menu-bar-mode)
+    (menu-bar-mode -1))
+#+END_SRC
 
 ** Selecting text more like GUI apps
 
-   Except ~delete-selection-mode~
+Except ~delete-selection-mode~
 
-   #+BEGIN_SRC emacs-lisp
-     (transient-mark-mode t)
-     (setq x-select-enable-clipboard t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (transient-mark-mode t)
+  (setq x-select-enable-clipboard t)
+#+END_SRC
 
 ** Show empty lines
 
-   #+BEGIN_SRC emacs-lisp
-     (setq indicate-empty-lines t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq indicate-empty-lines t)
+#+END_SRC
 
 ** Single-character yes/no prompt
 
-   #+BEGIN_SRC emacs-lisp
-     (defalias 'yes-or-no-p 'y-or-n-p)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
 
 ** Faster keystroke feedback
 
-   #+BEGIN_SRC emacs-lisp
-     (setq echo-keystrokes 0.1)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq echo-keystrokes 0.1)
+#+END_SRC
 
 ** Never use dialog boxes
 
-   #+BEGIN_SRC emacs-lisp
-     (setq use-dialog-box nil)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq use-dialog-box nil)
+#+END_SRC
 
 ** Visible bell
 
-   Emacs 24.5.1 has a [[http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/][bug]] under OS X El Capitan, fixed in Emacs 25,
-   that causes display artifacts when using the visible bell.
+Emacs 24.5.1 has a [[http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/][bug]] under OS X El Capitan, fixed in Emacs 25,
+that causes display artifacts when using the visible bell.
 
-   This alternative from [[http://www.emacswiki.org/emacs/AlarmBell][EmacsWiki: Alarm Bell]] works:
+This alternative from [[http://www.emacswiki.org/emacs/AlarmBell][EmacsWiki: Alarm Bell]] works:
 
-   #+BEGIN_SRC emacs-lisp
-     (defun my-visible-bell ()
-       "Flash the mode line as a visible bell."
-       (invert-face 'mode-line)
-       (run-with-timer 0.2 nil 'invert-face 'mode-line))
+#+BEGIN_SRC emacs-lisp
+  (defun my-visible-bell ()
+    "Flash the mode line as a visible bell."
+    (invert-face 'mode-line)
+    (run-with-timer 0.2 nil 'invert-face 'mode-line))
 
-     (setq visible-bell nil
-           ring-bell-function #'my-visible-bell)
-   #+END_SRC
+  (setq visible-bell nil
+        ring-bell-function #'my-visible-bell)
+#+END_SRC
 
 ** Always show parens
 
-   #+BEGIN_SRC emacs-lisp
-     (show-paren-mode t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode t)
+#+END_SRC
 
 * Editing text
 
 ** indent-region
 
-   #+BEGIN_SRC emacs-lisp
-     (defun indent-buffer ()
-       (interactive)
-       (indent-region (point-min) (point-max)))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defun indent-buffer ()
+    (interactive)
+    (indent-region (point-min) (point-max)))
+#+END_SRC
 
 ** unfill-region
 
-   From http://www.emacswiki.org/emacs/UnfillRegion
+From http://www.emacswiki.org/emacs/UnfillRegion
 
-   #+BEGIN_SRC emacs-lisp
-     (defun unfill-region (beg end)
-       "Unfill the region, joining text paragraphs into a single
-       logical line. This is useful, e.g., for use with
-       `visual-line-mode'."
-       (interactive "*r")
-       (let ((fill-column (point-max)))
-         (fill-region beg end)))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defun unfill-region (beg end)
+    "Unfill the region, joining text paragraphs into a single
+    logical line. This is useful, e.g., for use with
+    `visual-line-mode'."
+    (interactive "*r")
+    (let ((fill-column (point-max)))
+      (fill-region beg end)))
+#+END_SRC
 
 ** zap-up-to-char
 
-   #+BEGIN_SRC emacs-lisp
-     (defun zap-up-to-char (arg char)
-       "Kill up to but not including ARGth occurrence of CHAR.
-     Case is ignored if `case-fold-search' is non-nil in the current buffer.
-     Goes backward if ARG is negative; error if CHAR not found."
-       (interactive "p\ncZap up to char: ")
-       ;; Avoid "obsolete" warnings for translation-table-for-input.
-       (with-no-warnings
-         (if (char-table-p translation-table-for-input)
-             (setq char (or (aref translation-table-for-input char) char))))
-       (kill-region (point) (progn
-                              (search-forward (char-to-string char) nil nil arg)
-                                             ;                        (goto-char (if (> arg 0) (1- (point)) (1+ (point))))
-                              (1- (point))))
-       (goto-char (1- (point))))
+#+BEGIN_SRC emacs-lisp
+  (defun zap-up-to-char (arg char)
+    "Kill up to but not including ARGth occurrence of CHAR.
+  Case is ignored if `case-fold-search' is non-nil in the current buffer.
+  Goes backward if ARG is negative; error if CHAR not found."
+    (interactive "p\ncZap up to char: ")
+    ;; Avoid "obsolete" warnings for translation-table-for-input.
+    (with-no-warnings
+      (if (char-table-p translation-table-for-input)
+          (setq char (or (aref translation-table-for-input char) char))))
+    (kill-region (point) (progn
+                           (search-forward (char-to-string char) nil nil arg)
+                                          ;                        (goto-char (if (> arg 0) (1- (point)) (1+ (point))))
+                           (1- (point))))
+    (goto-char (1- (point))))
 
-     (global-unset-key "\M-z")
-     (global-set-key "\M-z" 'zap-up-to-char)
-   #+END_SRC
+  (global-unset-key "\M-z")
+  (global-set-key "\M-z" 'zap-up-to-char)
+#+END_SRC
 
 ** Temporary buffer
 
-   #+BEGIN_SRC emacs-lisp
-     (defun temp-buffer ()
-       (interactive)
-       (switch-to-buffer "*temp*"))
+#+BEGIN_SRC emacs-lisp
+  (defun temp-buffer ()
+    (interactive)
+    (switch-to-buffer "*temp*"))
 
-     (global-set-key (kbd "C-c o t") 'temp-buffer)
-   #+END_SRC
+  (global-set-key (kbd "C-c o t") 'temp-buffer)
+#+END_SRC
 
 ** Line numbering
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'linum-off)
-     (require 'hlinum)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (require 'linum-off)
+  (require 'hlinum)
+#+END_SRC
 
 ** Typographical punctuation
 
-   From http://www.emacswiki.org/emacs/TypographicalPunctuationMarks
+From http://www.emacswiki.org/emacs/TypographicalPunctuationMarks
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'typopunct)
+#+BEGIN_SRC emacs-lisp
+  (require 'typopunct)
 
-     (defconst typopunct-ellipsis (decode-char 'ucs #x2026))
-     (defconst typopunct-middot   (decode-char 'ucs #xB7)) ; or 2219
+  (defconst typopunct-ellipsis (decode-char 'ucs #x2026))
+  (defconst typopunct-middot   (decode-char 'ucs #xB7)) ; or 2219
 
-     (defun typopunct-insert-ellipsis-or-middot (arg)
-       "Change three consecutive dots to a typographical ellipsis mark."
-       (interactive "p")
-       (cond
-        ((and (= 1 arg)
-              (eq (char-before) ?^))
-         (delete-char -1)
-         (insert typopunct-middot))
-        ((and (= 1 arg)
-              (eq this-command last-command)
-              (looking-back "\\.\\."))
-         (replace-match "")
-         (insert typopunct-ellipsis))
-        (t
-         (self-insert-command arg))))
+  (defun typopunct-insert-ellipsis-or-middot (arg)
+    "Change three consecutive dots to a typographical ellipsis mark."
+    (interactive "p")
+    (cond
+     ((and (= 1 arg)
+           (eq (char-before) ?^))
+      (delete-char -1)
+      (insert typopunct-middot))
+     ((and (= 1 arg)
+           (eq this-command last-command)
+           (looking-back "\\.\\."))
+      (replace-match "")
+      (insert typopunct-ellipsis))
+     (t
+      (self-insert-command arg))))
 
-     (define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
-   #+END_SRC
+  (define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
+#+END_SRC
 
 * IDO & SMEX
 
 ** IDO is built into Emacs.
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (require 'ido)
-     (ido-mode t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :results silent
+  (require 'ido)
+  (ido-mode t)
+#+END_SRC
 
 ** SMEX
 
-   [[https://github.com/nonsequitur/smex/][github: nonsequitur/smex]]
+[[https://github.com/nonsequitur/smex/][github: nonsequitur/smex]]
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (require 'smex)
-     (smex-initialize)
-     (global-set-key (kbd "M-x") 'smex)
-     (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :results silent
+  (require 'smex)
+  (smex-initialize)
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+#+END_SRC
 
 * Window management
 
 ** rotate-windows
 
-   from http://emacswiki.org/emacs/TransposeWindows
+from http://emacswiki.org/emacs/TransposeWindows
 
-   #+BEGIN_SRC emacs-lisp
-     (defun rotate-windows ()
-       "Rotate your windows"
-       (interactive)
-       (cond
-        ((not (> (count-windows) 1))
-         (message "You can't rotate a single window!"))
-        (t
-         (let ((i 1)
-               (num-windows (count-windows)))
-           (while  (< i num-windows)
-             (let* ((w1 (elt (window-list) i))
-                    (w2 (elt (window-list) (+ (% i num-windows) 1)))
-                    (b1 (window-buffer w1))
-                    (b2 (window-buffer w2))
-                    (s1 (window-start w1))
-                    (s2 (window-start w2)))
-               (set-window-buffer w1 b2)
-               (set-window-buffer w2 b1)
-               (set-window-start w1 s2)
-               (set-window-start w2 s1)
-               (setq i (1+ i))))))))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defun rotate-windows ()
+    "Rotate your windows"
+    (interactive)
+    (cond
+     ((not (> (count-windows) 1))
+      (message "You can't rotate a single window!"))
+     (t
+      (let ((i 1)
+            (num-windows (count-windows)))
+        (while  (< i num-windows)
+          (let* ((w1 (elt (window-list) i))
+                 (w2 (elt (window-list) (+ (% i num-windows) 1)))
+                 (b1 (window-buffer w1))
+                 (b2 (window-buffer w2))
+                 (s1 (window-start w1))
+                 (s2 (window-start w2)))
+            (set-window-buffer w1 b2)
+            (set-window-buffer w2 b1)
+            (set-window-start w1 s2)
+            (set-window-start w2 s1)
+            (setq i (1+ i))))))))
+#+END_SRC
 
 ** Switch windows like tabs
 
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "s-}") 'other-window)
-     (global-set-key (kbd "s-{") (lambda () (interactive) (other-window -1)))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "s-}") 'other-window)
+  (global-set-key (kbd "s-{") (lambda () (interactive) (other-window -1)))
+#+END_SRC
 
 * Org mode
 
 ** Org keybindings
 
-   #+BEGIN_SRC emacs-lisp
-     (org-defkey org-mode-map (kbd "RET") 'org-return-indent)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (org-defkey org-mode-map (kbd "RET") 'org-return-indent)
+#+END_SRC
 
 ** Copy URL from org-moge link
 
@@ -351,56 +351,56 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 
 ** Day pages
 
-   See [[http://almostobsolete.net/daypage.html][A day page for Org-Mode - AlmostObsolete.net]]
+See [[http://almostobsolete.net/daypage.html][A day page for Org-Mode - AlmostObsolete.net]]
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'org)
-     (require 'org-clock)
-     (require 'org-faces)
+#+BEGIN_SRC emacs-lisp
+  (require 'org)
+  (require 'org-clock)
+  (require 'org-faces)
 
-     (add-hook 'org-mode-hook 'auto-fill-mode)
+  (add-hook 'org-mode-hook 'auto-fill-mode)
 
-     (when (fboundp 'set-word-wrap)
-       (add-hook 'org-mode-hook 'set-word-wrap))
+  (when (fboundp 'set-word-wrap)
+    (add-hook 'org-mode-hook 'set-word-wrap))
 
-     (setq stuart/daypage-path "~/Documents/daypage/")
+  (setq stuart/daypage-path "~/Documents/daypage/")
 
-     (defvar stuart/daypage-default-project nil)
-     (defvar stuart/daypage-default-tags nil)
+  (defvar stuart/daypage-default-project nil)
+  (defvar stuart/daypage-default-tags nil)
 
-     (defun stuart/find-daypage (&optional date)
-       "Go to the day page for the specified date,
-        or toady's if none is specified."
-       (interactive (list
-                     (org-read-date "" 'totime nil nil
-                                    (current-time) "")))
-       (setq date (or date (current-time)))
-       (let* ((file (expand-file-name
-                     (concat stuart/daypage-path
-                             (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
-              (buffer (find-buffer-visiting file)))
-         (if buffer
-             (switch-to-buffer buffer)
-           (find-file file))
-         (when (= 0 (buffer-size))
-           (let ((datestr (format-time-string "%Y-%m-%d %A" date)))
-             ;; Insert an initial heading for the page
-             (insert datestr)
-             (when stuart/daypage-default-project
-               (insert " : " stuart/daypage-default-project "\n\n")
-               (insert "* " stuart/daypage-default-project)
-               (when stuart/daypage-default-tags
-                 (org-set-tags-to stuart/daypage-default-tags)))))))
+  (defun stuart/find-daypage (&optional date)
+    "Go to the day page for the specified date,
+     or toady's if none is specified."
+    (interactive (list
+                  (org-read-date "" 'totime nil nil
+                                 (current-time) "")))
+    (setq date (or date (current-time)))
+    (let* ((file (expand-file-name
+                  (concat stuart/daypage-path
+                          (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
+           (buffer (find-buffer-visiting file)))
+      (if buffer
+          (switch-to-buffer buffer)
+        (find-file file))
+      (when (= 0 (buffer-size))
+        (let ((datestr (format-time-string "%Y-%m-%d %A" date)))
+          ;; Insert an initial heading for the page
+          (insert datestr)
+          (when stuart/daypage-default-project
+            (insert " : " stuart/daypage-default-project "\n\n")
+            (insert "* " stuart/daypage-default-project)
+            (when stuart/daypage-default-tags
+              (org-set-tags-to stuart/daypage-default-tags)))))))
 
-     (defun stuart/todays-daypage ()
-       "Go straight to today's day page without prompting for a date."
-       (interactive)
-       (stuart/find-daypage))
+  (defun stuart/todays-daypage ()
+    "Go straight to today's day page without prompting for a date."
+    (interactive)
+    (stuart/find-daypage))
 
-     (defun stuart/my-agenda ()
-       (interactive)
-       (org-agenda nil "n"))
-   #+END_SRC
+  (defun stuart/my-agenda ()
+    (interactive)
+    (org-agenda nil "n"))
+#+END_SRC
 
 ** Daypage directories
 
@@ -424,50 +424,50 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 
 ** Abbreviations and templates for org-mode
 
-   Mode-specific versions of the built-in ~<e~ and ~<s~ abbreviations:
+Mode-specific versions of the built-in ~<e~ and ~<s~ abbreviations:
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (push '("clj" . "src clojure :results silent")
-           org-structure-template-alist)
-     (push '("cljp" . "src clojure :results pp code")
-           org-structure-template-alist)
-     (push '("el" . "src emacs-lisp :results silent")
-           org-structure-template-alist)
-     (push '("sh" . "src shell")
-           org-structure-template-alist)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :results silent
+  (push '("clj" . "src clojure :results silent")
+        org-structure-template-alist)
+  (push '("cljp" . "src clojure :results pp code")
+        org-structure-template-alist)
+  (push '("el" . "src emacs-lisp :results silent")
+        org-structure-template-alist)
+  (push '("sh" . "src shell")
+        org-structure-template-alist)
+#+END_SRC
 
 ** Inserting links
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (defun stuart/org-insert-link (url description)
-       (insert "[[" url "][" description "]]"))
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun stuart/org-insert-link (url description)
+    (insert "[[" url "][" description "]]"))
 
-     (defconst pivotal-story-regex
-       "^\\(https://www\\.pivotaltracker\\.com/story/show/\\|#\\)\\([0-9]+\\)")
+  (defconst pivotal-story-regex
+    "^\\(https://www\\.pivotaltracker\\.com/story/show/\\|#\\)\\([0-9]+\\)")
 
-     (defun org-insert-pivotal-link (story-id-or-url)
-       (interactive "sPivotal Tracker story ID or URL: ")
-       (when (null (string-match pivotal-story-regex story-id-or-url))
-         (error "Invalid Pivotal Tracker story ID or URL '%s'"
-                story-id-or-url))
-       (let ((story-id (match-string 2 story-id-or-url)))
-         (stuart/org-insert-link
-          (concat "https://www.pivotaltracker.com/story/show/"
-                  story-id)
-          (concat "#" story-id))))
+  (defun org-insert-pivotal-link (story-id-or-url)
+    (interactive "sPivotal Tracker story ID or URL: ")
+    (when (null (string-match pivotal-story-regex story-id-or-url))
+      (error "Invalid Pivotal Tracker story ID or URL '%s'"
+             story-id-or-url))
+    (let ((story-id (match-string 2 story-id-or-url)))
+      (stuart/org-insert-link
+       (concat "https://www.pivotaltracker.com/story/show/"
+               story-id)
+       (concat "#" story-id))))
 
-     (defconst favro-story-regex
-       "^\\(https://favro.com/[^?]+\\?card=\\)\\([a-zA-Z0-9-]+\\)")
+  (defconst favro-story-regex
+    "^\\(https://favro.com/[^?]+\\?card=\\)\\([a-zA-Z0-9-]+\\)")
 
-     (defun org-insert-favro-link (url)
-       (interactive "sFavro URL: ")
-       (when (null (string-match favro-story-regex url))
-         (error "Invalid Favro URL '%s'" url))
-       (let ((full-url (match-string 0 url))
-             (story-id (match-string 2 url)))
-         (stuart/org-insert-link full-url story-id)))
-   #+END_SRC
+  (defun org-insert-favro-link (url)
+    (interactive "sFavro URL: ")
+    (when (null (string-match favro-story-regex url))
+      (error "Invalid Favro URL '%s'" url))
+    (let ((full-url (match-string 0 url))
+          (story-id (match-string 2 url)))
+      (stuart/org-insert-link full-url story-id)))
+#+END_SRC
 
 * Org-babel
 
@@ -475,12 +475,12 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
 
 #+begin_src emacs-lisp :results silent
   (org-babel-do-load-languages
-    'org-babel-load-languages
-    '((shell . t)
-      (plantuml . t)
-      (dot . t)
-      (ruby . t)
-      (clojure . t)))
+   'org-babel-load-languages
+   '((shell . t)
+     (plantuml . t)
+     (dot . t)
+     (ruby . t)
+     (clojure . t)))
 #+end_src
 
 ** Link to last CIDER session
@@ -507,99 +507,99 @@ buffer with that session. But first we have to set the buffer-local
 
 ** Units for Bytes
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (setq math-additional-units
-           '((GiB "1024 * MiB" "Giga Byte")
-             (MiB "1024 * KiB" "Mega Byte")
-             (KiB "1024 * B" "Kilo Byte")
-             (B nil "Byte")
-             (Gib "1024 * Mib" "Giga Bit")
-             (Mib "1024 * Kib" "Mega Bit")
-             (Kib "1024 * b" "Kilo Bit")
-             (b "B / 8" "Bit")))
-     (setq math-units-table nil)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :results silent
+  (setq math-additional-units
+        '((GiB "1024 * MiB" "Giga Byte")
+          (MiB "1024 * KiB" "Mega Byte")
+          (KiB "1024 * B" "Kilo Byte")
+          (B nil "Byte")
+          (Gib "1024 * Mib" "Giga Bit")
+          (Mib "1024 * Kib" "Mega Bit")
+          (Kib "1024 * b" "Kilo Bit")
+          (b "B / 8" "Bit")))
+  (setq math-units-table nil)
+#+END_SRC
 
 * Global keybindings
 
 ** find-file-in-project
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (global-set-key (kbd "C-x M-f") 'find-file-in-project)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :results silent
+  (global-set-key (kbd "C-x M-f") 'find-file-in-project)
+#+END_SRC
 
 ** Text scale increase/decrease
 
-   Use SUPER (Windows or Command key) with + - 0 like in a web browser.
+Use SUPER (Windows or Command key) with + - 0 like in a web browser.
 
-   Ignore whether we're pressing the SHIFT key.
+Ignore whether we're pressing the SHIFT key.
 
-   #+BEGIN_SRC emacs-lisp
-     (defun text-scale-reset ()
-       "Disables text scaling (zoom)"
-       (interactive)
-       (text-scale-set 0))
+#+BEGIN_SRC emacs-lisp
+  (defun text-scale-reset ()
+    "Disables text scaling (zoom)"
+    (interactive)
+    (text-scale-set 0))
 
-     (global-set-key (kbd "s-=") 'text-scale-increase)
-     (global-set-key (kbd "s--") 'text-scale-decrease)
-     (global-set-key (kbd "s-0") 'text-scale-reset)
-     (global-set-key (kbd "s-+") 'text-scale-increase)
-     (global-set-key (kbd "s-_") 'text-scale-decrease)
-     (global-set-key (kbd "s-)") 'text-scale-reset)
-   #+END_SRC
+  (global-set-key (kbd "s-=") 'text-scale-increase)
+  (global-set-key (kbd "s--") 'text-scale-decrease)
+  (global-set-key (kbd "s-0") 'text-scale-reset)
+  (global-set-key (kbd "s-+") 'text-scale-increase)
+  (global-set-key (kbd "s-_") 'text-scale-decrease)
+  (global-set-key (kbd "s-)") 'text-scale-reset)
+#+END_SRC
 
 ** Magit
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'magit)
-     (global-set-key (kbd "C-x m") 'magit-status)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (require 'magit)
+  (global-set-key (kbd "C-x m") 'magit-status)
+#+END_SRC
 
 ** Org daypage and agenda
 
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-c o n") 'stuart/todays-daypage)
-     (global-set-key (kbd "C-c o N") 'stuart/find-daypage)
-     (global-set-key (kbd "C-c o a") 'stuart/my-agenda)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c o n") 'stuart/todays-daypage)
+  (global-set-key (kbd "C-c o N") 'stuart/find-daypage)
+  (global-set-key (kbd "C-c o a") 'stuart/my-agenda)
+#+END_SRC
 
 ** Prevent minimize or suspend with Ctrl-Z
 
-   #+BEGIN_SRC emacs-lisp
-     (global-unset-key (kbd "C-z"))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-unset-key (kbd "C-z"))
+#+END_SRC
 
 * Programming
 
 ** Hide-show mode
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'hideshow)
+#+BEGIN_SRC emacs-lisp
+  (require 'hideshow)
 
-     (defvar hs-hiding-all-enabled nil)
+  (defvar hs-hiding-all-enabled nil)
 
-     (defun hs-toggle-hiding-all ()
-       (interactive)
-       (if hs-hiding-all-enabled
-           (hs-show-all)
-         (hs-hide-all))
-       (setq hs-hiding-all-enabled (not hs-hiding-all-enabled)))
+  (defun hs-toggle-hiding-all ()
+    (interactive)
+    (if hs-hiding-all-enabled
+        (hs-show-all)
+      (hs-hide-all))
+    (setq hs-hiding-all-enabled (not hs-hiding-all-enabled)))
 
-     (defun enable-hs-minor-mode ()
-       (hs-minor-mode 1)
-       (make-local-variable 'hs-hiding-all-enabled)
-       (local-set-key (kbd "C-c C-s") 'hs-toggle-hiding)
-       (local-set-key (kbd "C-c C-S-s") 'hs-toggle-hiding-all))
-   #+END_SRC
+  (defun enable-hs-minor-mode ()
+    (hs-minor-mode 1)
+    (make-local-variable 'hs-hiding-all-enabled)
+    (local-set-key (kbd "C-c C-s") 'hs-toggle-hiding)
+    (local-set-key (kbd "C-c C-S-s") 'hs-toggle-hiding-all))
+#+END_SRC
 
 ** Emacs Lisp
 
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-     (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-     (add-hook 'emacs-lisp-mode-hook 'subword-mode)
-     (add-hook 'emacs-lisp-mode-hook 'enable-hs-minor-mode)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook 'subword-mode)
+  (add-hook 'emacs-lisp-mode-hook 'enable-hs-minor-mode)
+#+END_SRC
 
 ** Clojure
 
@@ -630,18 +630,18 @@ the paredit binding and recreate it locally.
 
 *** clojure-mode
 
-   #+BEGIN_SRC emacs-lisp
-     (add-to-list 'auto-mode-alist
-                  '("\\.cljs$" . clojure-mode)
-                  '("\\.edn$" . clojure-mode))
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist
+               '("\\.cljs$" . clojure-mode)
+               '("\\.edn$" . clojure-mode))
 
-     (add-hook 'clojure-mode-hook 'paredit-mode)
-     (add-hook 'clojure-mode-hook 'clojure-paredit-setup)
-     (add-hook 'clojure-mode-hook 'subword-mode)
-     (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
-     (add-hook 'clojure-mode-hook 'eldoc-mode)
-     (add-hook 'clojure-mode-hook 'flycheck-mode)
-   #+END_SRC
+  (add-hook 'clojure-mode-hook 'paredit-mode)
+  (add-hook 'clojure-mode-hook 'clojure-paredit-setup)
+  (add-hook 'clojure-mode-hook 'subword-mode)
+  (add-hook 'clojure-mode-hook 'enable-hs-minor-mode)
+  (add-hook 'clojure-mode-hook 'eldoc-mode)
+  (add-hook 'clojure-mode-hook 'flycheck-mode)
+#+END_SRC
 
 *** Custom Clojure indentation rules
 
@@ -654,20 +654,20 @@ the paredit binding and recreate it locally.
 *** Disable CIDER "words of inspiration"
 
 #+BEGIN_SRC emacs-lisp :results silent
-(setq cider-words-of-inspiration ())
+  (setq cider-words-of-inspiration ())
 #+END_SRC
 
 *** inf-clojure mode
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (defun disable-comint-autoexpand ()
-       (setq comint-input-autoexpand nil))
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun disable-comint-autoexpand ()
+    (setq comint-input-autoexpand nil))
 
-     (add-hook 'inf-clojure-mode-hook 'paredit-mode)
-     (add-hook 'inf-clojure-mode-hook 'clojure-paredit-setup)
-     (add-hook 'inf-clojure-mode-hook 'subword-mode)
-     (add-hook 'inf-clojure-mode-hook 'disable-comint-autoexpand)
-   #+END_SRC
+  (add-hook 'inf-clojure-mode-hook 'paredit-mode)
+  (add-hook 'inf-clojure-mode-hook 'clojure-paredit-setup)
+  (add-hook 'inf-clojure-mode-hook 'subword-mode)
+  (add-hook 'inf-clojure-mode-hook 'disable-comint-autoexpand)
+#+END_SRC
 
 *** inf-clojure to socket
 
@@ -683,17 +683,17 @@ required. Great for socket-REPL!
 
 *** Copy name of current namespace
 
-    #+BEGIN_SRC emacs-lisp
-      (defun cider-copy-current-ns ()
-        "Copies the name of the current Clojure namespace to the kill
-      ring."
-        (interactive)
-        (let ((ns (cider-current-ns)))
-          (kill-new ns)
-          (message ns)))
+#+BEGIN_SRC emacs-lisp
+  (defun cider-copy-current-ns ()
+    "Copies the name of the current Clojure namespace to the kill
+  ring."
+    (interactive)
+    (let ((ns (cider-current-ns)))
+      (kill-new ns)
+      (message ns)))
 
-      (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
-    #+END_SRC
+  (define-key clojure-mode-map (kbd "C-c M-k") 'cider-copy-current-ns)
+#+END_SRC
 
 *** Evaluate expressions in current REPL
 
@@ -772,83 +772,83 @@ As if they had been typed into the REPL buffer.
 ** File types
 
 #+BEGIN_SRC emacs-lisp :results silent
-(add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode))
+  (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode))
 #+END_SRC
 
 * Emacs server
 
-  #+BEGIN_SRC emacs-lisp
-    (server-start)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (server-start)
+#+END_SRC
 
 * Eshell
 
 ** Prompt
 
-   #+BEGIN_SRC emacs-lisp :results silent
-     (require 'eshell)
+#+BEGIN_SRC emacs-lisp :results silent
+  (require 'eshell)
 
-     (defun stuart/eshell-prompt ()
-       "Eshell prompt function that prints PWD without full path"
-       (concat (file-name-nondirectory (eshell/pwd))
-               (if (= (user-uid) 0) " # " " $ ")))
+  (defun stuart/eshell-prompt ()
+    "Eshell prompt function that prints PWD without full path"
+    (concat (file-name-nondirectory (eshell/pwd))
+            (if (= (user-uid) 0) " # " " $ ")))
 
-     (setq eshell-prompt-function 'stuart/eshell-prompt)
-   #+END_SRC
+  (setq eshell-prompt-function 'stuart/eshell-prompt)
+#+END_SRC
 
 * Quick statistics on region
 
-  #+BEGIN_SRC emacs-lisp :results silent
-    (defun numbers-in-region ()
-      (let ((numbers ()))
-        (save-excursion
-          (when (< (mark) (point))
-            (exchange-point-and-mark))
-          (while (re-search-forward "-?[0-9]+\\(\\.[0-9]+\\)?" (mark) t)
-            (push (string-to-number (match-string 0)) numbers))
-          (nreverse numbers))))
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun numbers-in-region ()
+    (let ((numbers ()))
+      (save-excursion
+        (when (< (mark) (point))
+          (exchange-point-and-mark))
+        (while (re-search-forward "-?[0-9]+\\(\\.[0-9]+\\)?" (mark) t)
+          (push (string-to-number (match-string 0)) numbers))
+        (nreverse numbers))))
 
-    (defun mean (numbers)
-      (/ (float (apply '+ numbers)) (length numbers)))
+  (defun mean (numbers)
+    (/ (float (apply '+ numbers)) (length numbers)))
 
-    (defun mean-in-region ()
-      (interactive)
-      (let ((m (mean (numbers-in-region))))
-        (kill-new (number-to-string m))
-        (message (format "Mean: %f" m))))
-  #+END_SRC
+  (defun mean-in-region ()
+    (interactive)
+    (let ((m (mean (numbers-in-region))))
+      (kill-new (number-to-string m))
+      (message (format "Mean: %f" m))))
+#+END_SRC
 
 * OS X extensions
 
-  #+BEGIN_SRC emacs-lisp
-    (when (fboundp 'tabbar-mode) (tabbar-mode -1))
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'tabbar-mode) (tabbar-mode -1))
 
-    (when (boundp 'osx-key-mode-map)
-      (define-key osx-key-mode-map (kbd "C-;") nil))
+  (when (boundp 'osx-key-mode-map)
+    (define-key osx-key-mode-map (kbd "C-;") nil))
 
-    ;; from https://gist.github.com/1297644
-    (defun finder (location)
-      "Fire up finder in a location relative to pwd."
-      (interactive "sOpen finder at this location (relative to pwd): ")
-      (start-process "finder" "findxer" "open" "-a" "Finder.app" location))
+  ;; from https://gist.github.com/1297644
+  (defun finder (location)
+    "Fire up finder in a location relative to pwd."
+    (interactive "sOpen finder at this location (relative to pwd): ")
+    (start-process "finder" "findxer" "open" "-a" "Finder.app" location))
 
-    ;; Has to come late in the initialization process
-    (when (display-graphic-p)
-      (menu-bar-mode 1))
+  ;; Has to come late in the initialization process
+  (when (display-graphic-p)
+    (menu-bar-mode 1))
 
-    ;; Fix Unicode character spacing; see http://stackoverflow.com/q/8779351
-    (when (string-equal system-type "darwin")
-      (set-fontset-font "fontset-default"
-                        'unicode
-                        '("Menlo" . "iso10646-1")))
-  #+END_SRC
+  ;; Fix Unicode character spacing; see http://stackoverflow.com/q/8779351
+  (when (string-equal system-type "darwin")
+    (set-fontset-font "fontset-default"
+                      'unicode
+                      '("Menlo" . "iso10646-1")))
+#+END_SRC
 
 * Local extensions
 
-  Customizations that are local to this computer.
+Customizations that are local to this computer.
 
-  #+BEGIN_SRC emacs-lisp
-    (let ((local-config (expand-file-name "local.el" user-emacs-directory)))
-      (when (file-exists-p local-config)
-        (load local-config)))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (let ((local-config (expand-file-name "local.el" user-emacs-directory)))
+    (when (file-exists-p local-config)
+      (load local-config)))
+#+END_SRC
