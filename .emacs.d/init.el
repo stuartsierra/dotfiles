@@ -7,6 +7,10 @@
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 
+;; We have to load cider before org-mode to ensure ob-clojure
+;; recogines that cider is available:
+(require 'cider)
+
 (require 'org-install)
 (require 'ob-tangle)
 (org-babel-load-file (expand-file-name "stuart.org" user-emacs-directory))
