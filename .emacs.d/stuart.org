@@ -631,21 +631,10 @@ the paredit binding and recreate it locally.
 *** clojure-mode
 
    #+BEGIN_SRC emacs-lisp
-     (defun stuart/clojure-mode-connect-repl ()
-       "Enable the minor mode for either CIDER or inf-clojure,
-       whichever is currently running."
-       (cond
-        ((cider-connected-p) (cider-mode))
-        ((inf-clojure-connected-p) (inf-clojure-minor-mode))
-        (t (message "No Clojure REPL connected"))))
-   #+END_SRC
-
-   #+BEGIN_SRC emacs-lisp
      (add-to-list 'auto-mode-alist
                   '("\\.cljs$" . clojure-mode)
                   '("\\.edn$" . clojure-mode))
 
-     ;;(add-hook 'clojure-mode-hook 'stuart/clojure-mode-connect-repl)
      (add-hook 'clojure-mode-hook 'paredit-mode)
      (add-hook 'clojure-mode-hook 'clojure-paredit-setup)
      (add-hook 'clojure-mode-hook 'subword-mode)
@@ -653,6 +642,7 @@ the paredit binding and recreate it locally.
      (add-hook 'clojure-mode-hook 'eldoc-mode)
      (add-hook 'clojure-mode-hook 'flycheck-mode)
    #+END_SRC
+
 *** Custom Clojure indentation rules
 
 #+BEGIN_SRC emacs-lisp :results silent
