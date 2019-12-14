@@ -546,13 +546,13 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
    Mode-specific versions of the built-in ~<e~ and ~<s~ abbreviations:
 
    #+BEGIN_SRC emacs-lisp :results silent
-     (push '("clj" "#+BEGIN_SRC clojure :results silent\n?\n#+END_SRC")
+     (push '("clj" . "src clojure :results silent")
            org-structure-template-alist)
-     (push '("cljp" "#+BEGIN_SRC clojure :results pp code\n?\n#+END_SRC")
+     (push '("cljp" . "src clojure :results pp code")
            org-structure-template-alist)
-     (push '("el" "#+BEGIN_SRC emacs-lisp :results silent\n?\n#+END_SRC")
+     (push '("el" . "src emacs-lisp :results silent")
            org-structure-template-alist)
-     (push '("sh" "#+BEGIN_SRC shell-script :results silent\n?\n#+END_SRC")
+     (push '("sh" . "src shell")
            org-structure-template-alist)
    #+END_SRC
 
