@@ -483,6 +483,26 @@ Adapted from [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/16/Copy-formatted-
       (clojure . t)))
 #+end_src
 
+** Link to last CIDER session
+
+CIDER uses the sesman library to manage sessions.
+
+By default, a CIDER session is linked to the project or directory in
+which the Clojure process was started. Files outside that project or
+directory will not have access to that session.
+
+To allow org-babel to evaluate Clojure code outside of a project
+directory (for example, with daypages), we need to *link* the org-mode
+buffer with that session. But first we have to set the buffer-local
+~sesman-system~ variable to ~CIDER~.
+
+#+begin_src emacs-lisp :results silent
+  (defun stuart/link-cider-session ()
+    (interactive)
+    (setq sesman-system 'CIDER)
+    (sesman-link-with-buffer))
+#+end_src
+
 * Calc spreadsheet and math
 
 ** Units for Bytes
