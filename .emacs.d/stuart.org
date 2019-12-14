@@ -653,27 +653,6 @@ the paredit binding and recreate it locally.
      (add-hook 'clojure-mode-hook 'eldoc-mode)
      (add-hook 'clojure-mode-hook 'flycheck-mode)
    #+END_SRC
-
-*** CIDER session management current
-
-Since (some version) CIDER manages multiple REPL sessions with the
-[[https://github.com/vspinu/sesman][Sesman]] library. As a result, a buffer must be linked to a session
-before you can evaluate Clojure in it. See [[https://github.com/clojure-emacs/cider/issues/2464][CIDER #2464]].
-
-Since [[https://github.com/clojure-emacs/cider/issues/2483][CIDER #2483]] sessions are automatically linked for dependency
-files found through =M-.=, but this doesn't work for an arbitrary file
-at an arbitrary location.
-
-This is a workaround [[https://github.com/clojure-emacs/cider/issues/2464#issuecomment-425671148][suggested in #2464]]:
-
-#+BEGIN_SRC emacs-lisp :results silent
-  (defun stuart/sesman-link-last-session ()
-    (interactive)
-    (sesman-link-with-buffer
-     (current-buffer)
-     (car (hash-table-values sesman-sessions-hashmap))))
-#+END_SRC
-
 *** Custom Clojure indentation rules
 
 #+BEGIN_SRC emacs-lisp :results silent
