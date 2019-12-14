@@ -53,9 +53,6 @@ Adapted from [[https://github.com/abedra/emacs.d][Aaron Bedra]] and [[https://gi
    The =~/.emacs.d/vendor= directory, and any directory in it, should
    be on the ~load-path~.
 
-   Note: the =org-mode= directory is already added in =init.el= for
-   bootstrapping.
-
    #+BEGIN_SRC emacs-lisp
      (defvar stuart/vendor-dir (expand-file-name "vendor" user-emacs-directory))
 
