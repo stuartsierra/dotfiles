@@ -45,6 +45,7 @@
     s
     smex
     solarized-theme
+    terraform-mode
     typescript-mode
     typo
     xml-rpc
