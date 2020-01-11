@@ -51,6 +51,7 @@
     terraform-mode
     typescript-mode
     typo
+    visual-fill-column
     xml-rpc
     ))
 
