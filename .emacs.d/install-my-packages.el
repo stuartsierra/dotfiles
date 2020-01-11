@@ -37,6 +37,7 @@
     lua-mode
     magit
     markdown-mode
+    markdown-toc
     metaweblog  ; org2blog dependency
     multiple-cursors
     org-plus-contrib
