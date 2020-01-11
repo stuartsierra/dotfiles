@@ -37,8 +37,10 @@
     lua-mode
     magit
     markdown-mode
+    metaweblog  ; org2blog dependency
     multiple-cursors
     org-plus-contrib
+    org2blog
     paredit
     rainbow-delimiters
     ruby-mode
