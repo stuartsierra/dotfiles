@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# blue
+#
+# A utility to toggle Bluetooth on and off on macOS.
+#
+# Prerequisites:
+#
+# * blueutil is installed and available on `$PATH`
+#   - https://github.com/toy/blueutil
+#   - Homebrew: `brew install blueutil`
+#
+# Usage:
+#
+#     blue
+#
+# If bluetooth is currently enabled (power on),
+# it will be turned off.
+
+set -euo pipefail
+
+if [[ $(blueutil -p) -eq 1 ]]
+then
+    echo "Turning Bluetooth OFF ..."
+    blueutil -p 0
+    echo "OFF"
+else
+    echo "Turning Bluetooth ON ..."
+    blueutil -p 1
+    echo "ON"
+fi
