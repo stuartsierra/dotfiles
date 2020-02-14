@@ -1,10 +1,3 @@
-# Used later (maybe in .bash_local) to determine if this is an
-# interactive shell; see http://www.gnu.org/software/bash/manual/html_node/Is-this-Shell-Interactive_003f.html
-case "$-" in
-*i*)	INTERACTIVE_SHELL="true" ;;
-*)	: ;;
-esac
-
 # Basic environment
 export TERM=xterm-256color
 export EDITOR=/usr/bin/nano
