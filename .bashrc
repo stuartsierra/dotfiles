@@ -118,7 +118,7 @@ function ssh-reagent {
 }
 
 # iterm2 shell integration; see https://iterm2.com/documentation-shell-integration.html
-if [ -e ~/.iterm2_shell_integration.bash ]; then
+if [[ $LC_TERMINAL = "iTerm2" && -e ~/.iterm2_shell_integration.bash ]]; then
     source ~/.iterm2_shell_integration.bash
 fi
 
