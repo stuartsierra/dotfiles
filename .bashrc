@@ -56,9 +56,9 @@ alias pgrep='ps aux | grep'
 
 alias gs='git status'
 
-if which open > /dev/null; then
+if command -v open > /dev/null; then
     alias e="open -a Emacs.app"
-elif which emacs > /dev/null; then
+elif command -v emacs > /dev/null; then
     alias e="emacs"
 else
     alias e="nano"
@@ -91,7 +91,7 @@ if [[ -e /usr/local/etc/bash_completion.d/password-store ]]; then
 fi
 
 ## AWS command line interface
-if which aws_completer > /dev/null; then
+if command -v aws_completer > /dev/null; then
     complete -C aws_completer aws
 fi
 
