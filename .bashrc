@@ -65,12 +65,12 @@ else
 fi
 
 # Local system stuff
-if [ -e ~/.bash_local ]; then
+if [[ -e ~/.bash_local ]]; then
     source ~/.bash_local
 fi
 
 # Git autocompletion
-if [ -f ~/.git-completion.bash ]; then
+if [[ -f ~/.git-completion.bash ]]; then
     source ~/.git-completion.bash
 fi
 
