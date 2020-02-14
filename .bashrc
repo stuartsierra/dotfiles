@@ -29,7 +29,7 @@ export PS1="\[\033[38;5;2m\]\h:\[\033[38;5;4m\]\w\[\033[38;5;15m\] \[\033[38;5;5
 # Go language; https://golang.org/doc/code.html#GOPATH
 export GOPATH="${HOME}/go"
 
-export PATH="/Users/stuart/bin:/Users/stuart/.jenv/bin:/Users/stuart/.local/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/usr/local/opt/python3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/Users/stuart/go/bin"
+export PATH="/Users/stuart/bin:/Users/stuart/.local/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/usr/local/opt/python3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/Users/stuart/go/bin"
 
 # My aliases
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -121,19 +121,6 @@ function ssh-reagent {
 if [[ $LC_TERMINAL = "iTerm2" && -e ~/.iterm2_shell_integration.bash ]]; then
     source ~/.iterm2_shell_integration.bash
 fi
-
-# jenv: Java version manager, http://www.jenv.be/
-if which jenv > /dev/null; then
-    eval "$(jenv init -)"
-fi
-
-# nvm: Node.js version manager, https://github.com/creationix/nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
-
-# rbenv: Ruby version manager
-eval "$(rbenv init -)"
 
 if [[ -e /Users/stuart/Library/Preferences/org.dystroy.broot/launcher/bash/br ]]; then
     source /Users/stuart/Library/Preferences/org.dystroy.broot/launcher/bash/br
