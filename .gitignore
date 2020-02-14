@@ -12,6 +12,7 @@
 .emacs.d/.mc-lists.el
 .emacs.d/games/
 .emacs.d/network-security.data
+.emacs.d/url
 .org-id-locations
 *.tar.gz
 *.zip
