@@ -61,11 +61,6 @@ function git-delete-merged-branches() {
     git remote prune origin
 }
 
-# Java on OS X
-if [[ -f /usr/libexec/java_home ]]; then
-    export JAVA_HOME="$(/usr/libexec/java_home)"
-fi
-
 ## 'pass' Password Manager; http://www.zx2c4.com/projects/password-store/
 if [[ -e /usr/local/etc/bash_completion.d/password-store ]]; then
     source /usr/local/etc/bash_completion.d/password-store
