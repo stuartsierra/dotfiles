@@ -7,9 +7,6 @@ export HISTCONTROL=ignoreboth
 export PROMPT_DIRTRIM=3
 export PS1="\[\033[38;5;2m\]\h:\[\033[38;5;4m\]\w\[\033[38;5;15m\] \[\033[38;5;5m\]\\$ \[\033[00m\]"
 
-# Go language; https://golang.org/doc/code.html#GOPATH
-export GOPATH="${HOME}/go"
-
 export PATH="/Users/stuart/bin:/Users/stuart/.local/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/usr/local/opt/python3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/Users/stuart/go/bin"
 
 # My aliases
