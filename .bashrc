@@ -39,11 +39,6 @@ else
     alias e="nano"
 fi
 
-# Local system stuff
-if [[ -e ~/.bash_local ]]; then
-    source ~/.bash_local
-fi
-
 # Git autocompletion
 if [[ -f ~/.git-completion.bash ]]; then
     source ~/.git-completion.bash
@@ -94,4 +89,9 @@ fi
 
 if [[ -e /Users/stuart/Library/Preferences/org.dystroy.broot/launcher/bash/br ]]; then
     source /Users/stuart/Library/Preferences/org.dystroy.broot/launcher/bash/br
+fi
+
+# Local system stuff
+if [[ -e ~/.bash_local ]]; then
+    source ~/.bash_local
 fi
