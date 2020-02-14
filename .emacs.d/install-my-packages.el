@@ -41,6 +41,7 @@
     metaweblog  ; org2blog dependency
     multiple-cursors
     org-plus-contrib
+    org-re-reveal
     org2blog
     paredit
     rainbow-delimiters
