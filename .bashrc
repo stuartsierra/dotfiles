@@ -27,11 +27,8 @@ else
 fi
 
 alias rm='rm -i'
-
 alias beep="echo -e '\a'"
-
 alias pgrep='ps aux | grep'
-
 alias gs='git status'
 
 if command -v open > /dev/null; then
