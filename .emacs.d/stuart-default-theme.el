@@ -8,7 +8,7 @@
  '(cider-prompt-for-symbol nil)
  '(cider-repl-display-help-banner nil)
  '(delete-old-versions t)
- '(dired-listing-switches "-alg")
+ '(dired-listing-switches "-al")
  '(git-commit-summary-max-length 70)
  '(indent-tabs-mode nil)
  '(indicate-empty-lines t)
