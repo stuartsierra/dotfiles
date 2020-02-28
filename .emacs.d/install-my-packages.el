@@ -54,6 +54,7 @@
     typo
     visual-fill-column
     xml-rpc
+    yaml-mode
     ))
 
 (setq stuart/unstable-packages
