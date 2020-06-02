@@ -3,10 +3,14 @@ export TERM=xterm-256color
 export EDITOR=/usr/bin/nano
 export HISTCONTROL=ignoreboth
 
-# Prompt: see http://bashrcgenerator.com/
+# Prompt: see http://mywiki.wooledge.org/BashFAQ/037
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+blue=$(tput setaf 4)
+pink=$(tput setaf 13)
+reset=$(tput sgr0)
 export PROMPT_DIRTRIM=3
-# \[\033[38;5;2m\]\h:
-export PS1="\[\033[38;5;4m\]\w\[\033[38;5;15m\] \[\033[38;5;5m\]\\$ \[\033[00m\]"
+export PS1="\[$blue\]\w \[$pink\]\\$ \[$reset\]"
 
 export PATH="/Users/stuart/bin:/Users/stuart/.local/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/usr/local/opt/python3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/Users/stuart/go/bin"
 
