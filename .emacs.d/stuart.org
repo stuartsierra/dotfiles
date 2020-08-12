@@ -503,6 +503,16 @@ buffer with that session. But first we have to set the buffer-local
     (sesman-link-with-buffer))
 #+end_src
 
+** Copy contents of src block
+
+#+begin_src emacs-lisp :results silent
+  (defun stuart/org-copy-src-block ()
+    (interactive)
+    (let ((body (cadr (org-babel-get-src-block-info))))
+      (when body
+        (kill-new body))))
+#+end_src
+
 * Calc spreadsheet and math
 
 ** Units for Bytes
