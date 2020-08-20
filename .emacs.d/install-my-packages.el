@@ -19,6 +19,7 @@
     clojure-mode
     clojure-mode-extra-font-locking
     color-theme-sanityinc-solarized
+    dockerfile-mode
     exec-path-from-shell
     find-file-in-project
     flycheck-clj-kondo
