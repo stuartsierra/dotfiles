@@ -12,7 +12,7 @@ reset=$(tput sgr0)
 export PROMPT_DIRTRIM=3
 export PS1="\[$blue\]\w \[$pink\]\\$ \[$reset\]"
 
-export PATH="/Users/stuart/bin:/Users/stuart/.local/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/usr/local/opt/python3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/Users/stuart/go/bin"
+export PATH="${HOME}/bin:${HOME}/.local/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/usr/local/opt/python3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:${HOME}/go/bin"
 
 # My aliases
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -92,8 +92,8 @@ if [[ $LC_TERMINAL = "iTerm2" && -e ~/.iterm2_shell_integration.bash ]]; then
     source ~/.iterm2_shell_integration.bash
 fi
 
-if [[ -e /Users/stuart/Library/Preferences/org.dystroy.broot/launcher/bash/br ]]; then
-    source /Users/stuart/Library/Preferences/org.dystroy.broot/launcher/bash/br
+if [[ -e ${HOME}/Library/Preferences/org.dystroy.broot/launcher/bash/br ]]; then
+    source ${HOME}/Library/Preferences/org.dystroy.broot/launcher/bash/br
 fi
 
 # Local system stuff
