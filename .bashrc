@@ -3,15 +3,6 @@ export TERM=xterm-256color
 export EDITOR=/usr/bin/nano
 export HISTCONTROL=ignoreboth
 
-# Prompt: see http://mywiki.wooledge.org/BashFAQ/037
-red=$(tput setaf 1)
-green=$(tput setaf 2)
-blue=$(tput setaf 4)
-pink=$(tput setaf 13)
-reset=$(tput sgr0)
-export PROMPT_DIRTRIM=3
-export PS1="\[$blue\]\w \[$pink\]\\$ \[$reset\]"
-
 export PATH="${HOME}/bin:${HOME}/.local/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/usr/local/opt/python3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:${HOME}/go/bin"
 
 # My aliases
