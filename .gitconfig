@@ -38,3 +38,5 @@
 [core]
 	editor = ~/bin/edit
 	excludesfile = ~/.gitignore_global
+[pull]
+	ff = only
