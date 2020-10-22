@@ -467,6 +467,21 @@ Mode-specific versions of the built-in ~<e~ and ~<s~ abbreviations:
     (let ((full-url (match-string 0 url))
           (story-id (match-string 2 url)))
       (stuart/org-insert-link full-url story-id)))
+
+  (defconst github-blob-regex
+    "^\\https://github.com/[^/]+/[^/]+/blob/[0-9a-f]+/\\(.+\\)$")
+
+  (defconst github-commit-regex
+    "^\\https://github.com/[^/]+/[^/]+/commit/\\([0-9a-f]+\\)")
+
+  (defun org-insert-github-link (url)
+    (interactive "sGitHub URL: ")
+    (cond
+     ((string-match github-blob-regex url)
+      (stuart/org-insert-link url (match-string 1 url)))
+     ((string-match github-commit-regex url)
+      (stuart/org-insert-link url (concat "commit " (substring (match-string 1 url) 0 8))))
+     (t (error "Invalid GitHub URL '%s'" url))))
 #+END_SRC
 
 * Org-babel
