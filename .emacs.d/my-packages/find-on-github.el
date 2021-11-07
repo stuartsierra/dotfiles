@@ -2,8 +2,7 @@
 
 ;; Author: Stuart Sierra <mail@stuartsierra.com>
 ;; Keywords: git, github, browse, url
-;; URL: https://github.com/gstamp/align-cljlet
-
+;; URL: https://github.com/stuartsierra/dotfiles
 
 ;; This file is *NOT* part of GNU Emacs.
 
@@ -29,19 +28,23 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
+;;; Commentary:
+
 ;; Call browse-on-github to open a web browser showing the current
-;; file, at the current commit, on GitHub.com. This assumes that the
+;; file, at the current commit, on GitHub.com.  This assumes that the
 ;; file is in a Git repository whose "remote.origin.url" property
-;; points to github.com. Works for both public (https://github.com)
+;; points to github.com.  Works for both public (https://github.com)
 ;; and private (git@github.com) repository URLs.
-;;
+
 ;; Inspired by https://github.com/gleitz/browse-on-github.el but
 ;; rewritten without an external script.
 
+;;; Code:
 
 (defun call-git (&rest args)
-  "Invoke git with the given arguments and return whatever it
-  prints to STDOUT, whitespace-trimmed."
+  "Invoke git with command line ARGS and return output.
+Returns a string of whatever the git command prints to STDOUT,
+whitespace-trimmed."
   (cl-labels ((strip-whitespace (string)
                 (let ((s string))
                   (while (string-match "\\`\s+\\|\n+\\'" s)
@@ -53,7 +56,7 @@
         (error "Git failed")))))
 
 (defun git-remote-to-web-url (remote-url)
-  "Convert a Git remote origin URL into a GitHub web page URL."
+  "Convert Git remote origin REMOTE-URL into a GitHub web page URL."
   (let ((url remote-url))
     (when (string-match "^git@github\\.com:" url)
       (setq url (replace-match "https://github.com/" t t url)))
@@ -64,9 +67,9 @@
     url))
 
 (defun github-hash-fragment ()
-  "Returns a URL hash fragment like #L4-10 based on point and/or
-  region in the current buffer. Returns nil if point is at the
-  beginning of the buffer."
+  "Return GitHub URL hash fragment for current region or point.
+Like #L4-10 if region covers lines 4 through 10, or nil if point
+is at the beginning of the buffer."
   (cond ((region-active-p)
          (concat "#L" (int-to-string (line-number-at-pos (region-beginning)))
                  "-L" (int-to-string
@@ -79,12 +82,13 @@
         (t (concat "#L" (int-to-string (line-number-at-pos (point)))))))
 
 (defun current-git-commit ()
+  "Return commit hash of the current Git commit."
   (call-git "rev-parse" "HEAD"))
 
 (defun github-url (branch-or-commit)
-  "Returns a GitHub URL for viewing the current file at the
-  commit or branch name. If region is active, selects the region of
-  lines. Otherwise selects the line at point."
+  "Return a GitHub URL for current file at BRANCH-OR-COMMIT.
+If region is active, selects the region of lines.  Otherwise
+selects the line at point."
   (let* ((remote-url (call-git "config" "--get" "remote.origin.url"))
          (web-url-base (git-remote-to-web-url remote-url))
          (relative-path (call-git "rev-parse" "--show-prefix"))
@@ -96,10 +100,9 @@
             (when file-name (github-hash-fragment)))))
 
 (defun find-on-github (branch-or-commit)
-  "If the current buffer is showing a file or directory in a Git
-  repository, displays a URL for it on github.com with the
-  current line or region highlighted. Also copies the URL to the
-  kill ring."
+  "Show GitHub URL for current file at BRANCH-OR-COMMIT.
+The URL will highlight the current line or region.  Also copies
+the URL to the kill ring."
   (interactive
    (if current-prefix-arg
        (list (read-string "Git branch (default master): " nil nil "master"))
@@ -109,11 +112,8 @@
     (message url)))
 
 (defun browse-on-github (branch-or-commit)
-  "If the current buffer is showing a file or directory in a Git
-  repository, opens a web browser showing that file on github.com
-  at the current commit, with the current line or region
-  highlighted. Also displays the URL and copies it to the kill
-  ring."
+  "Open web browser to current file at BRANCH-OR-COMMIT in GitHub.
+Also displays the URL and copies it to the kill ring."
   (interactive
    (if current-prefix-arg
        (list (read-string "Git branch (default master): " nil nil "master"))
@@ -124,3 +124,5 @@
     (browse-url url)))
 
 (provide 'find-on-github)
+
+;;; find-on-github.el ends here
