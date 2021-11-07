@@ -15,5 +15,6 @@
 .emacs.d/url
 .emacs.d/transient
 .org-id-locations
+.lsp*
 *.tar.gz
 *.zip
