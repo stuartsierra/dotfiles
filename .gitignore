@@ -13,6 +13,7 @@
 .emacs.d/games/
 .emacs.d/network-security.data
 .emacs.d/url
+.emacs.d/transient
 .org-id-locations
 *.tar.gz
 *.zip
