@@ -5,8 +5,9 @@
 
 ;;; my custom and vendored elisp files
 
-(add-to-list 'load-path
-	     (directory-file-name (locate-user-emacs-file "my-packages")))
+(eval-and-compile
+  (defun my-packages-load-path ()
+    (directory-file-name (locate-user-emacs-file "my-packages"))))
 
 ;;; use-package initialization
 
@@ -93,6 +94,10 @@
   :ensure t
   :pin melpa-stable
   :bind ("C-x m" . magit-status))
+
+(use-package find-on-github
+  :load-path (lambda () (list (my-packages-load-path)))
+  :commands (find-on-github browse-on-github))
 
 ;;; clojure-related packages
 
