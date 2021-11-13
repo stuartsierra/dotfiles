@@ -90,14 +90,14 @@
   :pin melpa-stable
   :bind ("C-x M-f" . find-file-in-project))
 
+(use-package find-on-github
+  :load-path (lambda () (list (my-packages-load-path)))
+  :commands (find-on-github browse-on-github))
+
 (use-package magit
   :ensure t
   :pin melpa-stable
   :bind ("C-x m" . magit-status))
-
-(use-package find-on-github
-  :load-path (lambda () (list (my-packages-load-path)))
-  :commands (find-on-github browse-on-github))
 
 ;;; clojure-related packages
 
