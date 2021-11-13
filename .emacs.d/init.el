@@ -70,6 +70,24 @@
 
 ;;; general-purpose packages
 
+(use-package calc-units
+  :after (calc)
+  :config
+  (setq math-additional-units
+      '((PiB "1024 * TiB" "Pebi Byte")
+	(TiB "1024 * GiB" "Tebi Byte")
+	(GiB "1024 * MiB" "Gibi Byte")
+        (MiB "1024 * KiB" "Mebi Byte")
+        (KiB "1024 * B" "Kibi Byte")
+        (B nil "Byte")
+	(Pib "1024 * Tib" "Pebi Bit")
+	(Tib "1024 * Gib" "Tebi Bit")
+        (Gib "1024 * Mib" "Gibi Bit")
+        (Mib "1024 * Kib" "Mebi Bit")
+        (Kib "1024 * b" "Kibi Bit")
+        (b "B / 8" "Bit")))
+  (setq math-units-table nil))
+
 (use-package rg
   :ensure t
   :pin melpa-stable)
