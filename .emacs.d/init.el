@@ -61,6 +61,11 @@
   (ido-mode 1)
   (ido-vertical-mode 1))
 
+;; Needed to get ido completion in Magit
+(use-package ido-completing-read+
+  :ensure t
+  :pin melpa-stable)
+
 (use-package smex
   :ensure t
   :pin melpa-stable
