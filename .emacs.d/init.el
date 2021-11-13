@@ -88,7 +88,7 @@
 (use-package find-file-in-project
   :ensure t
   :pin melpa-stable
-  :bind ("C-x M-f" . find-file-in-project-by-selected))
+  :bind ("C-x M-f" . find-file-in-project))
 
 (use-package magit
   :ensure t
