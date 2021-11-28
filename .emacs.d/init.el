@@ -153,7 +153,9 @@
   :hook ((clojure-mode . subword-mode)
          (clojure-mode . hs-minor-mode)
          (clojure-mode . eldoc-mode)
-         (clojure-mode . flycheck-mode)))
+         (clojure-mode . flycheck-mode))
+  :config
+  (require 'paredit))
 
 (use-package cider
   :defer t
