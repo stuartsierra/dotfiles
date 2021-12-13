@@ -36,7 +36,6 @@
 	changed = green
 	untracked = cyan
 [core]
-	editor = ~/bin/edit
 	excludesfile = ~/.gitignore_global
 [pull]
 	ff = only
