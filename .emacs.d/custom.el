@@ -16,6 +16,7 @@
  '(initial-major-mode 'fundamental-mode)
  '(initial-scratch-message nil)
  '(magit-completing-read-function 'magit-ido-completing-read)
+ '(org-babel-clojure-backend 'cider)
  '(org-babel-load-languages
    '((emacs-lisp . t)
      (clojure . t)
