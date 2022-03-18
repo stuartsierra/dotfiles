@@ -275,6 +275,10 @@
   :if window-system
   :config (server-start))
 
+;;; enabling commands
+
+(put 'erase-buffer 'disabled nil)
+
 ;;; local extensions for this machine
 
 (let ((local-config (locate-user-emacs-file "local.el")))
