@@ -35,7 +35,7 @@
      ("s" . "src")
      ("v" . "verse")))
  '(package-selected-packages
-   '(yaml-mode visual-fill-column typescript-mode terraform-mode ob-restclient markdown-toc lua-mode ledger-mode htmlize groovy-mode graphviz-dot-mode graphql-mode go-mode gnuplot dockerfile-mode ido-completing-read+ ido-completeing-read+ scala-mode ido-vertical-mode flycheck company lsp-ui lsp-mode super-save rg rotate s typo paredit org-contrib magit cider find-file-in-project exec-path-from-shell smex use-package org clojure-mode))
+   '(yaml-mode visual-fill-column typescript-mode terraform-mode scala-mode ob-restclient markdown-toc lua-mode ledger-mode htmlize groovy-mode graphviz-dot-mode graphql-mode go-mode gnuplot dockerfile-mode org-contrib flycheck company lsp-treemacs lsp-ui lsp-mode paredit cider clojure-mode magit find-file-in-project unfill typo super-save rg smex ido-completing-read+ ido-vertical-mode rotate exec-path-from-shell treemacs s use-package))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(use-dialog-box nil))
