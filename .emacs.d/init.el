@@ -39,6 +39,12 @@
   :ensure t
   :pin melpa-stable)
 
+(use-package treemacs
+  :defer t
+  :ensure t
+  :pin melpa-stable
+  :commands (treemacs))
+
 ;;; environment and initialization
 
 (use-package exec-path-from-shell
@@ -196,6 +202,11 @@
   :ensure t
   :pin melpa-stable
   :commands lsp-ui-mode)
+
+(use-package lsp-treemacs
+  :defer t
+  :ensure t
+  :pin melpa-stable)
 
 (use-package company
   :defer t
