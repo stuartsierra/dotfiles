@@ -40,6 +40,10 @@
 (defvar stuart/daypage-default-project nil)
 (defvar stuart/daypage-default-tags nil)
 
+(defun stuart/daypage-filename-base (date)
+  "Return daypage filename (without extension) for DATE."
+  (format-time-string "daypage-%Y-%m-%d-%a" date))
+
 (defun stuart/find-daypage (&optional date)
   "Open journal page for DATE, default today."
   (interactive (list
@@ -48,7 +52,7 @@
   (setq date (or date (current-time)))
   (let* ((file (expand-file-name
                 (concat stuart/daypage-path
-                        (format-time-string "daypage-%Y-%m-%d-%a" date) ".org")))
+                        (stuart/daypage-filename-base date) ".org")))
          (buffer (find-buffer-visiting file)))
     (if buffer
         (switch-to-buffer buffer)
@@ -68,6 +72,16 @@
   (interactive)
   (stuart/find-daypage))
 
+(defun stuart/copy-daypage-dir (&optional date)
+  "Copy directory for day page DATE, default today."
+  (interactive (list
+                (org-read-date "" 'totime nil nil
+                               (current-time) "")))
+  (setq date (or date (current-time)))
+  (let ((dir (stuart/daypage-filename-base date)))
+    (kill-new dir)
+    (message dir)))
+
 (defun stuart/find-daypage-dir (&optional date)
   "Open subdirectory for day page DATE, default today."
   (interactive (list
@@ -76,7 +90,7 @@
   (setq date (or date (current-time)))
   (let* ((dir (expand-file-name
                (concat stuart/daypage-path
-                       (format-time-string "daypage-%Y-%m-%d-%a" date))))
+                       (stuart/daypage-filename-base date))))
          (buffer (find-buffer-visiting dir)))
     (mkdir dir t)
     (if buffer
