@@ -209,6 +209,10 @@
   :pin melpa
   :init (global-flycheck-mode))
 
+(use-package link-cider-session
+  :defer t
+  :commands (link-cider-session))
+
 ;;; org-mode and related packages
 
 (use-package org
