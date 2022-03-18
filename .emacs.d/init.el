@@ -123,6 +123,12 @@
   :ensure t
   :pin melpa-stable)
 
+(use-package unfill
+  :defer t
+  :ensure t
+  :pin melpa-stable
+  :commands (unfill-region unfill-paragraph unfill-toggle))
+
 ;;; project and version-control packages
 
 (use-package find-file-in-project
