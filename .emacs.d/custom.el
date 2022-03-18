@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
+ '(backup-directory-alist '(("." . "/tmp/emacs-backups")))
  '(cider-repl-display-help-banner nil)
  '(exec-path-from-shell-arguments '("-l"))
  '(ffip-prefer-ido-mode t)
