@@ -14,6 +14,8 @@
 .emacs.d/network-security.data
 .emacs.d/url
 .emacs.d/transient
+.emacs.d/.cache
+.emacs.d/workspace
 .org-id-locations
 .lsp*
 *.tar.gz
