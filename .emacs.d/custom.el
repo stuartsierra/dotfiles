@@ -15,6 +15,10 @@
  '(inhibit-startup-screen t)
  '(initial-major-mode 'fundamental-mode)
  '(initial-scratch-message nil)
+ '(lsp-ui-doc-enable nil)
+ '(lsp-ui-imenu-enable nil)
+ '(lsp-ui-peek-enable nil)
+ '(lsp-ui-sideline-enable nil)
  '(magit-completing-read-function 'magit-ido-completing-read)
  '(org-babel-clojure-backend 'cider)
  '(org-babel-load-languages
