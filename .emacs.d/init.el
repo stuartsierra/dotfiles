@@ -263,6 +263,11 @@
   :bind (:map org-mode-map
               ("s-c" . org-copy-for-external)))
 
+(use-package literate-calc-mode
+  :defer t
+  :ensure t
+  :pin melpa)
+
 ;;; miscellaneous packages
 
 (use-package dockerfile-mode    :defer t :ensure t :pin melpa-stable)
