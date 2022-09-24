@@ -224,6 +224,19 @@
   :defer t
   :commands (link-cider-session))
 
+;;; Java-related packages
+
+(use-package dap-mode
+  :defer t
+  :ensure t
+  :pin melpa-stable)
+
+(use-package lsp-java
+  :defer t
+  :ensure t
+  :pin melpa-stable
+  :config (add-hook 'java-mode-hook 'lsp))
+
 ;;; org-mode and related packages
 
 (use-package org
