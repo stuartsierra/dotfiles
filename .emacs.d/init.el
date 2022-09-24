@@ -160,7 +160,7 @@
   :defer t
   :ensure t
   :pin melpa-stable
-  :mode "\\.bb\\'"
+  :mode "\\.bb\\|.repl\\'"
   :interpreter "bb"
   :hook ((clojure-mode . subword-mode)
          (clojure-mode . hs-minor-mode)
