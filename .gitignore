@@ -20,3 +20,5 @@
 .lsp*
 *.tar.gz
 *.zip
+.emacs.d/.dap-breakpoints
+.emacs.d/eclipse.jdt.ls
