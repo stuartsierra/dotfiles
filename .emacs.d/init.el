@@ -257,6 +257,12 @@
   :bind (("C-c o n" . stuart/todays-daypage)
          ("C-c o N" . stuart/find-daypage)))
 
+(use-package org-copy-for-external
+  :defer t
+  :commands (org-copy-for-external)
+  :bind (:map org-mode-map
+              ("s-c" . org-copy-for-external)))
+
 ;;; miscellaneous packages
 
 (use-package dockerfile-mode    :defer t :ensure t :pin melpa-stable)
