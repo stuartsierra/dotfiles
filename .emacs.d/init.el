@@ -285,6 +285,7 @@
 (use-package ob-restclient      :defer t :ensure t :pin melpa)
 (use-package restclient         :defer t :ensure t :pin melpa)
 (use-package ruby-mode          :defer t :ensure t :pin melpa-stable)
+(use-package rust-mode          :defer t :ensure t :pin melpa-stable)
 (use-package scala-mode         :defer t :ensure t :pin melpa-stable)
 (use-package terraform-mode     :defer t :ensure t :pin melpa-stable)
 (use-package typescript-mode    :defer t :ensure t :pin melpa-stable)
