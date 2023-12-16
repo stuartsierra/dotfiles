@@ -42,7 +42,7 @@
      ("s" . "src")
      ("v" . "verse")))
  '(package-selected-packages
-   '(literate-calc-mode dap-mode lsp-java yaml-mode visual-fill-column typescript-mode terraform-mode scala-mode ob-restclient markdown-toc lua-mode ledger-mode htmlize groovy-mode graphviz-dot-mode graphql-mode go-mode gnuplot dockerfile-mode org-contrib flycheck company lsp-treemacs lsp-ui lsp-mode paredit cider clojure-mode magit find-file-in-project unfill typo super-save rg smex ido-completing-read+ ido-vertical-mode rotate exec-path-from-shell treemacs s use-package))
+   '(rust-mode literate-calc-mode dap-mode lsp-java yaml-mode visual-fill-column typescript-mode terraform-mode scala-mode ob-restclient markdown-toc lua-mode ledger-mode htmlize groovy-mode graphviz-dot-mode graphql-mode go-mode gnuplot dockerfile-mode org-contrib flycheck company lsp-treemacs lsp-ui lsp-mode paredit cider clojure-mode magit find-file-in-project unfill typo super-save rg smex ido-completing-read+ ido-vertical-mode rotate exec-path-from-shell treemacs s use-package))
  '(safe-local-variable-values '((cider-clojure-cli-global-options . "-A:rebl")))
  '(sentence-end-double-space nil)
  '(show-paren-mode t)
