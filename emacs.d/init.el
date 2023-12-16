@@ -9,12 +9,9 @@
   (defun my-packages-load-path ()
     (directory-file-name (locate-user-emacs-file "my-packages"))))
 
-;;; use-package initialization
-
-(eval-when-compile
-  (require 'use-package))
-
 ;;; additional ELPA package archives
+
+(require 'package)
 
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
