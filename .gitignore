@@ -22,3 +22,4 @@
 *.zip
 .emacs.d/.dap-breakpoints
 .emacs.d/eclipse.jdt.ls
+.emacs.d/org-persist
