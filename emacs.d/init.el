@@ -1,3 +1,8 @@
+;;; Minimum required Emacs version
+
+(when (version< emacs-version "29")
+  (error "Emacs version 29+ required for use-package"))
+
 ;;; customizations file
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
@@ -270,6 +275,7 @@
 ;;; miscellaneous packages
 
 (use-package dockerfile-mode    :defer t :ensure t :pin melpa-stable)
+(use-package emms               :defer t :ensure t :pin melpa-stable)
 (use-package git-commit         :defer t :ensure t :pin melpa-stable)
 (use-package gnuplot            :defer t :ensure t :pin melpa-stable)
 (use-package go-mode            :defer t :ensure t :pin melpa-stable)
