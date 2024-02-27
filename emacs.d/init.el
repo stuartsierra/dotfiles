@@ -115,6 +115,9 @@
   :ensure t
   :pin melpa-stable)
 
+(use-package rg-daypage
+  :commands (rg-daypage))
+
 (use-package super-save
   :defer 1
   :ensure t
