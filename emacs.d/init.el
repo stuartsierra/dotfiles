@@ -172,8 +172,7 @@
 (use-package cider
   :defer t
   :ensure t
-  :pin melpa-stable
-  :config (setq cider-words-of-inspiration ()))
+  :pin melpa-stable)
 
 (use-package paredit
   :defer t

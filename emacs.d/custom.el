@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
  '(backup-directory-alist '(("." . "/tmp/emacs-backups")))
+ '(cider-connection-message-fn 'cider-random-tip)
  '(cider-repl-display-help-banner nil)
  '(exec-path-from-shell-check-startup-files nil)
  '(exec-path-from-shell-variables '("PATH" "MANPATH" "JAVA_HOME"))
