@@ -30,6 +30,7 @@
      (plantuml . t)
      (ruby . t)))
  '(org-confirm-babel-evaluate nil)
+ '(org-link-file-path-type 'relative)
  '(org-structure-template-alist
    '(("sc" . "src clojure")
      ("sC" . "src clojure :results silent")
