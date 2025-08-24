@@ -1,7 +1,9 @@
 export PS1='%(?..%F{red}$?=%? )%f%F{blue}%3~%f %F{magenta}%#%f '
 
+export EDITOR="${HOME}/dotfiles/bin/edit"
+alias e="\$EDITOR"
+
 alias gs="git status"
-alias e="$EDITOR"
 alias l="eza --classify"
 alias ll="eza --all --classify --long"
 

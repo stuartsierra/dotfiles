@@ -1,16 +1,33 @@
 #!/usr/bin/env bash
 
-# On OS X, work around the fact that the default installed emacsclient
-# does not recognize an Emacs installed with Homebrew
-if [[ -e /usr/local/bin/emacsclient ]]; then
-    EMACSCLIENT=/usr/local/bin/emacsclient
-else
-    EMACSCLIENT=$(which emacsclient)
+found_emacsclient=""
+found_alternate=""
+
+# Find emacsclient. Sometimes it is not on $PATH,
+# especially under macOS/Homebrew.
+if hash emacsclient > /dev/null 2>&1; then
+    found_emacsclient=emacsclient
+elif [[ -e /usr/local/bin/emacsclient ]]; then
+    found_emacsclient=/usr/local/bin/emacsclient
+elif [[ -e /opt/homebrew/bin/emacsclient ]]; then
+    found_emacsclient=/opt/homebrew/bin/emacsclient
 fi
 
-for command in zile nano emacs vim; do
-    ALTERNATE=$(which ${command})
-    if [[ ! -z "$ALTERNATE" ]]; then break; fi
+# Find an alternative editor, in order of preference.
+for check_for_command in zile nano emacs pico joe vim vi; do
+    if hash "$check_for_command" > /dev/null 2>&1; then
+        found_alternate="$check_for_command"
+        break
+    fi
 done
 
-exec "$EMACSCLIENT" --alternate-editor="$ALTERNATE" "$@"
+# If emacsclient exists, run that, with an alternate
+# in case an Emacs server is not running.
+if [[ -n $found_emacsclient ]]; then
+    exec "$found_emacsclient" --alternate-editor="$found_alternate" "$@"
+elif [[ -n $found_alternate ]]; then
+    exec "$found_alternate" "$@"
+else
+    echo "No editor found" 1>&2
+    exit 1
+fi
