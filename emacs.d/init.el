@@ -276,7 +276,6 @@
 
 (use-package dockerfile-mode    :defer t :ensure t :pin melpa-stable)
 (use-package emms               :defer t :ensure t :pin melpa-stable)
-(use-package git-commit         :defer t :ensure t :pin melpa-stable)
 (use-package gnuplot            :defer t :ensure t :pin melpa-stable)
 (use-package go-mode            :defer t :ensure t :pin melpa-stable)
 (use-package graphql-mode       :defer t :ensure t :pin melpa)
